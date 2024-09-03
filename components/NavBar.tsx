@@ -31,7 +31,7 @@ const NavBar = () => {
                 </h1>
             </div>
             <div className="flex flex-row items-center space-x-2 py-3">
-                <h3 className="font-mono text-xl font-thin phone:text-lg phone:p-2">
+                <h3 className="font-mono text-xl font-light phone:text-lg phone:p-2">
                     ML/AI Student
                 </h3>
             </div>

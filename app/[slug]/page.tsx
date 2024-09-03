@@ -19,7 +19,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
 
 
     return (
-        <div className='min-w-full flex justify-center prose dark:prose-invert prose-p:font-mono prose-p:text-base prose-h2:font-serif prose-h2:text-xl prose-h1:text-3xl prose-a:text-sm prose-h1:font-normal prose-h2:font-normal prose-h3:font-normal dark:prose-a:text-blue-300 prose-a:text-blue-600  prose-ol:m-0 prose-li:m-0.5'>
+        <div className='min-w-full flex justify-center prose dark:prose-invert prose-p:font-mono prose-li:font-mono prose-p:text-base prose-h2:font-serif prose-h2:text-xl prose-h1:text-3xl prose-a:text-sm prose-h1:font-normal prose-h2:font-normal prose-h3:font-normal dark:prose-a:text-blue-300 prose-a:text-blue-600  prose-ol:m-0 prose-li:m-0.5 prose-img:mx-auto prose-img:w-full prose-img:max-w-md '>
             <article className="min-w-full flex flex-col items-center">
                 <h1 className="font-serif text-3xl mb-0 pt-14 pb-3 ">{blogPost.title}</h1>
                 <p className='font-mono text-base my-0'>Published Date: {blogPost.date?.toLocaleDateString()}</p>
