@@ -10,7 +10,7 @@ import 'katex/dist/katex.min.css';
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
     const { slug } = params;
-    const blogPost: BlogPostInterface = await getPostData(slug);
+    const blogPost: BlogPostInterface | null = await getPostData(slug);
 
 
     if (!blogPost) {
