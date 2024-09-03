@@ -1,14 +1,19 @@
 
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import React from "react";
 import { cn } from "@/lib/utils"
 import SiteConfig from "@/config/site";
 import { ThemeProvider } from "@/components/theme-provider"
 
-
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+
+
+const robotoMono = Roboto_Mono({
+  subsets: ['latin'],
+  variable: '--font-roboto-mono',
+});
 
 export const metadata: Metadata = {
   title: SiteConfig.title,
@@ -21,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={cn("min-h-screen min-w-screen font-sans antialiased flex flex-row justify-center ", inter.variable)}>
+    <html lang="en" >
+      <body className={cn("min-h-screen min-w-screen font-sans antialiased flex flex-row justify-center ", robotoMono.variable)}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -32,6 +37,6 @@ export default function RootLayout({
           {children}
         </ThemeProvider>
       </body>
-    </html >
+    </ html >
   );
 }

@@ -40,6 +40,9 @@ const config = {
       },
       colors: {
       },
+      fontFamily: {
+        mono: ['var(--font-roboto-mono)'],
+      }
 
     },
   },
