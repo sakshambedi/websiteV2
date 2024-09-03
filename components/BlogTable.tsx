@@ -18,7 +18,7 @@ export default function BlogTable({ allData }: { allData: AllPostDataTableInterf
     }
 
     return (
-        <section className='flex w-9/12 flex-col pt-7 items-center justify-center phone:pt-2 font-mono'>
+        <section className='flex w-full flex-col items-center justify-center font-mono'>
             <Table>
                 {/* <TableCaption>Developing skills and sharing knowledge.</TableCaption> */}
                 <TableHeader>
