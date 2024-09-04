@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" >
-      <body className={cn("min-h-screen min-w-screen font-sans antialiased flex flex-row justify-center ", robotoMono.variable)}>
+      <body className={cn("w-screen max-w-fullfont-sans antialiased flex flex-row justify-center phone:-min-w-screen phone:overflow-x-hidden md:overflow-x-hidden", robotoMono.variable)}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

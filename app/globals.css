@@ -26,6 +26,11 @@
     --radius: 0.5rem;
   }
 
+  ::selection {
+    background-color: #1f2937;
+    color: #f8fafc;
+  }
+
   .dark :root {
     --background: 224 71% 42%;
     --foreground: 210 20% 98%;
@@ -47,4 +52,16 @@
     --destructive-foreground: 210 20% 98%;
     --ring: 216 12.2% 83.9%;
   }
+
+  .dark ::selection {
+    background-color: #f8fafc;
+    color: #1f2937;
+  }
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
