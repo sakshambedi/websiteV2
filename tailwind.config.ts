@@ -3,6 +3,7 @@ import tailwindcssAnimate from 'tailwindcss-animate'
 import typography from '@tailwindcss/typography'
 
 const config: Config = {
+  darkMode: 'class', // This enables dark mode with the 'class' strategy
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
