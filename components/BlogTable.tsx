@@ -20,7 +20,7 @@ export default function BlogTable({ allData }: { allData: AllPostDataTableInterf
     return (
         <section className='flex w-full flex-col items-center justify-center font-mono'>
             <Table>
-                {/* <TableCaption>Developing skills and sharing knowledge.</TableCaption> */}
+
                 <TableHeader>
                     <TableRow>
                         <TableHead className='text-sm text-left dark:text-gray-400 text-gray-600 pl-0 phone:px-0 phone:text-xs'>date</TableHead>
@@ -30,16 +30,18 @@ export default function BlogTable({ allData }: { allData: AllPostDataTableInterf
                 </TableHeader>
                 <TableBody>
                     {allData.map(({ slug, date, title, category }: BlogPostTableInterface) => (
-                        <TableRow key={slug} className='cursor-pointer '>
-                            <TableCell className='text-base text-left dark:text-gray-100 text-black w-24 pl-0 phone:text-sm phone:px-0 phone:w-9 md:w-13 md:p-0'>
+                        <TableRow key={slug} className="cursor-pointer">
+                            <TableCell className="text-base text-left text-gray-900 dark:text-gray-100 w-24 pl-0 phone:text-sm phone:px-0 phone:w-9 md:w-13 md:p-0">
                                 {`${new Date(date).toLocaleDateString(undefined, { month: 'short' }).toLowerCase()} '${new Date(date).getFullYear().toString().slice(-2)}`}
                             </TableCell>
-                            <TableCell className='text-base text-left dark:text-gray-100 text-black phone:text-sm phone:px-1 phone:py-1 md:px-2 md:py-1.5 '>
-                                <Link href={`/${slug}/`}>
+                            <TableCell className="text-base text-left text-gray-900 dark:text-gray-100 phone:text-sm phone:px-1 phone:py-1 md:px-2 md:py-1.5">
+                                <Link href={`/${slug}/`} className="hover:underline">
                                     {title}
                                 </Link>
                             </TableCell>
-                            <TableCell className="text-base text-right dark:text-gray-100 text-black pr-0 phone:text-sm phone:px-0 phone:py-1 phone:w-4">{category}</TableCell>
+                            <TableCell className="text-base text-right text-gray-900 dark:text-gray-100 pr-0 phone:text-sm phone:px-0 phone:py-1 phone:w-4">
+                                {category}
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
