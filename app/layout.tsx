@@ -27,13 +27,13 @@ export default function RootLayout({
   return (
     <html lang="en" >
       <body className={cn("w-screen max-w-fullfont-sans antialiased flex flex-row justify-center phone:-min-w-screen phone:overflow-x-hidden md:overflow-x-hidden", robotoMono.variable)}>
-        <Analytics />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
+          <Analytics />
           {children}
         </ThemeProvider>
       </body>
