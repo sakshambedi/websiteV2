@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils"
 import SiteConfig from "@/config/site";
 import { ThemeProvider } from "@/components/theme-provider"
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from "@vercel/speed-insights/next"
+
 
 
 const robotoMono = Roboto_Mono({
@@ -27,13 +29,14 @@ export default function RootLayout({
   return (
     <html lang="en" >
       <body className={cn("w-screen max-w-fullfont-sans antialiased flex flex-row justify-center phone:-min-w-screen phone:overflow-x-hidden md:overflow-x-hidden", robotoMono.variable)}>
+        <Analytics />
+        <SpeedInsights />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <Analytics />
           {children}
         </ThemeProvider>
       </body>
