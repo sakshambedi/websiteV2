@@ -13,10 +13,9 @@ export default async function Home() {
   const allData: AllPostDataTableInterface = getSortedPostsData();
   return (
     <main className="flex flex-col  justify-center w-full ">
-      <div className="min-w-full">
-        <NavBar />
-      </div>
-      <div className="w-1/2 min-h-screen flex flex-col  items-center self-center mx-auto phone:w-10/12 md:w-3/4 phone:mx-0 ">
+      <NavBar />
+
+      <section className="w-1/2 min-h-screen flex flex-col  items-center self-center mx-auto phone:w-10/12 md:w-3/4 phone:mx-0 ">
         <Tabs defaultValue="home" className="w-full py-10 phone:py-5 align-middle ">
           <TabsList className="w-full space-x-10 align-middle font-mono font-normal focus:shadow-none shadow-none outline-none phone:space-x-5 md:space-x-7">
             <TabsTrigger value="home" className="text-lg phone:text-base" style={{ boxShadow: 'none', outline: 'none' }} >home</TabsTrigger>
@@ -59,7 +58,7 @@ export default async function Home() {
             </a>
           </div>
         </div>
-      </div>
+      </section>
     </main >
   );
 }
