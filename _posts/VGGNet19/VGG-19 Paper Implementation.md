@@ -1,6 +1,6 @@
 ---
 title: "Convolutional Network (VGG-19) Implemetation"
-date: "2024-09-15"
+date: "2024-07-15"
 category: "CNN"
 ---
 
