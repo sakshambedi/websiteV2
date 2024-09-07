@@ -35,7 +35,7 @@ export default async function Home() {
         </Tabs>
 
 
-        <div className='w-full flex flex-row font-thin justify-center pt-20 pb-24 md:space-x-16 lg:space-x-16 phone:justify-between  phone:pt-10 phone:pb-12 '>
+        <div className='w-full flex flex-row font-thin justify-center pt-5 pb-24 md:space-x-16 lg:space-x-16 phone:justify-between  phone:pt-10 phone:pb-12 '>
           <div className="flex flex-row items-center min-w-fit ">
             <a href="https://github.com/sakshambedi" className="flex flex-row items-center">
               <p className="font-light text-base phone:text-sm">github</p>
