@@ -1,7 +1,7 @@
 
 const SiteConfig = {
-    "title": "Saksham Resume",
-    "description": "this is resume-blog implementation"
+    "title": "Saksham Bedi",
+    "description": "interesting things here ..."
 }
 
 export default SiteConfig

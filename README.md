@@ -65,3 +65,4 @@ These are the following react libs that I use to convert a markdown to a beautif
 - Add caching for the server side rendering
 - Add a loading component when the blog is getting rendered
 - Fix the basic dark and light theme. The light theme is too light.
+- Add Open Graph preview for social media
