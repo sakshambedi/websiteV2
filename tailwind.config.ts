@@ -11,7 +11,7 @@ const config: Config = {
   ],
   theme: {
     screens: {
-      'phone': { 'min': '350px', 'max': '767px' },
+      'phone': { 'min': '320px', 'max': '767px' },
       'md': { 'min': '768px', 'max': '1023px' },
       'lg': '1024px',
       'xl': '1280px',

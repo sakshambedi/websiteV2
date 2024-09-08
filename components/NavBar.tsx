@@ -10,7 +10,7 @@ const NavBar = () => {
 
     return (
 
-        <header className="relative flex flex-col items-center pt-14 min-w-max phone:pt-8 ">
+        <header className="relative flex flex-col items-center pt-14 w-screen max-w-full overflow-hidden phone:pt-8 ">
             <div className="absolute right-20  phone:hidden z-10 ">
                 <Toggle
                     aria-label="Toggle theme"
@@ -23,7 +23,7 @@ const NavBar = () => {
                 </Toggle>
             </div>
 
-            <div className="flex w-full items-center justify-center relative px-16 phone:px-1">
+            <div className="flex w-screen items-center justify-center relative">
                 <h1 className="text-4xl font-serif phone:text-3xl">
                     <span className="font-normal">Saksham</span>
                     <span className="mr-4 phone:mr-1.5"></span>

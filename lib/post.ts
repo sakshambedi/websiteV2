@@ -56,7 +56,7 @@ export function getSortedPostsData(): AllPostDataTableInterface {
         } as BlogPostTableInterface;
     }).filter((post): post is BlogPostTableInterface => post !== null);
 
-    console.log("All Post Data: ", allPostsData);
+    // console.log("All Post Data: ", allPostsData);
 
     return allPostsData.sort((a, b) => {
         return a.date && b.date && a.date < b.date ? 1 : -1;
@@ -107,12 +107,7 @@ export async function getPostData(slug: string): Promise<BlogPostInterface | nul
         .use(rehypeStringify)
         // And finally, process the input
         .process(matterResult.content)
-    // const processedContent = await remark()
-    //     .use(remarkMath)
-    //     .use(html, { sanitize: false }) // Ensure only one instance of the html plugin
-    //     .use(rehypeKatex)
-    //     .use(rehypeHighlight)
-    //     .process(matterResult.content);
+
 
     return {
         slug,
