@@ -114,6 +114,12 @@ importers:
       '@types/estree':
         specifier: ^1.0.5
         version: 1.0.5
+      '@types/json-schema':
+        specifier: ^7.0.15
+        version: 7.0.15
+      '@types/katex':
+        specifier: ^0.16.7
+        version: 0.16.7
       '@types/node':
         specifier: ^20
         version: 20.16.2

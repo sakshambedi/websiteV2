@@ -1,4 +1,12 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is the readme for this project
+
+This website is built using nextjs + tailwindcs + react + determination and ambition (I am not a front end developer)
+
+## Prototyping
+
+I did some prototyping using figma. Check out the basic desing that I made here. [FIGMA prototype](https://www.figma.com/proto/410Ouu5c369LS4SDUs9COp/Website?node-id=0-1&t=TdAx4BHHASegScUF-1)
+
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2F410Ouu5c369LS4SDUs9COp%2FWebsite%3Fnode-id%3D0-1%26t%3DTdAx4BHHASegScUF-1" allowfullscreen></iframe>
 
 ## Getting Started
 
@@ -14,23 +22,21 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Most of the website is very basic TS. 
 
-## Learn More
+The blog is generated from a markdown file. Markdown was the prefered file format due to its massive adoption, and has all the features that I require. 
 
-To learn more about Next.js, take a look at the following resources:
+Alternative to this was using a headlessCMS with more features but that seemed unnecessary.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The 
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## TODO:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Add caching for the server side rendering
+- Add a loading component when the blog is getting rendered
+- Fix the basic dark and light theme. The light theme is too light.
