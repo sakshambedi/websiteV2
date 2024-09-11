@@ -31,15 +31,15 @@ export default function BlogTable({ allData }: { allData: AllPostDataTableInterf
                 <TableBody>
                     {allData.map(({ slug, date, title, category }: BlogPostTableInterface) => (
                         <TableRow key={slug} className="cursor-pointer">
-                            <TableCell className="text-base text-left text-gray-900 dark:text-gray-100 w-24 pl-0 phone:text-sm phone:px-0 phone:w-9 md:w-13 md:p-0">
+                            <TableCell className="text-base text-left text-gray-900 dark:text-gray-100 w-18 pr-0 pl-0 phone:text-sm phone:px-0 phone:w-9 md:w-13 md:p-0">
                                 {`${new Date(date).toLocaleDateString(undefined, { month: 'short' }).toLowerCase()} '${new Date(date).getFullYear().toString().slice(-2)}`}
                             </TableCell>
-                            <TableCell className="text-base text-left text-gray-900 dark:text-gray-100 phone:text-sm phone:px-1 phone:py-1 md:px-2 md:py-1.5">
+                            <TableCell className="text-base text-left px-1 text-gray-900 dark:text-gray-100 phone:text-sm phone:px-1 phone:py-1 md:px-2 md:py-1.5">
                                 <Link href={`/${slug}/`} className="hover:underline">
                                     {title}
                                 </Link>
                             </TableCell>
-                            <TableCell className="text-base text-right text-gray-900 dark:text-gray-100 pr-0 phone:text-sm phone:px-0 phone:py-1 phone:w-4">
+                            <TableCell className="text-base text-right text-gray-900 dark:text-gray-100 px-0 w-16 phone:text-sm phone:px-0 phone:py-1 phone:w-4">
                                 {category}
                             </TableCell>
                         </TableRow>
