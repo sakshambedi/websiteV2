@@ -51,7 +51,7 @@ export default function HomeContent() {
                         </li>
                     </ul>
 
-                    <div className='flex flex-row flex-wrap pt-5 phone:pt-4 justify-start space-x-7 phone:gap-7 box-border w-full md:gap-9'>
+                    <div className='flex flex-row flex-wrap pt-5 phone:pt-4 justify-start space-x-9 phone:gap-7 box-border w-full md:gap-9'>
                         <Image
                             src="/icons/techstack/amazonecs.svg"
                             width={32}
@@ -84,7 +84,7 @@ export default function HomeContent() {
 
 
                 <div className="pt-10">
-                    <div className="flex flex-row justify-between  font-mono text-lg  font-base  pt-2  space-x-7 phone:space-x-3 phone:pt-1.5 md:pt-2 md:space-x-3">
+                    <div className="flex flex-row justify-between  font-mono text-lg  font-base  pt-2  space-x-9 phone:space-x-3 phone:pt-1.5 md:pt-2 md:space-x-3">
                         <h3 className='text-xl phone:text-lg md:text-lg text-left'>NanoGTP NLP Model</h3>
                         <h3 className='text-lg phone:text-base md:text-base text-right'>Summer 2024 - ongoing</h3>
                     </div>
