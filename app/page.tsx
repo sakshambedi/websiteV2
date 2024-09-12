@@ -8,7 +8,6 @@ import HomeContent from "@/components/HomeContent";
 import Image from "next/image";
 import WorkContent from "@/components/WorkContent";
 
-
 export default async function Home() {
   const allData: AllPostDataTableInterface = getSortedPostsData();
   return (
@@ -16,15 +15,14 @@ export default async function Home() {
       <NavBar />
 
       <section className="w-1/2 min-h-screen flex flex-col  items-center self-center mx-auto phone:w-10/12 md:w-3/4 phone:mx-0 ">
-        <Tabs defaultValue="home" className="w-full py-10 phone:py-5 align-middle ">
-          <TabsList className="w-full space-x-10 align-middle font-mono font-normal focus:shadow-none shadow-none outline-none phone:space-x-5 md:space-x-7">
+        <Tabs defaultValue="home" className="w-full py-8 phone:py-5 align-middle ">
+          <TabsList className="w-full space-x-10 pb-4 align-middle font-mono font-normal focus:shadow-none shadow-none outline-none phone:space-x-5 md:space-x-7">
             <TabsTrigger value="home" className="text-lg phone:text-base" style={{ boxShadow: 'none', outline: 'none' }} >home</TabsTrigger>
-            <TabsTrigger value="blog" className="text-lg phone:text-base" style={{ boxShadow: 'none', outline: 'none' }}>blog</TabsTrigger>
+            <TabsTrigger value="blog" className=" text-lg phone:text-base " style={{ boxShadow: 'none', outline: 'none' }} >blog</TabsTrigger>
             <TabsTrigger value="work" className="text-lg phone:text-base" style={{ boxShadow: 'none', outline: 'none' }}>work</TabsTrigger>
           </TabsList>
           <TabsContent value="home" className="flex flex-col items-center">
             <HomeContent />
-            {/* home */}
           </TabsContent>
           <TabsContent value="blog" className="flex flex-col items-center">
             <BlogTable allData={allData} />

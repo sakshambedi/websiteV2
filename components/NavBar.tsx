@@ -1,26 +1,14 @@
 "use client"
-
-import { Moon, Sun } from "lucide-react"
-import { useTheme } from "next-themes"
 import React from 'react'
-import { Toggle } from "@/components/ui/toggle"
-
+import { ThemeSwitcher } from "@/app/util/ThemeSwitcher"
 const NavBar = () => {
-    const { theme, setTheme } = useTheme()
 
     return (
 
         <header className="relative flex flex-col items-center pt-14 w-screen max-w-full overflow-hidden phone:pt-8 ">
             <div className="absolute right-20  phone:hidden z-10 ">
-                <Toggle
-                    aria-label="Toggle theme"
-                    pressed={theme === "dark"}
-                    onPressedChange={(pressed) => setTheme(pressed ? "dark" : "light")}
-                >
-                    <Sun className="h-[1.5rem] w-[1.5rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 phone:h-[1.0rem] phone:w-[1.0rem]" />
-                    <Moon className="absolute h-[1.5rem] w-[1.5rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 phone:h-[1.0rem] phone:w-[1.0rem]" />
-                    <span className="sr-only">Toggle theme</span>
-                </Toggle>
+                <ThemeSwitcher />
+                
             </div>
 
             <div className="flex w-screen items-center justify-center relative">

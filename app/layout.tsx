@@ -1,6 +1,6 @@
 
 import type { Metadata } from "next";
-import { Roboto_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import React from "react";
 import { cn } from "@/lib/utils"
@@ -11,8 +11,9 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import HeadResume from "@/config/head";
 
 
-const robotoMono = Roboto_Mono({
+const robotoMono = Inter({
   subsets: ['latin'],
+  weight: ['400', '700'],
   variable: '--font-roboto-mono',
 });
 

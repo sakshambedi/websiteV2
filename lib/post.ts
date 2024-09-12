@@ -30,7 +30,7 @@ export function getSortedPostsData(): AllPostDataTableInterface {
         .filter(dirent => dirent.isDirectory())
         .map(dirent => dirent.name);
 
-    console.log("File names in _posts directory:", dirNames);
+    // console.log("File names in _posts directory:", dirNames);
 
     const allPostsData: AllPostDataTableInterface = dirNames.map((dirName) => {
         const slug = dirName;

@@ -31,7 +31,7 @@
     color: #f8fafc;
   }
 
-  .dark :root {
+  .dark {
     --background: 224 71% 42%;
     --foreground: 210 20% 98%;
     --muted: 215 27.9% 16.9%;
