@@ -13,7 +13,7 @@ import localFont from 'next/font/local'
 
 
 
-export const HackNF = localFont({
+const HackNF = localFont({
   src: [
     {
       path: '../public/fonts/HackNF/FiraCodeNerdFont-Regular.woff2',
@@ -25,7 +25,7 @@ export const HackNF = localFont({
 })
 
 
-export const RebondG = localFont({
+const RebondG = localFont({
   src: [
     {
       path: '../public/fonts/Rebond-Grotesque/RebondGrotesque-Regular.woff2',
