@@ -8,7 +8,7 @@ const NavBar = () => {
         <header className="relative flex flex-col items-center pt-14 w-screen max-w-full overflow-hidden phone:pt-8 ">
             <div className="absolute right-20  phone:hidden z-10 ">
                 <ThemeSwitcher />
-                
+
             </div>
 
             <div className="flex w-screen items-center justify-center relative">

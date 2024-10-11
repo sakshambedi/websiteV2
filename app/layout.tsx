@@ -9,13 +9,34 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import HeadResume from "@/config/head";
+import localFont from 'next/font/local'
 
 
-const robotoMono = Inter({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-roboto-mono',
-});
+
+export const HackNF = localFont({
+  src: [
+    {
+      path: '../public/fonts/HackNF/FiraCodeNerdFont-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-hackNF'
+})
+
+
+export const RebondG = localFont({
+  src: [
+    {
+      path: '../public/fonts/Rebond-Grotesque/RebondGrotesque-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-Rebond'
+})
+
+
 
 export const metadata: Metadata = {
   title: SiteConfig.title,
@@ -30,7 +51,7 @@ export default function RootLayout({
   return (
     <html lang="en" >
       <HeadResume />
-      <body className={cn("w-screen font-sans antialiased flex flex-row justify-center phone:w-screen phone:overflow-x-hidden md:w-screen md:overflow-x-hidden overflow-x-hidden", robotoMono.variable)}>
+      <body className={cn("w-screen font-sans antialiased flex flex-row justify-center phone:w-screen phone:overflow-x-hidden md:w-screen md:overflow-x-hidden overflow-x-hidden ", HackNF.variable, RebondG.variable)}>
         <Analytics />
         <SpeedInsights />
         <ThemeProvider
