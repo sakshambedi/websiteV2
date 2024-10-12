@@ -10,8 +10,8 @@ export default function Loading({ onComplete }: LoadingProps) {
     const loadingScreenRef = useRef<HTMLPreElement>(null);
 
     useEffect(() => {
-        let A = 1,
-            B = 1;
+        let A = 0,
+            B = 0;
 
         const renderDonut = () => {
             const loadingScreen = loadingScreenRef.current;
@@ -53,10 +53,10 @@ export default function Loading({ onComplete }: LoadingProps) {
                     );
 
                     if (
-                        y < 22 &&
                         y >= 0 &&
+                        y < 22 &&
                         x >= 0 &&
-                        x < 79 &&
+                        x < 80 &&
                         D > z[o]
                     ) {
                         z[o] = D;
@@ -83,15 +83,15 @@ export default function Loading({ onComplete }: LoadingProps) {
     }, [onComplete]);
 
     return (
-        <div className="flex items-center justify-center h-screen text-white font-mono">
+        <div className="flex flex-col items-center justify-center h-screen text-white font-mono">
             <div>
                 <pre
                     id="loadingScreen"
                     ref={loadingScreenRef}
-                    className="whitespace-pre text-xs leading-tight"
+                    className="whitespace-pre text-xs leading-tight w-[80ch]"
                 ></pre>
             </div>
-            <p className="self-center justify-center">Loading ...</p>
+            <p className="mt-4 text-center">Loading ...</p>
         </div>
     );
 }
