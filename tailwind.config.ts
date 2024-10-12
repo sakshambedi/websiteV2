@@ -21,7 +21,11 @@ const config: Config = {
     extend: {
       fontFamily: {
         mono: ['var(--font-roboto-mono)'],
+        hackNF: ['var(--font-hackNF)', 'sans-serif'],
+        rebondG: ['var(--font-Rebond)', 'san-serif']
       },
+      colors: {
+      }
     },
   },
   plugins: [

@@ -24,7 +24,8 @@ In regression problems, the model tries to predict a continuous output, such as 
 
 - In a classification problem, we are trying to predict results in a discrete output. Classification problem are the one where a bank can use various input variables such as credit history, outstanding loans, and investment details to predict loan default likelihood. Similarly, binary classification can be employed to determine whether an email is spam or not spam based on features like the email's content, sender, and attachments. There are two 2 classes in this situation, it is either "Yes" or "No". In contrast, multi-class classification could involve predicting the genre of a movie based on its plot summary, actors, and director. The classes might include action, comedy, drama, etc. This type of problem, whether binary or multi-class, falls under the "Classification Problems" category.
 
-![[/Users/sakshambedi/Documents/courses/comp3190W24/assets/Screenshot 2024-03-29 at 3.16.00 PM.jpg#Center|Figure 1 : Comparision between Classification and Regression.Source:https://www.datacamp.com/blog/supervised-machine-learning|400]]
+![Figure 1 : Comparision between Classification and Regression](/imgs/LossFunctionPaper/Screenshot%202024-03-29%20at%203.16.00%20PM%201.jpg)
+Source:https://www.datacamp.com/blog/supervised-machine-learning
 
 ## Unsupervised Learning
 
@@ -46,7 +47,7 @@ Reinforcement Learning is a type of learning that may be considered a combinatio
 
 An artificial neural network (ANN) is a computational system that is designed to mimic the structure and function of the human brain. It is a complex network of interconnected processing nodes or artificial neurons, which work together to process and analyze complex information. These artificial neurons are designed to operate similarly to biological neurons in the human brain. _The computations of the brain are done by a highly interconnected network of neurons, which communicate by sending electric pulses through the neural wiring consisting of axons, synapses and dendrites_ [Krogh, 2008]. Just the the brain, the neurons of the artifical neural network allow the network to learn from input data and adjust its connections and weights to improve its accuracy and predictive capabilities.
 
-![[/Users/sakshambedi/Documents/courses/comp3190W24/assets/1*hkYlTODpjJgo32DoCOWN5w.webp#R|Figure 2: Diagram of Neuron(left) and Perceptron in AI model (right)|450]]
+![Figure 2: Diagram of Neuron(left) and Perceptron in AI model (right)](/imgs/LossFunctionPaper/1*hkYlTODpjJgo32DoCOWN5w.webp)
 
 ANNs have been applied in various fields, including image and speech recognition, natural language processing, and predictive analytics. They have been used to solve complex problems such as language translation, speech recognition, image and video analysis, and financial forecasting. ANNs are ideal for these tasks as they can learn and adapt to new data, making them a powerful tool for solving complex problems in various domains.
 The mathematical foundations of ANNs are rooted in linear algebra, calculus, and statistics. The design and training of ANNs require careful consideration of these mathematical principles. The network's architecture, activation functions, learning algorithms, and optimization techniques are crucial in determining its performance.
@@ -106,9 +107,11 @@ The loss functions have a series of properties that need to be considered when s
 
 These properties ensure that optimization procedures converge to global minima, enable the computation of gradients for iterative optimization, resist the influence of outliers, facilitate stable optimization trajectories, encourage focus on relevant features, allow for exploration of complex solution spaces, ensure progress towards improving model performance, and maintain consistency under relevant data transformations.
 
-## Type of Loss Functions
+## Types of Loss Functions
 
-![[/Users/sakshambedi/Documents/courses/comp3190W24/assets/Screenshot 2024-03-29 at 5.10.49 PM.jpg#R| Figure 3: A Block scheme measures the quality of network’s output.(Raximov, Kuvandikov and Dilmurod, 2022)|300x300]] "In general, AI systems work by ingesting large amounts of labeled training data, analyzing the data for correlations and patterns, and using these patterns to make predictions about future states" [Raximov, Kuvandikov and Dilmurod, 2022].
+![ A Block scheme measures the quality of network’s output.(Raximov, Kuvandikov and Dilmurod, 2022)](/imgs/LossFunctionPaper/Screenshot%202024-03-29%20at%205.10.49%20PM.jpg)
+
+"In general, AI systems work by ingesting large amounts of labeled training data, analyzing the data for correlations and patterns, and using these patterns to make predictions about future states" [Raximov, Kuvandikov and Dilmurod, 2022].
 _Figure 3_ shows that the neural net analyses data and makes predictions. The loss function produces a loss score, which is the result of comparing predicted values to the actual target values. The lower the loss score, the higher the model's accuracy.
 
 1. Mean Square Error
@@ -126,12 +129,12 @@ _Figure 3_ shows that the neural net analyses data and makes predictions. The lo
 The Mean Square Error is the most commonly used loss function for regression problems. Mean squared error is defined as the average of the squared differences between the predicted and actual values. Due to the sqaure property of the formula, the resulting value is more penalizing than taking absolute value. The resulting value is always positive. The cost function looks like :
 
 $$
-\begin{align}
+\begin{aligned}
 \text{MSE} = \dfrac{1}{n} \sum_{i=1}^{n}  (y_{i} - \hat{y_i})^{2}
-\end{align}
+\end{aligned}
 $$
 
-where $y_{i}$ is the true value, $\hat{y_i}$ is the predicted value at the $i^{th}$ rank and $n$ is the number of samples.
+where $y_i$ is the true value, $\hat{y_i}$ is the predicted value at the $i^{th}$ rank and $n$ is the number of samples.
 
 The advantage of using Mean Square Error is penalizes the model for making larger mistakes. Moreover the gradient decent has one global minima and no local minima. The diadvantage of using mean square error is that loss function is not robust for the data that contains outliers.
 
@@ -150,7 +153,7 @@ where $y_{i}$ is the true value and $\hat{y_i}$ is the predicted value at the $i
 
 The Mean Absolute Error is more robust than Mean Square Error to outlier as shown in the Figure 4. But comparting MAE to MSE, MAE is _... computationally expensive as modulus error is complex to solve compared to square error._(Raximov, Kuvandikov and Dilmurod, 2022). There may be a local minima and the gradient can increase significantly even with minor losses since it remains constant throughout the process, which is not suitable for the learning phase.
 
-![[/Users/sakshambedi/Documents/courses/comp3190W24/assets/Screenshot 2024-03-30 at 1.42.02 PM.jpg#C| Figure 4:Mean Square Error (blue) and Mean Absolute Error(red) Source: (Raximov, Kuvandikov and Dilmurod, 2022)| 350]]
+![Figure 4:Mean Square Error (blue) and Mean Absolute Error(red) Source: (Raximov, Kuvandikov and Dilmurod, 2022)](/imgs/LossFunctionPaper/Screenshot%202024-03-30%20at%201.42.02%20PM.jpg)
 
 ## Root Mean Square Error(RMSE)
 
@@ -195,8 +198,9 @@ The table below shows the environment for thr application of the most popular lo
 
 ## Hinge Loss
 
-![[/Users/sakshambedi/Documents/courses/comp3190W24/assets/Screenshot 2024-04-02 at 6.44.22 PM.jpg#R|Figure 5: Vizualize Hinge Loss|300x200]]
 The hinge loss is a widely used loss function for training classifiers and serves as the de facto maximum-margin classification loss function for Support Vector Machines (SVMs).
+
+![Figure 5: Vizualize Hinge Loss](/imgs/LossFunctionPaper/Screenshot%202024-04-02%20at%206.44.22%20PM.jpg)
 
 This is the formula for Hinge Loss :
 
@@ -247,7 +251,8 @@ Cross entropy loss, or the logistic loss function, is a cornerstone in binary cl
 ### Sigmoid Cross Entropy Loss Function
 
 Sigmoid Cross Entropy Loss is a loss function commonly used in classification tasks, particularly in neural networks where the final layer applies a sigmoid function. The sigmoid cross entropy has independant components that work together to output the loss between the predicted and the actual values. The two components are:
-![[/Users/sakshambedi/Documents/courses/comp3190W24/assets/Screenshot 2024-04-03 at 4.12.45 PM.jpg#R|Figure 7: Sigmoid Cross Entropy Loss|300x75]]
+
+![Figure 7: Sigmoid Cross Entropy Loss](imgs/LossFunctionPaper/Screenshot%202024-04-03%20at%204.12.45%20PM.jpg)
 
 1. Sigmoid Function: The sigmoid function squashes the output of a neural network to a value between 0 and 1, effectively transforming it into a probability.
 2. Cross Entropy Loss : Cross entropy loss measures the difference between the predicted probability distribution and the true distribution.
