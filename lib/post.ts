@@ -79,7 +79,6 @@ export async function getPostData(slug: string): Promise<BlogPostInterface | nul
     const fullPath = path.join(dirPath, mdFile);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const matterResult = matter(fileContents);
-    type Options = Omit<KatexOptions, 'displayMode' | 'throwOnError'>
     const result = await unified()
         // Parse Markdown into syntax tree
         .use(remarkParse)

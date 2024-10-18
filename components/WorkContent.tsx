@@ -16,10 +16,13 @@ export default function WorkContent() {
                         Analyze EPR(Electronic Patient Records) system from a software architectural perspective and integration with other clinical engineering modules in SharedHealth.
                     </li>
                     <li>
-                        Implemented logging and debugging capabilities for cloud infrastructure using Dynatrace, reducing the risk of attacks and resolving 36 critical issues.
+                        Collaborated with clinical engineering software providers and integrator(s) to ensure the successful delivery of migration plans for the clinical engineering modules for the SH Manitoba. The in-depth analysis of existing infrastructure guaranteed a seamless deployment, ensuring no disruption to healthcare operations in Manitoba.
                     </li>
                     <li>
-                        Monitored procurement processes to ensure timely delivery of equipment, achieving a 98% on‑time completion rate for construction milestones.
+                        Implement Dynatrace integration with existing infrastructure for Elections Manitoba, aiding in the identification of the root causes behind the infrastructure outage in 2023. This initiative identified 12 potential exploits within the infrastructure, improved monitoring capabilities and contributed preventing disruptions.
+                    </li>
+                    <li>
+                        Ensured timely procurement of endpoints for Share Health Manitoba by executing strategic project planning and delivery across the Manitoba. Achieved a 98% on-time completion rate for construction milestones by closely monitoring procurement processes and ensuring seamless delivery of equipment.
                     </li>
                 </ul>
 
@@ -38,9 +41,13 @@ export default function WorkContent() {
                     <li>
                         Worked with PMO(s) on Project Management to improve efficiency and communication about tickets and integrating it directly with services used by the organization. Documenting process and presenting changes to senior developers and PM(s)
                     </li>
+                    <li>
+                        Optimized SQL queries in Microsoft Reporting Services, reducing misinformation in reporting files and decreasing the
+                        error rate by 18%
+                    </li>
                 </ul>
 
-            </div>
+            </div >
 
 
         </section >
