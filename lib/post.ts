@@ -6,7 +6,7 @@ import { BlogPostTableInterface, AllPostDataTableInterface, BlogPostInterface } 
 import remarkMath from 'remark-math';
 import remarkGfm from 'remark-gfm';
 import stringWidth from 'string-width';
-import { KatexOptions } from 'katex';
+
 import rehypeKatex from 'rehype-katex'
 import { unified } from "unified"
 import rehypePrettyCode from "rehype-pretty-code";
