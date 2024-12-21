@@ -68,27 +68,26 @@ export default function Loading({ onComplete }: LoadingProps) {
             loadingScreen.innerText = b.join("");
         };
 
-        const interval = window.setInterval(renderDonut, 50);
-
-        // Ensure the animation runs for at least 2 seconds
-        const timeout = window.setTimeout(() => {
-            if (onComplete) onComplete();
-            clearInterval(interval);
-        }, 2000);
+        const interval = window.setInterval(() => {
+            renderDonut();
+            if (onComplete) {
+                onComplete();
+                clearInterval(interval);
+            }
+        }, 50);
 
         return () => {
             clearInterval(interval);
-            clearTimeout(timeout);
         };
     }, [onComplete]);
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen font-mono">
-            <div>
+        <div className="flex flex-col items-center justify-center w-screen h-screen font-mono">
+            <div className="flex items-center justify-center w-full h-full">
                 <pre
                     id="loadingScreen"
                     ref={loadingScreenRef}
-                    className="whitespace-pre text-sm leading-tight text-gray-950 dark:text-gray-300 w-[80ch]"
+                    className="whitespace-pre text-sm leading-tight text-gray-950 dark:text-gray-300"
                 ></pre>
             </div>
             <p className="mt-4 text-center">Loading ...</p>

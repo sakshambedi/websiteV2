@@ -25,16 +25,17 @@ const HackNF = localFont({
 })
 
 
-const RebondG = localFont({
-  src: [
-    {
-      path: '../public/fonts/Rebond-Grotesque/RebondGrotesque-Regular.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-Rebond'
-})
+// const RebondG = localFont({
+//   src: [
+//     {
+//       // path: '../public/fonts/Rebond-Grotesque/RebondGrotesque-Regular.ttf',
+//       path: '../public/fonts/Rebond-Grotesque/RebondGrotesque-Regular.woff2',
+//       weight: '400',
+//       style: 'normal',
+//     },
+//   ],
+//   variable: '--font-Rebond'
+// })
 
 
 
@@ -51,7 +52,7 @@ export default function RootLayout({
   return (
     <html lang="en" >
       <HeadResume />
-      <body className={cn("w-screen font-sans antialiased flex flex-row justify-center phone:w-screen phone:overflow-x-hidden md:w-screen md:overflow-x-hidden overflow-x-hidden ", HackNF.variable, RebondG.variable)}>
+      <body className={cn("w-screen font-sans antialiased flex flex-row justify-center phone:w-screen phone:overflow-x-hidden md:w-screen md:overflow-x-hidden overflow-x-hidden ", HackNF.variable, `RebondG.variable`)}>
         <Analytics />
         <SpeedInsights />
         <ThemeProvider
