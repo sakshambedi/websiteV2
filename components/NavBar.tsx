@@ -5,7 +5,7 @@ const NavBar = () => {
 
     return (
 
-        <header className="relative flex flex-col items-center pt-14 w-screen max-w-full overflow-hidden phone:pt-8 ">
+        <header className="relative flex flex-col items-center pt-20 w-screen max-w-full overflow-hidden phone:pt-8 ">
             <div className="absolute right-20  phone:hidden z-10 ">
                 <ThemeSwitcher />
 
@@ -20,7 +20,7 @@ const NavBar = () => {
             </div>
             <div className="flex flex-row w-full justify-center items-center py-3 phone:py-0">
                 <h3 className="font-mono text-xl font-light phone:text-lg phone:p-2">
-                    ML/AI Student
+                    Deep Learning/AI Student
                 </h3>
             </div>
 

@@ -6,15 +6,15 @@ import { AllPostDataTableInterface } from "@/interface/PostData";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import HomeContent from "@/components/HomeContent";
 import Image from "next/image";
-import WorkContent from "@/components/WorkContent";
+import ProjectContent from "@/components/ProjectContent";
 
 export default async function Home() {
   const allData: AllPostDataTableInterface = getSortedPostsData();
   return (
-    <main className="flex flex-col  justify-center w-full font-PPNeueM ">
+    <main className="flex flex-col  justify-center w-full">
       <NavBar />
 
-      <section className="w-1/2 min-h-screen flex flex-col  items-center self-center mx-auto phone:w-10/12 md:w-3/4 phone:mx-0 ">
+      <section className="w-1/2 min-h-screen flex flex-col items-center self-center mx-auto phone:w-10/12 md:w-3/4 phone:mx-0 ">
 
 
         <Tabs defaultValue="home" className="w-full flex flex-col py-8 phone:py-5 items-center">
@@ -34,11 +34,11 @@ export default async function Home() {
               blog
             </TabsTrigger>
             <TabsTrigger
-              value="work"
+              value="projects"
               className="text-lg phone:text-base text-gray-600 dark:text-gray-400 aria-selected:text-black dark:aria-selected:text-white aria-selected:underline aria-selected:underline-offset-4"
               style={{ boxShadow: 'none', outline: 'none' }}
             >
-              work
+              projects
             </TabsTrigger>
           </TabsList>
           <TabsContent value="home" className="flex flex-col items-center">
@@ -47,8 +47,8 @@ export default async function Home() {
           <TabsContent value="blog" className="flex w-full flex-col items-center">
             <BlogTable allData={allData} />
           </TabsContent>
-          <TabsContent value="work" className="flex flex-col items-center">
-            <WorkContent />
+          <TabsContent value="projects" className="flex flex-col items-center">
+            <ProjectContent />
           </TabsContent>
         </Tabs>
 
