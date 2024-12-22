@@ -61,7 +61,7 @@ device = torch.device(getDeviceInfo())
 print(f"Using device: {device}")
 ```
 
-    Using device: mps
+Using device: mps
 
 ```python
 dataset = os.getenv("NLP1_DATASET_PATH")

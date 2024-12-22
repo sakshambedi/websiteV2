@@ -21,21 +21,21 @@ export default async function Home() {
           <TabsList className="w-max space-x-10 align-middle font-mono font-normal phone:space-x-5 md:space-x-7 px-10">
             <TabsTrigger
               value="home"
-              className="text-lg phone:text-base text-gray-600 dark:text-gray-400 aria-selected:text-black dark:aria-selected:text-white aria-selected:underline aria-selected:underline-offset-4"
+              className="text-lg font-rebondG phone:text-base text-gray-600 dark:text-gray-400 aria-selected:text-black dark:aria-selected:text-white aria-selected:underline aria-selected:underline-offset-4"
               style={{ boxShadow: 'none', outline: 'none' }}
             >
               home
             </TabsTrigger>
             <TabsTrigger
               value="blog"
-              className="text-lg phone:text-base text-gray-600 dark:text-gray-400 aria-selected:text-black dark:aria-selected:text-white aria-selected:underline aria-selected:underline-offset-4"
+              className="text-lg font-rebondG phone:text-base text-gray-600 dark:text-gray-400 aria-selected:text-black dark:aria-selected:text-white aria-selected:underline aria-selected:underline-offset-4"
               style={{ boxShadow: 'none', outline: 'none' }}
             >
               blog
             </TabsTrigger>
             <TabsTrigger
               value="projects"
-              className="text-lg phone:text-base text-gray-600 dark:text-gray-400 aria-selected:text-black dark:aria-selected:text-white aria-selected:underline aria-selected:underline-offset-4"
+              className="text-lg font-rebondG phone:text-base text-gray-600 dark:text-gray-400 aria-selected:text-black dark:aria-selected:text-white aria-selected:underline aria-selected:underline-offset-4"
               style={{ boxShadow: 'none', outline: 'none' }}
             >
               projects
@@ -56,21 +56,21 @@ export default async function Home() {
         <div className='w-full flex flex-row font-thin justify-center pt-5 pb-24 md:space-x-16 lg:space-x-16 phone:justify-between  phone:pt-10 phone:pb-12   text-black dark:text-white '>
           <div className="flex flex-row items-center min-w-fit ">
             <a href="https://github.com/sakshambedi" className="flex flex-row items-center">
-              <p className="font-light text-base phone:text-sm">github</p>
+              <p className="font-light text-base font-rebondG phone:text-sm">github</p>
               <Image src="/icons/link.svg" width={15} height={15} alt="checkout my work on github" className="dark:invert phone:hidden ml-2" />
               <Image src="/icons/link.svg" width={10} height={10} alt="follow me on linkedin" className="dark:invert lg:hidden md:hidden ml-1" />
             </a>
           </div>
           <div className="flex flex-row items-center min-w-fit ">
             <a href="https://www.linkedin.com/in/sakshambedi/" className="flex flex-row items-center ">
-              <p className="font-light text-base phone:text-sm">follow me</p>
+              <p className="font-light text-base font-rebondG phone:text-sm">follow me</p>
               <Image src="/icons/link.svg" width={15} height={15} alt="follow me on linkedin" className="dark:invert phone:hidden ml-2" />
               <Image src="/icons/link.svg" width={10} height={10} alt="follow me on linkedin" className="dark:invert lg:hidden md:hidden ml-1" />
             </a>
           </div>
           <div className="flex flex-row items-center min-w-fit">
             <a href="https://huggingface.co/sakshambedi" className="flex flex-row items-center">
-              <p className="font-light text-base phone:text-sm">hugging face</p>
+              <p className="font-light font-rebondG text-base phone:text-sm">hugging face</p>
               <Image src="/icons/link.svg" width={15} height={15} alt="follow me on linkedin" className="phone:hidden ml-2 dark:invert" />
               <Image src="/icons/link.svg" width={10} height={10} alt="follow me on linkedin" className="md:hidden lg:hidden ml-1 dark:invert" />
             </a>

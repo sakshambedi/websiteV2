@@ -9,7 +9,7 @@ export default function HomeContent() {
 
 
             <div className="pt-10">
-                <h1 className="font-serif text-2xl md:pt-2 md:text-2xl phone:pt-3 phone:text-xl text-black dark:text-white">Skills</h1>
+                <h1 className="font-rebondG text-3xl md:pt-2 md:text-2xl phone:pt-3 phone:text-xl text-black dark:text-white">Skills</h1>
                 <span className="font-mono text-base  phone:text-sm">
                     <p className="pt-1 md:pt-1.5 phone:pt-1.5"><span className="font-bold">Languages : </span>Python, Java, SQL, JavaScript, Swift, Bash, C/C++, TypeScript</p>
                     <p className="pt-1 md:pt-1.5 phone:pt-1.5"><span className="font-bold">Frameworks: </span>SwiftUI, React.js, PyTorch, Tensorflow + Keras, Matplotlib, Pandas, FastAPI</p>
@@ -20,7 +20,7 @@ export default function HomeContent() {
             </div>
 
             <div className="pt-10 ">
-                <h1 className="font-serif text-2xl phone:text-xl phone:pt-1.5 text-black dark:text-white">Work Experience</h1>
+                <h1 className="font-rebondG text-3xl phone:text-xl phone:pt-1.5 text-black dark:text-white">Work Experience</h1>
                 <h2 className="text-lg font-mono phone:font-base pt-2 md:pt-2 phone:pt-1 text-gray-800 dark:text-gray-200" >Technical Analyst and Project Coordinator  </h2>
                 <h3 className="text-base font-mono phone:font-base text-gray-800 dark:text-gray-200" >Daemon Defense Systems, 2022 - Present</h3>
 
@@ -64,7 +64,7 @@ export default function HomeContent() {
 
 
             <div className="pt-10">
-                <h1 className="font-serif text-2xl md:pt-2 md:text-xl phone:pt-3 phone:text-xl text-black dark:text-white">Education</h1>
+                <h1 className="font-rebondG text-3xl md:pt-2 md:text-xl phone:pt-3 phone:text-xl text-black dark:text-white">Education</h1>
                 <div className="flex flex-row justify-between font-mono text-lg pt-2  phone:text-sm phone:pt-1.5">
                     <h3 className='text-left'>B.Sc. in Computer Science, </h3>
                     <h3 className='text-right'>2020 - 2025</h3>

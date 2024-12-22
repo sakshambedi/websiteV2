@@ -12,7 +12,7 @@ const NavBar = () => {
             </div>
 
             <div className="flex w-screen items-center justify-center relative">
-                <h1 className="text-4xl font-serif phone:text-3xl">
+                <h1 className="text-5xl font-rebondG phone:text-3xl">
                     <span className="font-normal">Saksham</span>
                     <span className="mr-4 phone:mr-1.5"></span>
                     <span className="font-normal">Bedi</span>
