@@ -83,12 +83,12 @@ export default function Loading({ onComplete }: LoadingProps) {
     }, [onComplete]);
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen font-mono">
+        <div className="flex flex-col items-center justify-center w-full h-screen font-mono">
             <div>
                 <pre
                     id="loadingScreen"
                     ref={loadingScreenRef}
-                    className="whitespace-pre text-sm leading-tight text-gray-950 dark:text-gray-300 w-[80ch]"
+                    className="whitespace-pre text-sm leading-tight text-gray-950 dark:text-gray-300 w-full"
                 ></pre>
             </div>
             <p className="mt-4 text-center">Loading ...</p>

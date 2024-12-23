@@ -13,11 +13,7 @@ First, run the development server:
 ```bash
 npm run dev
 # or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
 ```
 
 ## Structure
@@ -45,26 +41,26 @@ The metadata for each blog is also read to render to render the main page for th
 
 When the use click on a blog, the contents of the markdown file are read, cleanesed and represented to the user.
 
-These are the following react libs that I use to convert a markdown to a beautiful webpage :
+1. **remarkMath & rehypeKatex**: Handle mathematical expressions in your markdown. remarkMath parses the math syntax, while rehypeKatex renders it using KaTeX.
+2. **remarkGfm**: Adds GitHub Flavored Markdown support, giving you features like tables, strikethrough, task lists, and more.
+3. **stringWidth**: A utility library that properly calculates string widths, considering Unicode characters and emoji.
+4. **unified**: The core processor that ties everything together. It's like a pipeline manager for your markdown transformation.
+5. **rehypePrettyCode**: Makes your code blocks beautiful with syntax highlighting and theme support.
+6. **remarkParse**: The foundation - it reads your markdown and turns it into a format that can be processed.
+7. **remarkFrontmatter**: Handles the metadata section at the top of markdown files (like title, date, author).
+8. **rehypeSanitize**: Security guard for your HTML - it removes potentially dangerous content.
+9. **remarkRehype**: The bridge between markdown and HTML processing - converts markdown structure to HTML structure.
+10. **rehypeRaw**: Allows you to mix raw HTML within your markdown content.
+11. **rehypeStringify**: The final step - turns everything back into HTML that browsers can display.
+12. **transformerCopyButton**: Adds a nice "copy" button to code blocks for better user experience.
 
-1. **unified**: Core library that allows you to process content with plugins (e.g., Markdown to HTML).
-2. **remarkParse**: Parses Markdown into an abstract syntax tree (AST) to be transformed or further processed.
-3. **remarkFrontmatter**: Adds support for frontmatter (metadata) in Markdown files (e.g., YAML).
-4. **remarkParseFrontmatter**: Parses and validates the frontmatter (YAML) in Markdown files.
-5. **remarkRehype**: Converts the Markdown abstract syntax tree (AST) into an HTML syntax tree (rehype), enabling further processing.
-6. **remarkMath**: Adds support for parsing and rendering math equations in Markdown (LaTeX-style syntax).
-7. **rehypeKatex**: Renders mathematical notation using the KaTeX library, typically used with `remarkMath`.
-8. **rehypePrettyCode**: Enhances code block syntax highlighting using the `shiki` highlighter with support for themes like "one-dark-pro."
-9. **rehypeRaw**: Allows for embedding raw HTML within Markdown, making it possible to mix Markdown and HTML.
-10. **rehypeStringify**: Converts the HTML syntax tree back into a string of HTML for output.
-11. **transformerCopyButton**: Adds a copy button to code blocks to allow users to copy code snippets with ease.
-12. **matterResult.content**: Contains the raw Markdown content including frontmatter, which is processed by the pipeline.
+This combination of tools creates a powerful markdown processing pipeline that can handle everything from math equations to syntax-highlighted code blocks, while keeping content secure and well-structured.
 
 ## TODO:
 
-- Add caching for the server side rendering
-- Add a loading component when the blog is getting rendered
-- Fix the basic dark and light theme. The light theme is too light.
+[x] Add a loading component when the blog is getting rendered
+[x] Fix the basic dark and light theme.
+[x] Add Markdown Table support for blog
+
 - Add Open Graph preview for social media
-- Add Markdown Table support for blog
-- Custom dark and light theme
+- Caching
