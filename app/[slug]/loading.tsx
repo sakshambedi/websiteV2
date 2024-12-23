@@ -10,26 +10,15 @@ export default function Loading({ onComplete }: LoadingProps) {
     const loadingScreenRef = useRef<HTMLPreElement>(null);
 
     useEffect(() => {
-        let A = 0;
-        let B = 0;
+        let A = 0,
+            B = 0;
 
         const renderDonut = () => {
             const loadingScreen = loadingScreenRef.current;
             if (!loadingScreen) return;
 
-            const width = Math.floor(window.innerWidth / 5); // Half viewport width
-            const height = Math.floor(window.innerHeight / 5); // Half viewport height
-
-
             const b: string[] = [];
             const z: number[] = [];
-
-            const screenWidth = Math.floor(width / 2);
-            const screenHeight = Math.floor(height / 2);
-
-            const scaleX = screenWidth / 5;
-            const scaleY = screenHeight / 5;
-
             A += 0.07;
             B += 0.03;
             const cA = Math.cos(A),
@@ -37,8 +26,8 @@ export default function Loading({ onComplete }: LoadingProps) {
                 cB = Math.cos(B),
                 sB = Math.sin(B);
 
-            for (let k = 0; k < screenWidth * screenHeight; k++) {
-                b[k] = k % screenWidth === screenWidth - 1 ? "\n" : " ";
+            for (let k = 0; k < 1760; k++) {
+                b[k] = k % 80 === 79 ? "\n" : " ";
                 z[k] = 0;
             }
 
@@ -52,15 +41,9 @@ export default function Loading({ onComplete }: LoadingProps) {
                         D = 1 / (sp * h * sA + st * cA + 5),
                         t = sp * h * cA - st * sA;
 
-                    const x = Math.floor(
-                        screenWidth / 2 +
-                            scaleX * D * (cp * h * cB - t * sB)
-                    );
-                    const y = Math.floor(
-                        screenHeight / 2 +
-                            scaleY * D * (cp * h * sB + t * cB)
-                    );
-                    const o = x + screenWidth * y;
+                    const x = Math.floor(40 + 30 * D * (cp * h * cB - t * sB));
+                    const y = Math.floor(12 + 15 * D * (cp * h * sB + t * cB));
+                    const o = x + 80 * y;
                     const N = Math.floor(
                         8 *
                         ((st * sA - sp * ct * cA) * cB -
@@ -71,13 +54,13 @@ export default function Loading({ onComplete }: LoadingProps) {
 
                     if (
                         y >= 0 &&
-                        y < screenHeight &&
+                        y < 22 &&
                         x >= 0 &&
-                        x < screenWidth &&
+                        x < 80 &&
                         D > z[o]
                     ) {
                         z[o] = D;
-                        b[o] = ",.-~:;=!*#$@"[N > 0 ? N : 0];
+                        b[o] = ".,-~:;=!*#$@"[N > 0 ? N : 0];
                     }
                 }
             }
@@ -87,8 +70,15 @@ export default function Loading({ onComplete }: LoadingProps) {
 
         const interval = window.setInterval(renderDonut, 50);
 
+        // Ensure the animation runs for at least 2 seconds
+        const timeout = window.setTimeout(() => {
+            if (onComplete) onComplete();
+            clearInterval(interval);
+        }, 2000);
+
         return () => {
             clearInterval(interval);
+            clearTimeout(timeout);
         };
     }, [onComplete]);
 
@@ -98,10 +88,10 @@ export default function Loading({ onComplete }: LoadingProps) {
                 <pre
                     id="loadingScreen"
                     ref={loadingScreenRef}
-                    className="whitespace-pre text-sm leading-tight text-gray-950 dark:text-gray-300 w-full"
+                    className="whitespace-pre text-sm leading-tight text-gray-950 dark:text-gray-300 w-[80ch]"
                 ></pre>
-                <p className="mt-4 text-center">Loading ...</p>
             </div>
+            <p className="mt-4 text-center">Loading ...</p>
         </div>
     );
 }
