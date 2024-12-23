@@ -2,6 +2,14 @@
 title: "Loss Function in Regression and Classification problem for ML"
 date: "2024-03-31"
 category: "ML"
+tags:
+  [
+    "ML",
+    "Machine Learning",
+    "Loss Function",
+    "Regression",
+    "Classification Problem",
+  ]
 ---
 
 ## Abstract
