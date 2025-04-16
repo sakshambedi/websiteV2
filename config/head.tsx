@@ -18,6 +18,10 @@ export default function HeadResume() {
             <meta name="twitter:title" content="My Awesome Website" />
             <meta name="twitter:description" content="This is the description for my website." />
             <meta property="twitter:image" content="Twitter link preview image URL"></meta>
+
+            {/* <link rel="icon" href="/public/favicon.ico" type="image/x-icon" ></link> */}            
+            <link rel="apple-touch-icon" sizes="180x180" href="/SB.ico" />
+            <link rel="manifest" href="/site.webmanifest" />
         </Head>
     );
 }

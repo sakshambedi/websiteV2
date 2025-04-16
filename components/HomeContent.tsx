@@ -18,12 +18,12 @@ export default function HomeContent() {
             <div className="pt-10">
                 <h1 className="font-rebondG text-3xl md:pt-2 md:text-2xl phone:pt-3 phone:text-xl text-black dark:text-white">Skills</h1>
                 <span className="font-mono text-base phone:text-sm">
-                    <p className="pt-1 md:pt-1.5  phone:pt-1.5"><span className="font-bold text-white">AI & ML Skills: </span>Deep Learning Architectures (CNNs, RNNs), Generative Models (AutoEncoders, GAN), Computer Vision, Transfer Learning, Hyperparameter Optimization</p>
-                    <p className="pt-1 md:pt-1.5 phone:pt-1.5"><span className="font-bold text-white">Languages: </span>Python, Java, JavaScript, C++, C, R</p>
-                    <p className="pt-1 md:pt-1.5 phone:pt-1.5"><span className="font-bold text-white">Frameworks: </span>PyTorch, NumPy, Matplotlib, Pandas, FastAPI, TensorFlow + Keras</p>
-                    <p className="pt-1 md:pt-1.5 phone:pt-1.5"><span className="font-bold text-white">Cloud & DevOps: </span>AWS (CloudFront, EC2, Lambda, S3, Amplify), Azure, CI/CD (GitHub Actions), Dynatrace, Docker, Nginx, REST API</p>
-                    <p className="pt-1 md:pt-1.5 phone:pt-1.5"><span className="font-bold text-white">Database: </span>SQL, MongoDB, Neo4j</p>
-                    <p className="pt-1 md:pt-1.5 phone:pt-1.5"><span className="font-bold text-white">Tools: </span>TensorBoard, Git, GitHub/GitLab, Figma, JIRA, Pytest, Hugging Face, Linux</p>
+                    <p className="pt-1 md:pt-1.5  phone:pt-1.5"><span className="font-bold text-black dark:text-white">AI & ML Skills: </span>Deep Learning Architectures (CNNs, RNNs), Generative Models (AutoEncoders, GAN), Computer Vision, Transfer Learning, Hyperparameter Optimization</p>
+                    <p className="pt-1 md:pt-1.5 phone:pt-1.5"><span className="font-bold text-black dark:text-white">Languages: </span>Python, Java, JavaScript, C++, C, R</p>
+                    <p className="pt-1 md:pt-1.5 phone:pt-1.5"><span className="font-bold text-black dark:text-white">Frameworks: </span>PyTorch, NumPy, Matplotlib, Pandas, FastAPI, TensorFlow + Keras</p>
+                    <p className="pt-1 md:pt-1.5 phone:pt-1.5"><span className="font-bold text-black dark:text-white">Cloud & DevOps: </span>AWS (CloudFront, EC2, Lambda, S3, Amplify), Azure, CI/CD (GitHub Actions), Dynatrace, Docker, Nginx, REST API</p>
+                    <p className="pt-1 md:pt-1.5 phone:pt-1.5"><span className="font-bold text-black dark:text-white">Database: </span>SQL, MongoDB, Neo4j</p>
+                    <p className="pt-1 md:pt-1.5 phone:pt-1.5"><span className="font-bold text-black dark:text-white">Tools: </span>TensorBoard, Git, GitHub/GitLab, Figma, JIRA, Pytest, Hugging Face, Linux</p>
                 </span>
             </div>
 
