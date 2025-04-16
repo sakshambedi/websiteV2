@@ -1,6 +1,5 @@
-
 import type { Metadata } from "next";
-// import { Inter } from "next/font/google";
+import { Roboto } from 'next/font/google';
 import "./globals.css";
 import React from "react";
 import { cn } from "@/lib/utils"
@@ -10,7 +9,6 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import HeadResume from "@/config/head";
 import localFont from 'next/font/local'
-
 
 
 const HackNF = localFont({
@@ -36,6 +34,11 @@ const RebondG = localFont({
   variable: '--font-Rebond'
 })
 
+const roboto = Roboto({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-roboto'
+});
 
 
 export const metadata: Metadata = {
@@ -51,7 +54,7 @@ export default function RootLayout({
   return (
     <html lang="en" >
       <HeadResume />
-      <body className={cn("w-screen font-sans antialiased flex flex-row justify-center phone:w-screen phone:overflow-x-hidden md:w-screen md:overflow-x-hidden overflow-x-hidden ", HackNF.variable, RebondG.variable)}>
+      <body className={cn("w-screen font-sans antialiased flex flex-row justify-center phone:w-screen phone:overflow-x-hidden md:w-screen md:overflow-x-hidden overflow-x-hidden ", roboto.variable, RebondG.variable, HackNF.variable)}>
         <Analytics />
         <SpeedInsights />
         <ThemeProvider

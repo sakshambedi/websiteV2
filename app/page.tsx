@@ -11,10 +11,10 @@ import ProjectContent from "@/components/ProjectContent";
 export default async function Home() {
   const allData: AllPostDataTableInterface = getSortedPostsData();
   return (
-    <main className="flex flex-col  justify-center w-full">
+    <main className="flex flex-col w-full min-h-screen">
       <NavBar />
 
-      <section className="w-1/2 min-h-screen flex flex-col items-center self-center mx-auto phone:w-10/12 md:w-3/4 phone:mx-0 ">
+      <section className="w-1/2 flex flex-col flex-grow items-center self-center mx-auto phone:w-10/12 md:w-3/4 phone:mx-0 ">
 
 
         <Tabs defaultValue="home" className="w-full flex flex-col py-8 phone:py-5 items-center">
@@ -53,7 +53,7 @@ export default async function Home() {
         </Tabs>
 
 
-        <div className='w-full flex flex-row font-thin justify-center pt-5 pb-24 md:space-x-16 lg:space-x-16 phone:justify-between  phone:pt-10 phone:pb-12   text-black dark:text-white '>
+        <div className='mt-auto w-full flex flex-row font-thin justify-center pb-12 md:space-x-16 lg:space-x-16 phone:justify-between phone:pt-10 phone:pb-12 text-black dark:text-white'>
           <div className="flex flex-row items-center min-w-fit ">
             <a href="https://github.com/sakshambedi" className="flex flex-row items-center">
               <p className="font-light text-base font-rebondG phone:text-sm">github</p>

@@ -4,8 +4,6 @@ export default function ProjectContent() {
     return (
         <section className="text-gray-700 dark:text-gray-300">
 
-            {/* <h3 className="font-serif text-2xl pt-5 md:pt-2  phone:pt-3 phone:text-xl text-black dark:text-white">Work Mission</h3>
-            <p className="font-mono text-base dark:text-gray-200 phone:text-sm pt-2 md:pt-1 phone:pt-1.5 ">On a mission to build AI-driven products that enhance productivity and drive positive change for humanity. Documenting my journey, openly sharing lessons learned, and helping others benefit from my experiences as we grow together on this path to innovation and impact.</p> */}
             <div className="pt-0">
                 <h2 className="font-rebondG text-3xl md:pt-2 md:text-2xl phone:pt-3 phone:text-xl text-black dark:text-white">Projects</h2>
 
@@ -67,7 +65,7 @@ export default function ProjectContent() {
                         />
                     </div>
                 </div>
-
+                 
 
                 <div className="pt-10">
                     <div className="flex flex-row justify-between  font-mono text-lg  font-base  pt-2  space-x-9 phone:space-x-3 phone:pt-1.5 md:pt-2 md:space-x-3">

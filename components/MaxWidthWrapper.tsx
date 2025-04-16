@@ -9,7 +9,7 @@ interface MaxWidthProps {
 
 const MaxWidthWrapper = ({ className, children }: MaxWidthProps) => {
     return (
-        <div className={cn(' max-w-screen max-h-full w-full my-12 flex flex-col ', className)}>{children}</div>
+        <div className={cn('max-w-screen max-h-full w-full my-12 flex flex-col ', className)}>{children}</div>
     )
 }
 
