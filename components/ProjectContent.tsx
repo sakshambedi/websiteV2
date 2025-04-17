@@ -9,7 +9,7 @@ export default function ProjectContent() {
 
                 <div className="project-info">
                     <div className="flex flex-row justify-between  font-mono   pt-2  space-x-5 phone:space-x-3 phone:pt-1.5 md:pt-2 md:space-x-3">
-                        <h3 className='text-lg font-mono phone:font-base pt-2 md:pt-2 phone:pt-1 text-gray-800 dark:text-gray-200'>Vortex - AI Classification</h3>
+                        <h3 className='text-lg font-rebondG phone:font-base pt-2 md:pt-2 phone:pt-1  text-black dark:text-white'>Vortex - AI Classification</h3>
                         <p className='text-base phone:text-base md:text-base  text-right text-gray-800 dark:text-gray-200'>Summer 2024</p>
                     </div>
                     <p className="font-mono text-base phone:text-sm pt-1 md:pt-1 phone:pt-1.5 ">A full stack application for image classification based on Convolution Neural Networks. Transferring my knowledge in CS231n from Stanford University into training the most impactful CNNs of last decade. Designing and developed the full stack application, integrated it with CNNs and deployed it on AWS.
@@ -69,7 +69,7 @@ export default function ProjectContent() {
 
                 <div className="pt-10">
                     <div className="flex flex-row justify-between  font-mono text-lg  font-base  pt-2  space-x-9 phone:space-x-3 phone:pt-1.5 md:pt-2 md:space-x-3">
-                        <h3 className='text-lg font-mono phone:font-base pt-2 md:pt-2 phone:pt-1 text-gray-800 dark:text-gray-200'>NanoGTP NLP Model</h3>
+                        <h3 className='text-lg font-rebondG phone:font-base pt-2 md:pt-2 phone:pt-1 text-black dark:text-white'>NanoGTP NLP Model</h3>
                         <h3 className='text-base phone:text-base md:text-base text-right'>Summer 2024 - ongoing</h3>
                     </div>
                     <p className=" font-mono  text-base phone:text-sm pt-1 md:pt-1 phone:pt-1.5">The simplest, fastest repository for training/finetuning medium-sized GPTs. Still under active development
