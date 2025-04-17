@@ -1,4 +1,4 @@
-import "./../globals.css"
+import "./../../globals.css"
 import { BlogPostInterface } from "@/interface/PostData";
 import { getPostData } from "@/lib/post";
 import React from "react";

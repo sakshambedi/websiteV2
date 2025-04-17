@@ -35,7 +35,7 @@ export default function BlogTable({ allData }: { allData: AllPostDataTableInterf
                                 {`${new Date(date).toLocaleDateString(undefined, { month: 'short' }).toLowerCase()} '${new Date(date).getFullYear().toString().slice(-2)}`}
                             </TableCell>
                             <TableCell className="text-base text-left px-1 text-gray-900 dark:text-gray-100 phone:text-sm phone:px-1 phone:py-1 md:px-2 md:py-1.5">
-                                <Link href={`/${slug}/`} className="hover:underline">
+                                <Link href={`/blog/${slug}/`} className="hover:underline">
                                     {title}
                                 </Link>
                             </TableCell>
