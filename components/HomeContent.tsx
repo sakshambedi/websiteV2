@@ -8,7 +8,7 @@ export default function HomeContent() {
 
             <div className="pt-10">
                 <h1 className="font-rebondG text-3xl md:pt-2 md:text-xl phone:pt-3 phone:text-xl text-black dark:text-white"> Research</h1>
-                <ul className="font-mono text-base phone:text-sm pt-1 list-disc list-outside pl-5 space-y-1.5">
+                <ul className="font-mono text-base phone:text-sm pt-2 list-disc list-outside pl-5 space-y-1.5 ">
                     <li>
                         <span className="font-bold">3D Point Cloud Diffusion Model:</span> Lead researcher on an autoencoder-based diffusion model for infected wheat plant point clouds, reducing data collection time from 90 days to minutes with an Earth Mover&apos;s Distance of &#8776;0.003 and Chamfer distance of &#8776;0.005.
                     </li>
@@ -18,7 +18,7 @@ export default function HomeContent() {
             <div className="pt-10">
                 <h1 className="font-rebondG text-3xl md:pt-2 md:text-2xl phone:pt-3 phone:text-xl text-black dark:text-white">Skills</h1>
                 <span className="font-mono text-base phone:text-sm">
-                    <p className="pt-1 md:pt-1.5  phone:pt-1.5"><span className="font-bold text-black dark:text-white">AI & ML Skills: </span>Deep Learning Architectures (CNNs, RNNs), Generative Models (AutoEncoders, GAN), Computer Vision, Transfer Learning, Hyperparameter Optimization</p>
+                    <p className="pt-2 md:pt-1.5  phone:pt-1.5"><span className="font-bold text-black dark:text-white">AI & ML Skills: </span>Deep Learning Architectures (CNNs, RNNs), Generative Models (AutoEncoders, GAN), Computer Vision, Transfer Learning, Hyperparameter Optimization</p>
                     <p className="pt-1 md:pt-1.5 phone:pt-1.5"><span className="font-bold text-black dark:text-white">Languages: </span>Python, Java, JavaScript, C++, C, R</p>
                     <p className="pt-1 md:pt-1.5 phone:pt-1.5"><span className="font-bold text-black dark:text-white">Frameworks: </span>PyTorch, NumPy, Matplotlib, Pandas, FastAPI, TensorFlow + Keras</p>
                     <p className="pt-1 md:pt-1.5 phone:pt-1.5"><span className="font-bold text-black dark:text-white">Cloud & DevOps: </span>AWS (CloudFront, EC2, Lambda, S3, Amplify), Azure, CI/CD (GitHub Actions), Dynatrace, Docker, Nginx, REST API</p>
@@ -29,7 +29,7 @@ export default function HomeContent() {
 
             <div className="pt-10">
               <h1 className="font-rebondG text-3xl md:pt-2 md:text-xl phone:pt-3 phone:text-xl text-black dark:text-white">Work Experience</h1>
-              <div className="pt-6">
+              <div className="pt-2">
                 <h2 className="text-xl font-rebondG font-semibold text-gray-900 dark:text-white">Software Developer &amp; Project Manager</h2>
                 <div className="flex justify-between items-center mb-2">
                   <p className="text-base font-mono text-gray-700 dark:text-gray-200">Daemon Defense Systems, Winnipeg, MB</p>
