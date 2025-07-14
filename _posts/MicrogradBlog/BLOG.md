@@ -1,6 +1,6 @@
 ---
 title: "Micrograd: A Chronological Deep Dive into Design, Development, and Performance"
-date: "2024-07-12"
+date: "2025-07-12"
 category: "ML"
 tags:
   [
