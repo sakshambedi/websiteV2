@@ -59,7 +59,7 @@ export default function HomeContainer({
               className="text-lg font-rebondG phone:text-base text-gray-600 dark:text-gray-400 aria-selected:text-black dark:aria-selected:text-white aria-selected:underline aria-selected:underline-offset-4"
               style={{ boxShadow: "none", outline: "none" }}
             >
-              research ;amp& projects
+              research &amp; projects
             </TabsTrigger>
           </TabsList>
           <TabsContent value="home" className="flex flex-col items-center">
