@@ -11,8 +11,6 @@ I did some prototyping using figma. Check out the basic desing that I made here.
 First, run the development server:
 
 ```bash
-npm run dev
-# or
 pnpm dev
 ```
 
