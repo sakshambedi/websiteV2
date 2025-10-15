@@ -52,7 +52,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" >
+    <html lang="en" suppressHydrationWarning>
       <HeadResume />
       <body className={cn("w-screen font-sans antialiased flex flex-row justify-center phone:w-screen phone:overflow-x-hidden md:w-screen md:overflow-x-hidden overflow-x-hidden ", roboto.variable, RebondG.variable, HackNF.variable)}>
         <Analytics />
@@ -66,6 +66,6 @@ export default function RootLayout({
           {children}
         </ThemeProvider>
       </body>
-    </ html >
+    </html>
   );
 }
