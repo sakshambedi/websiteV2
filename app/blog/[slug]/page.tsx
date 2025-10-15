@@ -4,15 +4,16 @@ import { getPostData } from "@/lib/post";
 import React from "react";
 import { notFound } from "next/navigation";
 import "katex/dist/katex.min.css"; // Import KaTeX CSS
+import Link from "next/link";
 
 // import 'katex/dist/katex.min.css';
 
 export default async function BlogPostPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
-  const { slug } = await params;
+  const { slug } = params;
   const blogPost: BlogPostInterface | null = await getPostData(slug);
 
   if (!blogPost) {
@@ -24,6 +25,12 @@ export default async function BlogPostPage({
       <article className="flex flex-col flex-nowrap w-full  items-center phone:prose-figure:w-full ">
         <div className="flex flex-col w-full items-center bg-sky-700 dark:bg-sky-400 h-72 justify-end ">
           <div className="flex flex-col w-6/12  phone:w-9/12 md:w-3/4 ">
+            <Link
+              href="/?tab=blog"
+              className="font-mono text-sm text-gray-200 dark:text-gray-800 pb-3 hover:underline phone:text-xs phone:pb-2"
+            >
+              ← back to blog
+            </Link>
             <h1 className="flex font-rebondG  text-4xl justify-start mb-0 pt-14 pb-3  text-white dark:text-black phone:text-lg phone:pt-6 phone:pb-2">
               {blogPost.title}
             </h1>

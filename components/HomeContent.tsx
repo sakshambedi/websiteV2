@@ -2,79 +2,42 @@ import React from "react";
 
 export default function HomeContent() {
   return (
-    <div className="item-center w-full pt-4 text-gray-700 dark:text-gray-200 ">
-      <p className="text-base font-mono mt-2 phone:mt-1 phone:text-sm ">
-        Hi!👋🏼
-      </p>
-      <p className="text-base font-mono pt-4 phone:text-sm phone:pt-4">
-        I am Saksham Bedi, an AI/ML Developer and Computer Science student at
-        the University of Manitoba specializing in deep learning architectures
-        and data-driven solutions. I thrive in collaborative environments,
-        bridging technical implementation with strategic planning, and have
-        experience building HIPAA/PIPEDA-compliant systems for healthcare
-        clients. Beyond coding, I'm passionate about translating complex
-        mathematical concepts into practical solutions that drive real business
-        impact, bringing a unique perspective through my Economics and
-        Mathematics background. Other than that, I love to play squash, golf,
-        chess and watch F1 in my free time.
-      </p>
-
-      {/* <div className="pt-10">
-        <h1 className="font-rebondG text-3xl md:pt-2 md:text-xl phone:pt-3 phone:text-xl text-black dark:text-white">
-          {" "}
-          Research
-        </h1>
-        <ul className="font-mono text-base phone:text-sm pt-2 list-disc list-outside pl-5 space-y-1.5 ">
-          <li>
-            <span className="font-bold">3D Point Cloud Diffusion Model:</span>{" "}
-            Lead researcher on an autoencoder-based diffusion model for infected
-            wheat plant point clouds, reducing data collection time from 90 days
-            to minutes with an Earth Mover&apos;s Distance of &#8776;0.003 and
-            Chamfer distance of &#8776;0.005.
-          </li>
-        </ul>
-      </div> */}
+    <div className="item-center w-full pt-6 text-gray-700 dark:text-gray-200 space-y-8">
+      <div>
+        <p className="text-base font-mono mt-2 phone:mt-1 phone:text-sm ">
+          Hi!👋🏼
+        </p>
+        <p className="text-base font-mono mt-2 pt-1 phone:text-sm phone:pt-2">
+          I'm Saksham Bedi, an AI software engineer at Murray Chevrolet and
+          Computer Science student at the University of Manitoba. I build
+          production-ready ML systems that stay compliant, deliver clear
+          business results, and keep teams aligned; outside work you'll find me
+          playing squash, golf, chess, or catching F1.
+        </p>
+      </div>
 
       <div className="pt-10">
         <h1 className="font-rebondG text-3xl md:pt-2 md:text-2xl phone:pt-3 phone:text-xl text-black dark:text-white">
           Skills
         </h1>
         <span className="font-mono text-base phone:text-sm">
-          <p className="pt-2 md:pt-1.5  phone:pt-1.5">
+          <p className="pt-2 md:pt-1.5 phone:pt-1.5">
             <span className="font-bold text-black dark:text-white">
-              Programming Languages:{" "}
+              AI &amp; Python:{" "}
             </span>
-            Python, C++
+            LangChain, PyTorch, FastAPI, vector databases
           </p>
           <p className="pt-1 md:pt-1.5 phone:pt-1.5">
             <span className="font-bold text-black dark:text-white">
-              Frameworks & Libraries:{" "}
+              Data &amp; Platforms:{" "}
             </span>
-            Flask, FastAPI, PyTorch, NumPy
+            Supabase, SQL, Microsoft Fabric, NumPy
           </p>
           <p className="pt-1 md:pt-1.5 phone:pt-1.5">
             <span className="font-bold text-black dark:text-white">
-              Database & ORM:{" "}
+              Ops &amp; Tooling:{" "}
             </span>
-            SQL, Microsoft Fabric
-          </p>
-          <p className="pt-1 md:pt-1.5 phone:pt-1.5">
-            <span className="font-bold text-black dark:text-white">
-              Testing & CI:{" "}
-            </span>
-            Pytest, GitHub Actions, Dynatrace
-          </p>
-          <p className="pt-1 md:pt-1.5 phone:pt-1.5">
-            <span className="font-bold text-black dark:text-white">
-              Cloud & DevOps:{" "}
-            </span>
-            AWS (EC2, S3, CloudFront), Azure, Docker
-          </p>
-          <p className="pt-1 md:pt-1.5 phone:pt-1.5">
-            <span className="font-bold text-black dark:text-white">
-              Regulatory Compliance:{" "}
-            </span>
-            HIPAA, PIPEDA, PHI-aware system design, secure REST APIs
+            AWS (EC2, S3, CloudFront), Docker, GitHub Actions, Dynatrace
           </p>
         </span>
       </div>
@@ -84,6 +47,29 @@ export default function HomeContent() {
           Work Experience
         </h1>
         <div className="pt-2">
+          <h2 className="text-xl font-rebondG font-semibold text-gray-900 dark:text-white">
+            AI Software Engineer
+          </h2>
+          <div className="flex justify-between items-center mb-2">
+            <p className="text-base font-mono text-gray-700 dark:text-gray-200">
+              Murray Chevrolet, Winnipeg, MB
+            </p>
+            <time className="text-base font-mono text-gray-700 dark:text-gray-200">
+              Jan 2025 – Present
+            </time>
+          </div>
+          <ul className="list-disc list-outside pl-5 space-y-1.5 text-base text-gray-600 dark:text-gray-200 font-mono">
+            <li>
+              Deliver dealership AI copilots and predictive analytics that
+              streamline sales and service decisions.
+            </li>
+            <li>
+              Partner with sales, marketing, and data teams to roll out ML tools
+              and mentor co-ops on responsible AI use.
+            </li>
+          </ul>
+        </div>
+        <div className="pt-6">
           <h2 className="text-xl font-rebondG font-semibold text-gray-900 dark:text-white">
             Software Developer &amp; Project Coordinator
           </h2>
@@ -95,26 +81,14 @@ export default function HomeContent() {
               Sep 2022 – Jan 2025
             </time>
           </div>
-          {/* <p className="text-base font-mono text-gray-700 dark:text-gray-200 mb-2"> | Sep 2022 – Jan 2025</p> */}
           <ul className="list-disc list-outside pl-5 space-y-1.5 text-base text-gray-600 dark:text-gray-200 font-mono">
             <li>
-              Led client-facing technical consultations for device procurement
-              and infrastructure deployment, aligning stakeholder requirements
-              with scalable, compliant system architectures.
+              Led client workshops to launch HIPAA-compliant RIS-PACS across 80+
+              sites with zero disruption.
             </li>
             <li>
-              Collaborated with cross-functional teams and clients to design and
-              deploy data-driven solutions for real-world business processes.
-            </li>
-            <li>
-              Supported go-to-market deployment strategy of RIS-PACS across 80+
-              imaging sites, ensuring zero downtime and streamlined access to
-              1.2M+ clinical records annually.
-            </li>
-            <li>
-              Implemented Azure Dynatrace observability stack to monitor
-              mission-critical services, preventing election outages by
-              resolving high-impact issues.
+              Coordinated engineers and vendors to deploy Azure and Dynatrace
+              observability and resolve issues fast.
             </li>
           </ul>
         </div>
@@ -132,13 +106,12 @@ export default function HomeContent() {
           </div>
           <ul className="list-disc font-mono list-outside pl-5 space-y-1.5 text-base text-gray-600 dark:text-gray-200">
             <li>
-              Integrated Loqate API integration for address normalization within
-              IBM MDM, ensuring secure, PIPEDA-compliant data workflows for
-              healthcare clients.
+              Integrated Loqate API with IBM MDM to deliver secure, normalized
+              healthcare data flows.
             </li>
             <li>
-              Spearheaded JIRA implementation to streamline Agile workflows,
-              increasing team efficiency by 20%.
+              Championed Jira adoption and agile cadences, lifting team
+              throughput by 20% and improving communication.
             </li>
           </ul>
         </div>
@@ -152,7 +125,7 @@ export default function HomeContent() {
           <h3 className="text-left">B.Sc. in Computer Science, </h3>
           <h3 className="text-right">2020 - 2025</h3>
         </div>
-        <p className=" font-mono text-base  phone:text-sm md:pt-0">
+        <p className="font-mono text-base phone:text-sm md:pt-0">
           University of Manitoba
         </p>
       </div>
