@@ -17,21 +17,21 @@ A personal portfolio and blog built with Next.js, TypeScript, Tailwind CSS, and 
 
 ## Features
 
-- Next.js 15+ with SSR/SSG support
+- Next.js App Router (v15+) with hybrid SSR/SSG
 - Tailwind CSS 3 for utility-first styling
 - Light/dark theme toggling
-- Blog generation from markdown files
+- Blog generation from `_posts/` markdown files
 - Math rendering via remark-math & rehype-katex
 - GitHub Flavored Markdown (tables, task lists)
 - Syntax-highlighted code blocks (Shiki) + copy button
 - Open Graph support
-- Simple recommendation by category (future)
+- Simple recommendation by category (roadmap)
 - Zero-config deployment (Vercel ready)
 
 ## Prerequisites
 
-- Node.js v18 or higher
-- pnpm v7 or higher
+- Node.js v18+
+- pnpm v8+
 
 Install `pnpm` globally if you haven’t already:
 
@@ -75,6 +75,7 @@ pnpm start
 - `pnpm build` — Create an optimized production build
 - `pnpm start` — Start the production server
 - `pnpm lint` — Run ESLint
+- `pnpm approve-builds` — Approve native build scripts (only required once on install)
 
 ## Project Structure
 
