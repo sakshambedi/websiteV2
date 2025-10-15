@@ -1,6 +1,6 @@
-# website-portfolio
+# Saksham Bedi's Personal Portfolio
 
-A personal portfolio and blog built with Next.js, TypeScript, Tailwind CSS, and a powerful markdown-based blogging pipeline. Featuring math rendering, syntax-highlighted code blocks with copy buttons, dark/light theming, and optimized performance.
+Welcome to my personal portfolio and blog! This project showcases my work, thoughts, and technical expertise. Built with cutting-edge technologies like Next.js, TypeScript, and Tailwind CSS, it features a bespoke markdown-based blogging pipeline, math rendering, syntax-highlighted code blocks, and seamless dark/light theming for an optimized user experience.
 
 ## Table of Contents
 
@@ -25,7 +25,7 @@ A personal portfolio and blog built with Next.js, TypeScript, Tailwind CSS, and 
 - GitHub Flavored Markdown (tables, task lists)
 - Syntax-highlighted code blocks (Shiki) + copy button
 - Open Graph support
-- Simple recommendation by category (roadmap)
+- Personalized content recommendations based on blog categories (roadmap)
 - Zero-config deployment (Vercel ready)
 
 ## Prerequisites
@@ -95,7 +95,7 @@ pnpm start
 ├── postcss.config.mjs    # PostCSS configuration
 ├── tsconfig.json         # TypeScript configuration
 ├── pnpm-lock.yaml        # pnpm lockfile
-└── README.md             # This file
+├── README.md             # Project documentation
 ```
 
 ## Markdown Blog Pipeline
@@ -138,7 +138,7 @@ Pipeline steps:
 
 ## Tech Stack
 
-- **Framework**: Next.js App Router
+- **Framework**: Next.js App Router (v15+)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS, Tailwind Animate
 - **Linting**: ESLint (Next.js config)
@@ -161,7 +161,7 @@ Pipeline steps:
 4. Push to branch: `git push origin feature/my-change`
 5. Open a pull request
 
-Please adhere to existing code style and ensure TypeScript types are correct.
+Please adhere to the existing code style, ensure TypeScript types are correct, and maintain high-quality documentation for any new features.
 
 ## License
 
