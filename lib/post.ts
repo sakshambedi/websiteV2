@@ -76,6 +76,16 @@ export function getSortedPostsData(): AllPostDataTableInterface {
   });
 }
 
+export function getAllPostSlugs(): string[] {
+  if (!fs.existsSync(postsDirectory)) {
+    return [];
+  }
+  return fs
+    .readdirSync(postsDirectory, { withFileTypes: true })
+    .filter((dirent) => dirent.isDirectory())
+    .map((dirent) => dirent.name);
+}
+
 export async function getPostData(
   slug: string,
 ): Promise<BlogPostInterface | null> {

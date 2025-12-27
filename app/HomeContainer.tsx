@@ -67,21 +67,21 @@ export default function HomeContainer({
           <TabsList className="flex w-full max-w-md justify-center gap-8 font-mono font-normal phone:gap-4">
             <TabsTrigger
               value="home"
-              className="text-lg font-rebondG phone:text-sm text-gray-600 dark:text-gray-400 aria-selected:text-black dark:aria-selected:text-white aria-selected:underline aria-selected:underline-offset-4"
+              className="text-fluid-lg font-rebondG text-gray-600 dark:text-gray-400 aria-selected:text-black dark:aria-selected:text-white aria-selected:underline aria-selected:underline-offset-4"
               style={{ boxShadow: "none", outline: "none" }}
             >
               home
             </TabsTrigger>
             <TabsTrigger
               value="blog"
-              className="text-lg font-rebondG phone:text-sm text-gray-600 dark:text-gray-400 aria-selected:text-black dark:aria-selected:text-white aria-selected:underline aria-selected:underline-offset-4"
+              className="text-fluid-lg font-rebondG text-gray-600 dark:text-gray-400 aria-selected:text-black dark:aria-selected:text-white aria-selected:underline aria-selected:underline-offset-4"
               style={{ boxShadow: "none", outline: "none" }}
             >
               blog
             </TabsTrigger>
             <TabsTrigger
               value="projects"
-              className="text-lg font-rebondG phone:text-sm text-gray-600 dark:text-gray-400 aria-selected:text-black dark:aria-selected:text-white aria-selected:underline aria-selected:underline-offset-4"
+              className="text-fluid-lg font-rebondG text-gray-600 dark:text-gray-400 aria-selected:text-black dark:aria-selected:text-white aria-selected:underline aria-selected:underline-offset-4"
               style={{ boxShadow: "none", outline: "none" }}
             >
               projects
@@ -107,7 +107,7 @@ export default function HomeContainer({
               href="https://github.com/sakshambedi"
               className="flex flex-row items-center"
             >
-              <p className="font-light text-base font-rebondG phone:text-sm">
+              <p className="font-light text-fluid-base font-rebondG">
                 github
               </p>
               <Image
@@ -131,7 +131,7 @@ export default function HomeContainer({
               href="https://www.linkedin.com/in/sakshambedi/"
               className="flex flex-row items-center "
             >
-              <p className="font-light text-base font-rebondG phone:text-sm">
+              <p className="font-light text-fluid-base font-rebondG">
                 follow me
               </p>
               <Image
@@ -155,7 +155,7 @@ export default function HomeContainer({
               href="https://huggingface.co/sakshambedi"
               className="flex flex-row items-center"
             >
-              <p className="font-light font-rebondG text-base phone:text-sm">
+              <p className="font-light font-rebondG text-fluid-base">
                 hugging face
               </p>
               <Image

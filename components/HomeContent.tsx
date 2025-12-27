@@ -4,10 +4,10 @@ export default function HomeContent() {
   return (
     <div className="item-center w-full pt-6 text-gray-700 dark:text-gray-200 space-y-8">
       <div>
-        <p className="text-base font-mono mt-2 phone:mt-1 phone:text-sm ">
+        <p className="text-fluid-base font-mono mt-2 phone:mt-1">
           Hi!👋🏼
         </p>
-        <p className="text-base font-mono mt-2 pt-1 phone:text-sm phone:pt-2">
+        <p className="text-fluid-base font-mono mt-2 pt-1 phone:pt-2">
           I'm Saksham Bedi, an AI software engineer at Murray Chevrolet and
           Computer Science student at the University of Manitoba. I build
           production-ready ML systems that stay compliant, deliver clear
@@ -17,10 +17,10 @@ export default function HomeContent() {
       </div>
 
       <div className="pt-10">
-        <h1 className="font-rebondG text-3xl md:pt-2 md:text-2xl phone:pt-3 phone:text-xl text-black dark:text-white">
+        <h1 className="font-rebondG text-fluid-3xl md:pt-2 phone:pt-3 text-black dark:text-white">
           Skills
         </h1>
-        <span className="font-mono text-base phone:text-sm">
+        <span className="font-mono text-fluid-base">
           <p className="pt-2 md:pt-1.5 phone:pt-1.5">
             <span className="font-bold text-black dark:text-white">
               AI &amp; Python:{" "}
@@ -43,22 +43,22 @@ export default function HomeContent() {
       </div>
 
       <div className="pt-10">
-        <h1 className="font-rebondG text-3xl md:pt-2 md:text-xl phone:pt-3 phone:text-xl text-black dark:text-white">
+        <h1 className="font-rebondG text-fluid-3xl md:pt-2 phone:pt-3 text-black dark:text-white">
           Work Experience
         </h1>
         <div className="pt-2">
-          <h2 className="text-xl font-rebondG font-semibold text-gray-900 dark:text-white">
+          <h2 className="text-fluid-xl font-rebondG font-semibold text-gray-900 dark:text-white">
             AI Software Engineer
           </h2>
           <div className="flex justify-between items-center mb-2">
-            <p className="text-base font-mono text-gray-700 dark:text-gray-200">
+            <p className="text-fluid-base font-mono text-gray-700 dark:text-gray-200">
               Murray Chevrolet, Winnipeg, MB
             </p>
-            <time className="text-base font-mono text-gray-700 dark:text-gray-200">
+            <time className="text-fluid-base font-mono text-gray-700 dark:text-gray-200">
               Jan 2025 – Present
             </time>
           </div>
-          <ul className="list-disc list-outside pl-5 space-y-1.5 text-base text-gray-600 dark:text-gray-200 font-mono">
+          <ul className="list-disc list-outside pl-5 space-y-1.5 text-fluid-base text-gray-600 dark:text-gray-200 font-mono">
             <li>
               Deliver dealership AI copilots and predictive analytics that
               streamline sales and service decisions.
@@ -70,18 +70,18 @@ export default function HomeContent() {
           </ul>
         </div>
         <div className="pt-6">
-          <h2 className="text-xl font-rebondG font-semibold text-gray-900 dark:text-white">
+          <h2 className="text-fluid-xl font-rebondG font-semibold text-gray-900 dark:text-white">
             Software Developer &amp; Project Coordinator
           </h2>
           <div className="flex justify-between items-center mb-2">
-            <p className="text-base font-mono text-gray-700 dark:text-gray-200">
+            <p className="text-fluid-base font-mono text-gray-700 dark:text-gray-200">
               Daemon Defense Systems, Winnipeg, MB
             </p>
-            <time className="text-base font-mono text-gray-700 dark:text-gray-200">
+            <time className="text-fluid-base font-mono text-gray-700 dark:text-gray-200">
               Sep 2022 – Jan 2025
             </time>
           </div>
-          <ul className="list-disc list-outside pl-5 space-y-1.5 text-base text-gray-600 dark:text-gray-200 font-mono">
+          <ul className="list-disc list-outside pl-5 space-y-1.5 text-fluid-base text-gray-600 dark:text-gray-200 font-mono">
             <li>
               Led client workshops to launch HIPAA-compliant RIS-PACS across 80+
               sites with zero disruption.
@@ -93,18 +93,18 @@ export default function HomeContent() {
           </ul>
         </div>
         <div className="pt-6">
-          <h2 className="text-xl font-rebondG font-semibold text-gray-900 dark:text-white">
+          <h2 className="text-fluid-xl font-rebondG font-semibold text-gray-900 dark:text-white">
             Software Developer Intern
           </h2>
           <div className="flex justify-between items-center mb-2">
-            <p className="text-base font-mono text-gray-700 dark:text-gray-200">
+            <p className="text-fluid-base font-mono text-gray-700 dark:text-gray-200">
               InfoMagnetics Technologies, Winnipeg, MB
             </p>
-            <time className="text-base font-mono text-gray-700 dark:text-gray-200">
+            <time className="text-fluid-base font-mono text-gray-700 dark:text-gray-200">
               May 2022 – Sep 2022
             </time>
           </div>
-          <ul className="list-disc font-mono list-outside pl-5 space-y-1.5 text-base text-gray-600 dark:text-gray-200">
+          <ul className="list-disc font-mono list-outside pl-5 space-y-1.5 text-fluid-base text-gray-600 dark:text-gray-200">
             <li>
               Integrated Loqate API with IBM MDM to deliver secure, normalized
               healthcare data flows.
@@ -118,14 +118,14 @@ export default function HomeContent() {
       </div>
 
       <div className="pt-10">
-        <h1 className="font-rebondG text-3xl md:pt-2 md:text-xl phone:pt-3 phone:text-xl text-black dark:text-white">
+        <h1 className="font-rebondG text-fluid-3xl md:pt-2 phone:pt-3 text-black dark:text-white">
           Education
         </h1>
-        <div className="flex flex-row justify-between font-mono text-lg pt-2  phone:text-sm phone:pt-1.5">
+        <div className="flex flex-row justify-between font-mono text-fluid-lg pt-2 phone:pt-1.5">
           <h3 className="text-left">B.Sc. in Computer Science, </h3>
           <h3 className="text-right">2020 - 2025</h3>
         </div>
-        <p className="font-mono text-base phone:text-sm md:pt-0">
+        <p className="font-mono text-fluid-base md:pt-0">
           University of Manitoba
         </p>
       </div>
