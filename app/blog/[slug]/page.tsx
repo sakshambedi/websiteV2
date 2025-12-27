@@ -34,9 +34,10 @@ export default async function BlogPostPage({
           <div className="flex flex-col w-6/12 phone:w-9/12 md:w-3/4">
             <Link
               href="/?tab=blog"
-              className="font-mono text-fluid-sm text-gray-200 dark:text-gray-800 pb-3 hover:underline phone:pb-2"
+              className="inline-flex items-center gap-2 font-mono text-fluid-base font-medium text-white dark:text-gray-900 bg-black/20 dark:bg-white/30 backdrop-blur-sm px-4 py-2 rounded-full mb-4 hover:bg-black/30 dark:hover:bg-white/40 transition-all duration-200 hover:-translate-x-1 phone:mb-2"
             >
-              ← back to blog
+              <span aria-hidden="true">←</span>
+              <span>back to blog</span>
             </Link>
             <h1 className="flex font-rebondG text-fluid-4xl justify-start mb-0 pt-14 pb-3 text-white dark:text-black phone:pt-6 phone:pb-2">
               {blogPost.title}
