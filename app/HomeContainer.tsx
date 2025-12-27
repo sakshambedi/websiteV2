@@ -67,21 +67,21 @@ export default function HomeContainer({
           <TabsList className="flex w-full max-w-md justify-center gap-8 font-mono font-normal phone:gap-4">
             <TabsTrigger
               value="home"
-              className="text-fluid-lg font-rebondG text-gray-600 dark:text-gray-400 aria-selected:text-black dark:aria-selected:text-white aria-selected:underline aria-selected:underline-offset-4"
+              className="text-fluid-xl font-rebondG text-gray-600 dark:text-gray-400 aria-selected:text-black dark:aria-selected:text-white aria-selected:underline aria-selected:underline-offset-8 transition-colors duration-200"
               style={{ boxShadow: "none", outline: "none" }}
             >
               home
             </TabsTrigger>
             <TabsTrigger
               value="blog"
-              className="text-fluid-lg font-rebondG text-gray-600 dark:text-gray-400 aria-selected:text-black dark:aria-selected:text-white aria-selected:underline aria-selected:underline-offset-4"
+              className="text-fluid-xl font-rebondG text-gray-600 dark:text-gray-400 aria-selected:text-black dark:aria-selected:text-white aria-selected:underline aria-selected:underline-offset-8 transition-colors duration-200"
               style={{ boxShadow: "none", outline: "none" }}
             >
               blog
             </TabsTrigger>
             <TabsTrigger
               value="projects"
-              className="text-fluid-lg font-rebondG text-gray-600 dark:text-gray-400 aria-selected:text-black dark:aria-selected:text-white aria-selected:underline aria-selected:underline-offset-4"
+              className="text-fluid-xl font-rebondG text-gray-600 dark:text-gray-400 aria-selected:text-black dark:aria-selected:text-white aria-selected:underline aria-selected:underline-offset-8 transition-colors duration-200"
               style={{ boxShadow: "none", outline: "none" }}
             >
               projects
