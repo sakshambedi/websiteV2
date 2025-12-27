@@ -34,7 +34,7 @@ export default async function BlogPostPage({
           <div className="flex flex-col w-6/12 phone:w-9/12 md:w-3/4">
             <Link
               href="/?tab=blog"
-              className="inline-flex items-center gap-2 font-mono text-fluid-base font-medium text-white dark:text-gray-900 bg-black/20 dark:bg-white/30 backdrop-blur-sm px-4 py-2 rounded-full mb-4 hover:bg-black/30 dark:hover:bg-white/40 transition-all duration-200 hover:-translate-x-1 phone:mb-2"
+              className="not-prose inline-flex items-center gap-2 font-mono text-fluid-base font-medium text-white visited:text-white dark:text-gray-900 dark:visited:text-gray-900 bg-black/20 dark:bg-white/30 backdrop-blur-sm px-4 py-2 rounded-none mb-4 hover:bg-black/30 dark:hover:bg-white/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 dark:focus-visible:ring-black/40 focus-visible:ring-offset-2 focus-visible:ring-offset-sky-700 dark:focus-visible:ring-offset-sky-400 phone:mb-2"
             >
               <span aria-hidden="true">←</span>
               <span>back to blog</span>
