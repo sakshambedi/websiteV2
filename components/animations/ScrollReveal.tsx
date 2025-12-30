@@ -25,6 +25,7 @@ interface ScrollRevealProps {
   duration?: number;
   start?: string;
   distance?: number;
+  trigger?: "scroll" | "load";
 }
 
 const animations: Record<
@@ -65,6 +66,7 @@ export function ScrollReveal({
   duration = 0.8,
   start = "top 85%",
   distance = 40,
+  trigger = "scroll",
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -88,11 +90,11 @@ export function ScrollReveal({
       if (animation === "fade-left") animConfig.from.x = -distance;
       if (animation === "fade-right") animConfig.from.x = distance;
 
-      // Check if element is already in viewport
+      // Check if element is already in viewport or trigger is "load"
       const rect = ref.current.getBoundingClientRect();
       const isInViewport = rect.top < window.innerHeight * 0.85;
 
-      if (isInViewport) {
+      if (trigger === "load" || isInViewport) {
         // If already in viewport, animate immediately
         gsap.fromTo(
           ref.current,

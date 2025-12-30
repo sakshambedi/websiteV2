@@ -2,7 +2,6 @@
 import React from "react";
 import { ScrollReveal } from "./animations/ScrollReveal";
 import { StaggeredList } from "./animations/StaggeredList";
-import { AnimatedText } from "./animations/AnimatedText";
 
 const skills = [
   { category: "AI & Python", items: "LangChain, PyTorch, FastAPI, vector databases" },
@@ -66,9 +65,7 @@ export default function HomeContent() {
       <ScrollReveal animation="fade-up" delay={0.15}>
         <section className="space-y-6">
           <h2 className="font-rebondG text-fluid-3xl tracking-heading text-foreground">
-            <AnimatedText as="span" animation="words" trigger="scroll">
-              Skills
-            </AnimatedText>
+            Skills
           </h2>
           <StaggeredList className="space-y-3" stagger={0.08}>
             {skills.map((skill) => (
@@ -87,9 +84,7 @@ export default function HomeContent() {
       <section className="space-y-8">
         <ScrollReveal animation="fade-up">
           <h2 className="font-rebondG text-fluid-3xl tracking-heading text-foreground">
-            <AnimatedText as="span" animation="words" trigger="scroll">
-              Work Experience
-            </AnimatedText>
+            Work Experience
           </h2>
         </ScrollReveal>
 
@@ -144,12 +139,10 @@ export default function HomeContent() {
       </section>
 
       {/* Education Section */}
-      <ScrollReveal animation="fade-up" delay={0.1}>
+      <ScrollReveal animation="fade-up" delay={0.1} trigger="load">
         <section className="space-y-4">
           <h2 className="font-rebondG text-fluid-3xl tracking-heading text-foreground">
-            <AnimatedText as="span" animation="words" trigger="scroll">
-              Education
-            </AnimatedText>
+            Education
           </h2>
           <div className="space-y-1">
             <div className="flex flex-wrap justify-between items-center gap-2">
