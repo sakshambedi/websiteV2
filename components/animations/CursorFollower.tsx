@@ -9,7 +9,7 @@ export function CursorFollower() {
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const prefersReducedMotion = useReducedMotion();
-  const rafIdRef = useRef<number>();
+  const rafIdRef = useRef<number | null>(null);
   const cursorPosRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export function CursorFollower() {
       cursorPosRef.current = { x: e.clientX, y: e.clientY };
 
       // Use RAF for smoother performance
-      if (rafIdRef.current) {
+      if (rafIdRef.current !== null) {
         cancelAnimationFrame(rafIdRef.current);
       }
 
@@ -103,7 +103,7 @@ export function CursorFollower() {
     document.body.classList.add("custom-cursor-active");
 
     return () => {
-      if (rafIdRef.current) {
+      if (rafIdRef.current !== null) {
         cancelAnimationFrame(rafIdRef.current);
       }
       clearTimeout(observerTimeout);

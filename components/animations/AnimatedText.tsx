@@ -88,7 +88,7 @@ export function AnimatedText({
       return children.split("").map((char, i) => (
         <span
           key={i}
-          className="char inline-block"
+          className="char inline-block align-bottom"
           style={{ perspective: "400px" }}
         >
           {char === " " ? "\u00A0" : char}
@@ -99,7 +99,7 @@ export function AnimatedText({
     return children.split(" ").map((word, i) => (
       <span
         key={i}
-        className="word inline-block"
+        className="word inline-block align-bottom"
         style={{ perspective: "400px" }}
       >
         {word}

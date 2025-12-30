@@ -17,7 +17,7 @@ interface GSAPContextType {
 const GSAPContext = createContext<GSAPContextType | null>(null);
 
 export function GSAPProvider({ children }: { children: ReactNode }) {
-  const resizeTimeoutRef = useRef<NodeJS.Timeout>();
+  const resizeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     // Check for reduced motion preference
