@@ -4,8 +4,44 @@
 
 @layer base {
   :root {
-    --background: 184 1% 69%;
-    --foreground: 224 54% 9%;
+    /* Neutral Foundation - Minimalist & Elegant */
+    --background: 0 0% 99%;
+    --foreground: 0 0% 9%;
+
+    /* Sophisticated Grays */
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --border: 0 0% 91%;
+    --input: 0 0% 91%;
+
+    /* Accent - Warm Neutral */
+    --accent: 30 10% 96%;
+    --accent-foreground: 0 0% 9%;
+
+    /* Primary - Deep charcoal */
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 99%;
+
+    /* Secondary */
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 9%;
+
+    /* Card & Popover */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 9%;
+
+    /* Semantic */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 99%;
+    --success: 142 76% 36%;
+    --warning: 38 92% 50%;
+
+    /* Interactive */
+    --ring: 0 0% 65%;
+    --focus: 220 65% 54%;
+    --radius: 0.5rem;
 
     /* Fluid Typography Scale */
     --text-fluid-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
@@ -17,62 +53,261 @@
     --text-fluid-3xl: clamp(1.5rem, 1.25rem + 1.25vw, 1.875rem);
     --text-fluid-4xl: clamp(1.875rem, 1.5rem + 1.875vw, 2.25rem);
     --text-fluid-5xl: clamp(2rem, 1.5rem + 2.5vw, 3rem);
-    --muted: 220 14.3% 95.9%;
-    --muted-foreground: 220 8.9% 46.1%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 224 71.4% 4.1%;
-    --card: 0 0% 100%;
-    --card-foreground: 224 71.4% 4.1%;
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --primary: 220.9 39.3% 11%;
-    --primary-foreground: 210 20% 98%;
-    --secondary: 220 14.3% 95.9%;
-    --secondary-foreground: 220.9 39.3% 11%;
-    --accent: 220 14.3% 95.9%;
-    --accent-foreground: 220.9 39.3% 11%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 20% 98%;
-    --ring: 224 71.4% 4.1%;
-    --radius: 0.5rem;
+
+    /* Animation Tokens */
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --transition-fast: 150ms;
+    --transition-base: 300ms;
+    --transition-slow: 500ms;
   }
 
   ::selection {
-    background-color: #1f2937;
-    color: #f8fafc;
+    background-color: hsl(0 0% 9%);
+    color: hsl(0 0% 99%);
   }
 
   .dark {
-    --background: 224 71% 42%;
-    --foreground: 210 20% 98%;
-    --muted: 215 27.9% 16.9%;
-    --muted-foreground: 217.9 10.6% 64.9%;
-    --popover: 224 71.4% 4.1%;
-    --popover-foreground: 210 20% 98%;
-    --card: 224 71.4% 4.1%;
-    --card-foreground: 210 20% 98%;
-    --border: 215 27.9% 16.9%;
-    --input: 215 27.9% 16.9%;
-    --primary: 210 20% 98%;
-    --primary-foreground: 220.9 39.3% 11%;
-    --secondary: 215 27.9% 16.9%;
-    --secondary-foreground: 210 20% 98%;
-    --accent: 215 27.9% 16.9%;
-    --accent-foreground: 210 20% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 20% 98%;
-    --ring: 216 12.2% 83.9%;
+    --background: 0 0% 4%;
+    --foreground: 0 0% 95%;
+
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 55%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+
+    --accent: 0 0% 12%;
+    --accent-foreground: 0 0% 95%;
+
+    --primary: 0 0% 95%;
+    --primary-foreground: 0 0% 4%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 95%;
+
+    --card: 0 0% 6%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 95%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 95%;
+
+    --ring: 0 0% 35%;
   }
 
   .dark ::selection {
-    background-color: #f8fafc;
-    color: #1f2937;
+    background-color: hsl(0 0% 95%);
+    color: hsl(0 0% 9%);
   }
 }
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Hide cursor on touch devices for custom cursor */
+  @media (hover: hover) and (pointer: fine) {
+    .custom-cursor-active * {
+      cursor: none !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Letter-spacing refinements */
+  .tracking-display {
+    letter-spacing: -0.02em;
+  }
+
+  .tracking-heading {
+    letter-spacing: -0.015em;
+  }
+
+  .tracking-body {
+    letter-spacing: 0.01em;
+  }
+
+  /* Animation utilities */
+  .animate-in {
+    animation: animateIn var(--transition-base) var(--ease-out-expo) forwards;
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.6s var(--ease-out-expo) forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s var(--ease-out-expo) forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s var(--ease-out-expo) forwards;
+  }
+
+  .animate-blur-in {
+    animation: blurIn 0.6s var(--ease-out-expo) forwards;
+  }
+
+  /* Stagger delay utilities */
+  .stagger-1 { animation-delay: 0.05s; }
+  .stagger-2 { animation-delay: 0.1s; }
+  .stagger-3 { animation-delay: 0.15s; }
+  .stagger-4 { animation-delay: 0.2s; }
+  .stagger-5 { animation-delay: 0.25s; }
+
+  /* Focus ring utility */
+  .focus-ring {
+    @apply outline-none ring-2 ring-offset-2 ring-offset-background ring-ring/50 transition-shadow duration-200;
+  }
+
+  /* Hover underline animation */
+  .hover-underline {
+    @apply relative;
+  }
+
+  .hover-underline::after {
+    content: "";
+    @apply absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-current transition-transform duration-300;
+    transition-timing-function: var(--ease-out-expo);
+  }
+
+  .hover-underline:hover::after {
+    @apply scale-x-100;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-in,
+    .animate-fade-up,
+    .animate-fade-in,
+    .animate-scale-in,
+    .animate-blur-in {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+    }
+  }
+}
+
+@layer components {
+  /* Magnetic button base styles */
+  .magnetic-btn {
+    @apply relative inline-flex items-center justify-center transition-transform duration-300;
+    transition-timing-function: var(--ease-out-expo);
+  }
+
+  /* Glass effect */
+  .glass {
+    @apply bg-background/80 backdrop-blur-xl border border-border/50;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-foreground to-muted-foreground;
+  }
+}
+
+/* Keyframe animations */
+@keyframes animateIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes blurIn {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Progress bar animation */
+@keyframes progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
 }

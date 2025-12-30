@@ -1,134 +1,171 @@
+"use client";
 import React from "react";
+import { ScrollReveal } from "./animations/ScrollReveal";
+import { StaggeredList } from "./animations/StaggeredList";
+import { AnimatedText } from "./animations/AnimatedText";
+
+const skills = [
+  { category: "AI & Python", items: "LangChain, PyTorch, FastAPI, vector databases" },
+  { category: "Data & Platforms", items: "Supabase, SQL, Microsoft Fabric, NumPy" },
+  { category: "Ops & Tooling", items: "AWS (EC2, S3, CloudFront), Docker, GitHub Actions, Dynatrace" },
+];
+
+const experience = [
+  {
+    title: "AI Software Engineer",
+    company: "Murray Chevrolet",
+    location: "Winnipeg, MB",
+    period: "Jan 2025 – Present",
+    bullets: [
+      "Deliver dealership AI copilots and predictive analytics that streamline sales and service decisions.",
+      "Partner with sales, marketing, and data teams to roll out ML tools and mentor co-ops on responsible AI use.",
+    ],
+  },
+  {
+    title: "Software Developer & Project Coordinator",
+    company: "Daemon Defense Systems",
+    location: "Winnipeg, MB",
+    period: "Sep 2022 – Jan 2025",
+    bullets: [
+      "Led client workshops to launch HIPAA-compliant RIS-PACS across 80+ sites with zero disruption.",
+      "Coordinated engineers and vendors to deploy Azure and Dynatrace observability and resolve issues fast.",
+    ],
+  },
+  {
+    title: "Software Developer Intern",
+    company: "InfoMagnetics Technologies",
+    location: "Winnipeg, MB",
+    period: "May 2022 – Sep 2022",
+    bullets: [
+      "Integrated Loqate API with IBM MDM to deliver secure, normalized healthcare data flows.",
+      "Championed Jira adoption and agile cadences, lifting team throughput by 20% and improving communication.",
+    ],
+  },
+];
 
 export default function HomeContent() {
   return (
-    <div className="item-center w-full pt-6 text-gray-700 dark:text-gray-200 space-y-8">
-      <div>
-        <p className="text-fluid-base font-mono mt-2 phone:mt-1">
-          Hi!👋🏼
-        </p>
-        <p className="text-fluid-base font-mono mt-2 pt-1 phone:pt-2">
-          I'm Saksham Bedi, an AI software engineer at Murray Chevrolet and
-          Computer Science student at the University of Manitoba. I build
-          production-ready ML systems that stay compliant, deliver clear
-          business results, and keep teams aligned; outside work you'll find me
-          playing squash, golf, chess, or catching F1.
-        </p>
-      </div>
-
-      <div className="pt-10">
-        <h1 className="font-rebondG text-fluid-3xl md:pt-2 phone:pt-3 text-black dark:text-white">
-          Skills
-        </h1>
-        <span className="font-mono text-fluid-base">
-          <p className="pt-2 md:pt-1.5 phone:pt-1.5">
-            <span className="font-bold text-black dark:text-white">
-              AI &amp; Python:{" "}
-            </span>
-            LangChain, PyTorch, FastAPI, vector databases
+    <div className="w-full pt-6 space-y-16 phone:space-y-12">
+      {/* Bio Section */}
+      <ScrollReveal animation="fade-up" delay={0.1}>
+        <div className="space-y-4">
+          <p className="text-fluid-base font-mono text-muted-foreground">
+            Hi!
           </p>
-          <p className="pt-1 md:pt-1.5 phone:pt-1.5">
-            <span className="font-bold text-black dark:text-white">
-              Data &amp; Platforms:{" "}
-            </span>
-            Supabase, SQL, Microsoft Fabric, NumPy
+          <p className="text-fluid-base font-mono text-foreground/80 leading-relaxed">
+            I&apos;m Saksham Bedi, an AI software engineer at Murray Chevrolet and
+            Computer Science student at the University of Manitoba. I build
+            production-ready ML systems that stay compliant, deliver clear
+            business results, and keep teams aligned; outside work you&apos;ll find me
+            playing squash, golf, chess, or watching F1.
           </p>
-          <p className="pt-1 md:pt-1.5 phone:pt-1.5">
-            <span className="font-bold text-black dark:text-white">
-              Ops &amp; Tooling:{" "}
-            </span>
-            AWS (EC2, S3, CloudFront), Docker, GitHub Actions, Dynatrace
-          </p>
-        </span>
-      </div>
+        </div>
+      </ScrollReveal>
 
-      <div className="pt-10">
-        <h1 className="font-rebondG text-fluid-3xl md:pt-2 phone:pt-3 text-black dark:text-white">
-          Work Experience
-        </h1>
-        <div className="pt-2">
-          <h2 className="text-fluid-xl font-rebondG font-semibold text-gray-900 dark:text-white">
-            AI Software Engineer
+      {/* Skills Section */}
+      <ScrollReveal animation="fade-up" delay={0.15}>
+        <section className="space-y-6">
+          <h2 className="font-rebondG text-fluid-3xl tracking-heading text-foreground">
+            <AnimatedText as="span" animation="words" trigger="scroll">
+              Skills
+            </AnimatedText>
           </h2>
-          <div className="flex justify-between items-center mb-2">
-            <p className="text-fluid-base font-mono text-gray-700 dark:text-gray-200">
-              Murray Chevrolet, Winnipeg, MB
-            </p>
-            <time className="text-fluid-base font-mono text-gray-700 dark:text-gray-200">
-              Jan 2025 – Present
-            </time>
-          </div>
-          <ul className="list-disc list-outside pl-5 space-y-1.5 text-fluid-base text-gray-600 dark:text-gray-200 font-mono">
-            <li>
-              Deliver dealership AI copilots and predictive analytics that
-              streamline sales and service decisions.
-            </li>
-            <li>
-              Partner with sales, marketing, and data teams to roll out ML tools
-              and mentor co-ops on responsible AI use.
-            </li>
-          </ul>
-        </div>
-        <div className="pt-6">
-          <h2 className="text-fluid-xl font-rebondG font-semibold text-gray-900 dark:text-white">
-            Software Developer &amp; Project Coordinator
-          </h2>
-          <div className="flex justify-between items-center mb-2">
-            <p className="text-fluid-base font-mono text-gray-700 dark:text-gray-200">
-              Daemon Defense Systems, Winnipeg, MB
-            </p>
-            <time className="text-fluid-base font-mono text-gray-700 dark:text-gray-200">
-              Sep 2022 – Jan 2025
-            </time>
-          </div>
-          <ul className="list-disc list-outside pl-5 space-y-1.5 text-fluid-base text-gray-600 dark:text-gray-200 font-mono">
-            <li>
-              Led client workshops to launch HIPAA-compliant RIS-PACS across 80+
-              sites with zero disruption.
-            </li>
-            <li>
-              Coordinated engineers and vendors to deploy Azure and Dynatrace
-              observability and resolve issues fast.
-            </li>
-          </ul>
-        </div>
-        <div className="pt-6">
-          <h2 className="text-fluid-xl font-rebondG font-semibold text-gray-900 dark:text-white">
-            Software Developer Intern
-          </h2>
-          <div className="flex justify-between items-center mb-2">
-            <p className="text-fluid-base font-mono text-gray-700 dark:text-gray-200">
-              InfoMagnetics Technologies, Winnipeg, MB
-            </p>
-            <time className="text-fluid-base font-mono text-gray-700 dark:text-gray-200">
-              May 2022 – Sep 2022
-            </time>
-          </div>
-          <ul className="list-disc font-mono list-outside pl-5 space-y-1.5 text-fluid-base text-gray-600 dark:text-gray-200">
-            <li>
-              Integrated Loqate API with IBM MDM to deliver secure, normalized
-              healthcare data flows.
-            </li>
-            <li>
-              Championed Jira adoption and agile cadences, lifting team
-              throughput by 20% and improving communication.
-            </li>
-          </ul>
-        </div>
-      </div>
+          <StaggeredList className="space-y-3" stagger={0.08}>
+            {skills.map((skill) => (
+              <p key={skill.category} className="font-mono text-fluid-base">
+                <span className="font-semibold text-foreground">
+                  {skill.category}:{" "}
+                </span>
+                <span className="text-muted-foreground">{skill.items}</span>
+              </p>
+            ))}
+          </StaggeredList>
+        </section>
+      </ScrollReveal>
 
-      <div className="pt-10">
-        <h1 className="font-rebondG text-fluid-3xl md:pt-2 phone:pt-3 text-black dark:text-white">
-          Education
-        </h1>
-        <div className="flex flex-row justify-between font-mono text-fluid-lg pt-2 phone:pt-1.5">
-          <h3 className="text-left">B.Sc. in Computer Science, </h3>
-          <h3 className="text-right">2020 - 2025</h3>
+      {/* Work Experience Section */}
+      <section className="space-y-8">
+        <ScrollReveal animation="fade-up">
+          <h2 className="font-rebondG text-fluid-3xl tracking-heading text-foreground">
+            <AnimatedText as="span" animation="words" trigger="scroll">
+              Work Experience
+            </AnimatedText>
+          </h2>
+        </ScrollReveal>
+
+        <div className="relative space-y-10">
+          {/* Timeline line */}
+          <div className="absolute left-0 top-2 bottom-2 w-px bg-border phone:hidden" />
+
+          {experience.map((job, index) => (
+            <ScrollReveal
+              key={job.title + job.company}
+              animation="fade-up"
+              delay={index * 0.1}
+            >
+              <div className="relative pl-6 phone:pl-0">
+                {/* Timeline dot */}
+                <div className="absolute left-0 top-2 w-2 h-2 rounded-full bg-foreground -translate-x-[3px] phone:hidden" />
+
+                <div className="space-y-3">
+                  <div>
+                    <h3 className="text-fluid-xl font-rebondG font-semibold text-foreground">
+                      {job.title}
+                    </h3>
+                    <div className="flex flex-wrap justify-between items-center gap-2 mt-1">
+                      <p className="text-fluid-base font-mono text-muted-foreground">
+                        {job.company}, {job.location}
+                      </p>
+                      <time className="text-fluid-sm font-mono text-muted-foreground/70">
+                        {job.period}
+                      </time>
+                    </div>
+                  </div>
+
+                  <StaggeredList
+                    className="space-y-2"
+                    stagger={0.05}
+                    animation="fade-left"
+                  >
+                    {job.bullets.map((bullet, i) => (
+                      <li
+                        key={i}
+                        className="list-disc list-outside ml-5 text-fluid-base font-mono text-foreground/70"
+                      >
+                        {bullet}
+                      </li>
+                    ))}
+                  </StaggeredList>
+                </div>
+              </div>
+            </ScrollReveal>
+          ))}
         </div>
-        <p className="font-mono text-fluid-base md:pt-0">
-          University of Manitoba
-        </p>
-      </div>
+      </section>
+
+      {/* Education Section */}
+      <ScrollReveal animation="fade-up" delay={0.1}>
+        <section className="space-y-4">
+          <h2 className="font-rebondG text-fluid-3xl tracking-heading text-foreground">
+            <AnimatedText as="span" animation="words" trigger="scroll">
+              Education
+            </AnimatedText>
+          </h2>
+          <div className="space-y-1">
+            <div className="flex flex-wrap justify-between items-center gap-2">
+              <h3 className="font-mono text-fluid-lg text-foreground">
+                B.Sc. in Computer Science
+              </h3>
+              <span className="font-mono text-fluid-base text-muted-foreground">
+                2020 - 2025
+              </span>
+            </div>
+            <p className="font-mono text-fluid-base text-muted-foreground">
+              University of Manitoba
+            </p>
+          </div>
+        </section>
+      </ScrollReveal>
     </div>
   );
 }
