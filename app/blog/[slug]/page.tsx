@@ -7,6 +7,8 @@ import "katex/dist/katex.min.css";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import BlogPostClient from "./BlogPostClient";
+import type { Metadata } from "next";
+import SiteConfig from "@/config/site";
 
 // ISR: Revalidate every 24 hours
 export const revalidate = 86400;
@@ -15,6 +17,63 @@ export const revalidate = 86400;
 export async function generateStaticParams() {
   const slugs = getAllPostSlugs();
   return slugs.map((slug) => ({ slug }));
+}
+
+// Generate dynamic metadata for each blog post
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const blogPost = await getPostData(slug);
+
+  if (!blogPost) {
+    return {
+      title: "Post Not Found",
+    };
+  }
+
+  // Generate description from content (strip HTML and get first 160 characters)
+  const plainText = blogPost.contentHtml
+    .replace(/<[^>]*>/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  const description =
+    plainText.length > 160
+      ? plainText.substring(0, 160) + "..."
+      : plainText || SiteConfig.description;
+
+  const postUrl = `${SiteConfig.url}/blog/${slug}`;
+  const postTitle = `${blogPost.title} | ${SiteConfig.title}`;
+
+  return {
+    title: blogPost.title,
+    description,
+    openGraph: {
+      type: "article",
+      url: postUrl,
+      title: blogPost.title,
+      description,
+      publishedTime: blogPost.date?.toISOString(),
+      authors: ["Saksham Bedi"],
+      siteName: SiteConfig.siteName,
+      images: [
+        {
+          url: SiteConfig.ogImage,
+          width: 1200,
+          height: 630,
+          alt: blogPost.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: blogPost.title,
+      description,
+      images: [SiteConfig.ogImage],
+    },
+  };
 }
 
 export default async function BlogPostPage({
