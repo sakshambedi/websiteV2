@@ -9,6 +9,8 @@ export function CursorFollower() {
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const prefersReducedMotion = useReducedMotion();
+  const rafIdRef = useRef<number>();
+  const cursorPosRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     // Hide on touch devices
@@ -26,17 +28,28 @@ export function CursorFollower() {
 
     const moveCursor = (e: MouseEvent) => {
       if (!isVisible) setIsVisible(true);
+      
+      cursorPosRef.current = { x: e.clientX, y: e.clientY };
 
-      gsap.to(cursor, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.5,
-        ease: "power3.out",
-      });
-      gsap.to(dot, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.1,
+      // Use RAF for smoother performance
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
+
+      rafIdRef.current = requestAnimationFrame(() => {
+        gsap.to(cursor, {
+          x: cursorPosRef.current.x,
+          y: cursorPosRef.current.y,
+          duration: 0.5,
+          ease: "power3.out",
+          overwrite: "auto",
+        });
+        gsap.to(dot, {
+          x: cursorPosRef.current.x,
+          y: cursorPosRef.current.y,
+          duration: 0.1,
+          overwrite: "auto",
+        });
       });
     };
 
@@ -49,38 +62,51 @@ export function CursorFollower() {
       }
     };
 
-    // Add listeners to interactive elements
+    // Add listeners to interactive elements with debouncing
     const addInteractiveListeners = () => {
       const interactiveElements = document.querySelectorAll(
         "a, button, [data-cursor-hover], input, textarea, select"
       );
       interactiveElements.forEach((el) => {
-        el.addEventListener("mouseenter", handleMouseEnter);
-        el.addEventListener("mouseleave", handleMouseLeave);
+        el.addEventListener("mouseenter", handleMouseEnter, { passive: true });
+        el.addEventListener("mouseleave", handleMouseLeave, { passive: true });
       });
       return interactiveElements;
     };
 
     let interactiveElements = addInteractiveListeners();
 
-    // Re-add listeners when DOM changes
+    // Throttle observer updates
+    let observerTimeout: NodeJS.Timeout;
     const observer = new MutationObserver(() => {
-      interactiveElements.forEach((el) => {
-        el.removeEventListener("mouseenter", handleMouseEnter);
-        el.removeEventListener("mouseleave", handleMouseLeave);
-      });
-      interactiveElements = addInteractiveListeners();
+      clearTimeout(observerTimeout);
+      observerTimeout = setTimeout(() => {
+        interactiveElements.forEach((el) => {
+          el.removeEventListener("mouseenter", handleMouseEnter);
+          el.removeEventListener("mouseleave", handleMouseLeave);
+        });
+        interactiveElements = addInteractiveListeners();
+      }, 100);
     });
 
-    observer.observe(document.body, { childList: true, subtree: true });
+    observer.observe(document.body, { 
+      childList: true, 
+      subtree: true,
+      attributes: false,
+      characterData: false,
+    });
 
-    window.addEventListener("mousemove", moveCursor);
-    document.addEventListener("mouseout", handleMouseOut);
+    window.addEventListener("mousemove", moveCursor, { passive: true });
+    document.addEventListener("mouseout", handleMouseOut, { passive: true });
 
     // Add custom cursor class to body
     document.body.classList.add("custom-cursor-active");
 
     return () => {
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
+      clearTimeout(observerTimeout);
       window.removeEventListener("mousemove", moveCursor);
       document.removeEventListener("mouseout", handleMouseOut);
       observer.disconnect();

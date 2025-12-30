@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, createContext, useContext, ReactNode } from "react";
+import { useEffect, createContext, useContext, ReactNode, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -17,6 +17,8 @@ interface GSAPContextType {
 const GSAPContext = createContext<GSAPContextType | null>(null);
 
 export function GSAPProvider({ children }: { children: ReactNode }) {
+  const resizeTimeoutRef = useRef<NodeJS.Timeout>();
+
   useEffect(() => {
     // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia(
@@ -27,21 +29,42 @@ export function GSAPProvider({ children }: { children: ReactNode }) {
     gsap.defaults({
       ease: "power3.out",
       duration: prefersReducedMotion ? 0 : 0.8,
+      overwrite: "auto",
     });
 
     // Configure ScrollTrigger defaults
     ScrollTrigger.defaults({
-      toggleActions: "play none none reverse",
+      toggleActions: "play none none none",
     });
 
-    // Refresh ScrollTrigger on resize
+    // Configure ScrollTrigger for better performance
+    ScrollTrigger.config({
+      limitCallbacks: true,
+      syncInterval: 150,
+    });
+
+    // Debounced refresh on resize
     const handleResize = () => {
-      ScrollTrigger.refresh();
+      if (resizeTimeoutRef.current) {
+        clearTimeout(resizeTimeoutRef.current);
+      }
+      resizeTimeoutRef.current = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 150);
     };
 
-    window.addEventListener("resize", handleResize);
+    // Initial refresh after a short delay to ensure layout is stable
+    const initialRefresh = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
+
+    window.addEventListener("resize", handleResize, { passive: true });
 
     return () => {
+      clearTimeout(initialRefresh);
+      if (resizeTimeoutRef.current) {
+        clearTimeout(resizeTimeoutRef.current);
+      }
       window.removeEventListener("resize", handleResize);
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };

@@ -45,11 +45,11 @@ function AnimatedTableRow({
         scrollTrigger: {
           trigger: rowRef.current,
           start: "top 90%",
-          toggleActions: "play none none reverse",
+          once: true,
         },
       });
     },
-    { scope: rowRef, dependencies: [prefersReducedMotion, index] }
+    { scope: rowRef }
   );
 
   const formattedDate = `${new Date(date)

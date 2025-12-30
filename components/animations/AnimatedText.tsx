@@ -1,5 +1,5 @@
 "use client";
-import { useRef, ElementType, useEffect, useState } from "react";
+import { useRef, ElementType } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -32,21 +32,10 @@ export function AnimatedText({
 }: AnimatedTextProps) {
   const containerRef = useRef<HTMLElement>(null);
   const prefersReducedMotion = useReducedMotion();
-  const [hasAnimated, setHasAnimated] = useState(false);
 
   useGSAP(
     () => {
-      if (prefersReducedMotion || !containerRef.current || hasAnimated) {
-        // Ensure visible
-        if (containerRef.current) {
-          const elements =
-            animation === "chars"
-              ? containerRef.current.querySelectorAll(".char")
-              : containerRef.current.querySelectorAll(".word");
-          gsap.set(elements, { opacity: 1, y: 0, rotateX: 0, filter: "none" });
-        }
-        return;
-      }
+      if (prefersReducedMotion || !containerRef.current) return;
 
       const elements =
         animation === "chars"
@@ -76,55 +65,22 @@ export function AnimatedText({
 
       const { from, to } = animationProps[animation];
 
-      // Check if element is already in viewport
-      const rect = containerRef.current.getBoundingClientRect();
-      const isInViewport = rect.top < window.innerHeight * 0.85;
-
-      if (trigger === "load" || isInViewport) {
-        // Animate immediately
-        gsap.fromTo(elements, from, {
-          ...to,
-          stagger,
-          ease: "power3.out",
-          duration,
-          delay: trigger === "load" ? delay : 0,
-          onComplete: () => setHasAnimated(true),
-        });
-      } else {
-        // Set initial state and use ScrollTrigger
-        gsap.set(elements, from);
-
-        gsap.to(elements, {
-          ...to,
-          stagger,
-          ease: "power3.out",
-          duration,
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 85%",
-            once: true,
-          },
-          onComplete: () => setHasAnimated(true),
-        });
-      }
+      // Use GSAP's default behavior
+      gsap.fromTo(elements, from, {
+        ...to,
+        stagger,
+        ease: "power3.out",
+        duration,
+        delay,
+        scrollTrigger: trigger === "scroll" ? {
+          trigger: containerRef.current,
+          start: "top 85%",
+          once: true,
+        } : undefined,
+      });
     },
-    { scope: containerRef, dependencies: [prefersReducedMotion, animation, hasAnimated] }
+    { scope: containerRef }
   );
-
-  // Fallback: ensure content is visible after mount if animation didn't trigger
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (containerRef.current && !hasAnimated) {
-        const elements =
-          animation === "chars"
-            ? containerRef.current.querySelectorAll(".char")
-            : containerRef.current.querySelectorAll(".word");
-        gsap.set(elements, { opacity: 1, y: 0, rotateX: 0, filter: "none" });
-      }
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, [hasAnimated, animation]);
 
   // Split text into words or characters
   const renderContent = () => {

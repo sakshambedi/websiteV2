@@ -1,27 +1,41 @@
-// app/components/ThemeSwitcher.tsx
 "use client";
 
 import { useTheme } from "next-themes";
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 import { Moon, Sun } from "lucide-react";
-import { Toggle } from "@/components/ui/toggle";
 
 export function ThemeSwitcher() {
-  // const [mounted, setMounted] = useState(false)
+  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <button
+        aria-label="Toggle theme"
+        disabled
+        className="relative h-10 w-10 flex items-center justify-center text-muted-foreground"
+      >
+        <Sun className="h-5 w-5" />
+      </button>
+    );
+  }
+
+  const isDark = theme === "dark";
+
   return (
-    <Toggle
+    <button
       aria-label="Toggle theme"
-      pressed={theme === "dark"}
-      onPressedChange={(pressed: boolean) =>
-        setTheme(pressed ? "dark" : "light")
-      }
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      className="relative h-10 w-10 flex items-center justify-center text-foreground hover:text-muted-foreground transition-colors duration-200"
     >
-      <Sun className="h-[1.5rem] w-[1.5rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 phone:h-[1.0rem] phone:w-[1.0rem]" />
-      <Moon className="absolute h-[1.5rem] w-[1.5rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 phone:h-[1.0rem] phone:w-[1.0rem]" />
+      <Sun className={`h-5 w-5 transition-all duration-300 ${isDark ? "opacity-0 rotate-90 scale-0" : "opacity-100 rotate-0 scale-100"}`} />
+      <Moon className={`absolute h-5 w-5 transition-all duration-300 ${isDark ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-0"}`} />
       <span className="sr-only">Toggle theme</span>
-    </Toggle>
+    </button>
   );
 }

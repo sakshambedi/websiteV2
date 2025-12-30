@@ -87,6 +87,7 @@ function ProjectCard({
           y: -4,
           duration: 0.3,
           ease: "power3.out",
+          overwrite: "auto",
         });
       };
 
@@ -95,6 +96,7 @@ function ProjectCard({
           y: 0,
           duration: 0.3,
           ease: "power3.out",
+          overwrite: "auto",
         });
       };
 
@@ -139,20 +141,17 @@ function ProjectCard({
           </StaggeredList>
 
           {/* Tech Stack */}
-          <StaggeredList
-            className="flex flex-row flex-wrap pt-2 gap-6 phone:gap-5"
-            stagger={0.03}
-            animation="scale"
-          >
-            {project.techStack.map((tech) => (
+          <div className="flex flex-row flex-wrap pt-4 gap-6 phone:gap-5">
+            {project.techStack.map((tech, i) => (
               <TechStackIcon
                 key={tech.alt}
                 src={tech.src}
                 alt={tech.alt}
+                index={i}
                 className="dark:invert w-7 h-7 phone:w-6 phone:h-6 transition-transform duration-200 hover:scale-110"
               />
             ))}
-          </StaggeredList>
+          </div>
         </div>
       </article>
     </ScrollReveal>

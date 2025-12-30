@@ -1,5 +1,5 @@
 "use client";
-import { useRef, ReactNode, ElementType } from "react";
+import React, { useRef, ReactNode, ElementType, useEffect } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -28,12 +28,26 @@ export function MagneticButton({
   const buttonRef = useRef<HTMLElement>(null);
   const innerRef = useRef<HTMLSpanElement>(null);
   const prefersReducedMotion = useReducedMotion();
+  
+  // #region agent log
+  useEffect(() => {
+    if (buttonRef.current) {
+      const style = window.getComputedStyle(buttonRef.current);
+      fetch('http://127.0.0.1:7242/ingest/cbae29ee-7e08-4316-8562-21952b4578ad',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'MagneticButton.tsx:31',message:'Component mounted',data:{opacity:style.opacity,display:style.display,href:href||'none'},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix-v3',hypothesisId:'H'})}).catch(()=>{});
+    }
+  }, [href]);
+  // #endregion
 
   useGSAP(
     () => {
+      // #region agent log
+      const button = buttonRef.current;
+      const computedStyle = button ? window.getComputedStyle(button) : null;
+      fetch('http://127.0.0.1:7242/ingest/cbae29ee-7e08-4316-8562-21952b4578ad',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'MagneticButton.tsx:33',message:'useGSAP entry',data:{hasButton:!!button,opacity:computedStyle?.opacity,display:computedStyle?.display,visibility:computedStyle?.visibility},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix-v3',hypothesisId:'G'})}).catch(()=>{});
+      // #endregion
+      
       if (prefersReducedMotion) return;
 
-      const button = buttonRef.current;
       const inner = innerRef.current;
       if (!button || !inner) return;
 
@@ -47,6 +61,7 @@ export function MagneticButton({
           y: y * strength,
           duration: 0.4,
           ease: "power3.out",
+          overwrite: "auto",
         });
 
         gsap.to(inner, {
@@ -54,6 +69,7 @@ export function MagneticButton({
           y: y * strength * 0.5,
           duration: 0.4,
           ease: "power3.out",
+          overwrite: "auto",
         });
       };
 
@@ -63,11 +79,17 @@ export function MagneticButton({
           y: 0,
           duration: 0.6,
           ease: "elastic.out(1, 0.5)",
+          overwrite: "auto",
         });
       };
 
       button.addEventListener("mousemove", handleMouseMove);
       button.addEventListener("mouseleave", handleMouseLeave);
+      
+      // #region agent log
+      const finalStyle = window.getComputedStyle(button);
+      fetch('http://127.0.0.1:7242/ingest/cbae29ee-7e08-4316-8562-21952b4578ad',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'MagneticButton.tsx:77',message:'Event listeners attached',data:{opacity:finalStyle.opacity,transform:finalStyle.transform},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix-v3',hypothesisId:'G'})}).catch(()=>{});
+      // #endregion
 
       return () => {
         button.removeEventListener("mousemove", handleMouseMove);

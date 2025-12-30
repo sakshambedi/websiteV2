@@ -1,5 +1,5 @@
 "use client";
-import { useRef, ReactNode, useEffect, useState } from "react";
+import { useRef, ReactNode } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -30,20 +30,21 @@ export function StaggeredList({
 }: StaggeredListProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
-  const [hasAnimated, setHasAnimated] = useState(false);
 
   useGSAP(
     () => {
-      if (prefersReducedMotion || !containerRef.current || hasAnimated) {
-        // Ensure visible
-        if (containerRef.current) {
-          const items = containerRef.current.children;
-          gsap.set(items, { opacity: 1, y: 0, x: 0, scale: 1 });
-        }
-        return;
-      }
+      // #region agent log
+      fetch('http://127.0.0.1:7242/ingest/cbae29ee-7e08-4316-8562-21952b4578ad',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'StaggeredList.tsx:36',message:'useGSAP entry',data:{prefersReducedMotion,hasContainer:!!containerRef.current},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
+      // #endregion
+      
+      if (prefersReducedMotion || !containerRef.current) return;
 
       const items = containerRef.current.children;
+      
+      // #region agent log
+      fetch('http://127.0.0.1:7242/ingest/cbae29ee-7e08-4316-8562-21952b4578ad',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'StaggeredList.tsx:40',message:'Children check',data:{itemsLength:items.length,animation},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+      // #endregion
+      
       if (!items.length) return;
 
       const animations = {
@@ -57,26 +58,49 @@ export function StaggeredList({
       };
 
       const { from, to } = animations[animation];
-
-      // Check if element is already in viewport
+      
+      // #region agent log
       const rect = containerRef.current.getBoundingClientRect();
-      const isInViewport = rect.top < window.innerHeight * 0.85;
+      const viewportHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollY = window.scrollY || window.pageYOffset;
+      const triggerPoint = viewportHeight * 0.85;
+      const isInViewport = rect.top < triggerPoint;
+      
+      // Check if element is near bottom of document (footer detection)
+      const elementAbsoluteTop = rect.top + scrollY;
+      const distanceFromBottom = documentHeight - (elementAbsoluteTop + rect.height);
+      const isNearBottom = distanceFromBottom < viewportHeight * 0.3; // Within 30% of viewport from bottom
+      
+      fetch('http://127.0.0.1:7242/ingest/cbae29ee-7e08-4316-8562-21952b4578ad',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'StaggeredList.tsx:54',message:'Before animation',data:{rectTop:rect.top,rectBottom:rect.bottom,viewportHeight,documentHeight,elementAbsoluteTop,distanceFromBottom,isInViewport,isNearBottom,start},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix-v2',hypothesisId:'F'})}).catch(()=>{});
+      // #endregion
 
-      if (isInViewport) {
-        // If already in viewport, animate immediately
+      // Check if element is already in viewport OR is a footer element near bottom
+      if (isInViewport || isNearBottom) {
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/cbae29ee-7e08-4316-8562-21952b4578ad',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'StaggeredList.tsx:68',message:'Animating immediately (in viewport or near bottom)',data:{animation,reason:isNearBottom?'near-bottom':'in-viewport'},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix-v2',hypothesisId:'F'})}).catch(()=>{});
+        // #endregion
+        
+        // Animate immediately without ScrollTrigger
         gsap.fromTo(items, from, {
           ...to,
           stagger,
           delay,
           duration,
           ease: "power3.out",
-          onComplete: () => setHasAnimated(true),
+          onComplete: () => {
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/cbae29ee-7e08-4316-8562-21952b4578ad',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'StaggeredList.tsx:81',message:'Animation complete (immediate)',data:{animation},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix-v2',hypothesisId:'E'})}).catch(()=>{});
+            // #endregion
+          },
         });
       } else {
-        // Set initial state and use ScrollTrigger
-        gsap.set(items, from);
-
-        gsap.to(items, {
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/cbae29ee-7e08-4316-8562-21952b4578ad',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'StaggeredList.tsx:88',message:'Using ScrollTrigger (below viewport)',data:{animation},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix-v2',hypothesisId:'FIX'})}).catch(()=>{});
+        // #endregion
+        
+        // Use ScrollTrigger for elements below viewport
+        gsap.fromTo(items, from, {
           ...to,
           stagger,
           delay,
@@ -86,25 +110,22 @@ export function StaggeredList({
             trigger: containerRef.current,
             start,
             once: true,
+            onEnter: () => {
+              // #region agent log
+              fetch('http://127.0.0.1:7242/ingest/cbae29ee-7e08-4316-8562-21952b4578ad',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'StaggeredList.tsx:103',message:'ScrollTrigger onEnter fired',data:{animation},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix-v2',hypothesisId:'A'})}).catch(()=>{});
+              // #endregion
+            },
           },
-          onComplete: () => setHasAnimated(true),
+          onComplete: () => {
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/cbae29ee-7e08-4316-8562-21952b4578ad',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'StaggeredList.tsx:108',message:'Animation complete (scrollTrigger)',data:{animation},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix-v2',hypothesisId:'E'})}).catch(()=>{});
+            // #endregion
+          },
         });
       }
     },
-    { scope: containerRef, dependencies: [prefersReducedMotion, animation, hasAnimated] }
+    { scope: containerRef }
   );
-
-  // Fallback: ensure content is visible after mount if animation didn't trigger
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (containerRef.current && !hasAnimated) {
-        const items = containerRef.current.children;
-        gsap.set(items, { opacity: 1, y: 0, x: 0, scale: 1 });
-      }
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, [hasAnimated]);
 
   return (
     <div ref={containerRef} className={className}>

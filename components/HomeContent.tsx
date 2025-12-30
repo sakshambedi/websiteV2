@@ -49,7 +49,7 @@ export default function HomeContent() {
       <ScrollReveal animation="fade-up" delay={0.1}>
         <div className="space-y-4">
           <p className="text-fluid-base font-mono text-muted-foreground">
-            Hi!
+            Hi 👋🏼! 
           </p>
           <p className="text-fluid-base font-mono text-foreground/80 leading-relaxed">
             I&apos;m Saksham Bedi, an AI software engineer at Murray Chevrolet and

@@ -63,24 +63,26 @@ export default function HomeContainer({
         width: activeTabEl.offsetWidth,
         duration: 0.4,
         ease: "power3.out",
+        overwrite: "auto",
       });
     },
     { scope: tabsRef, dependencies: [activeTab] }
   );
 
-  // Animate tab content on change
+  // Animate tab content on change - only opacity to avoid layout shifts
   useGSAP(
     () => {
       if (!contentRef.current) return;
 
       gsap.fromTo(
         contentRef.current,
-        { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }
+        { opacity: 0 },
+        { opacity: 1, duration: 0.3, ease: "power2.out", overwrite: "auto" }
       );
     },
     { dependencies: [activeTab] }
   );
+
 
   const handleTabChange = (value: string) => {
     if (!isAllowedTab(value)) return;
@@ -103,46 +105,51 @@ export default function HomeContainer({
     <main className="flex flex-col w-full min-h-screen bg-background">
       <NavBar />
 
-      <section className="w-full max-w-5xl flex flex-col flex-grow items-center self-center mx-auto px-8 phone:px-4">
+      <section className="w-full max-w-5xl flex flex-col flex-grow items-center self-center mx-auto px-8 phone:px-4 pb-0">
         <Tabs
           value={activeTab}
           defaultValue="home"
-          className="w-full flex flex-col py-8 phone:py-6 items-center gap-8"
+          className="w-full flex flex-col items-center"
           onValueChange={handleTabChange}
         >
-          <div ref={tabsRef} className="relative">
-            <TabsList className="flex w-full max-w-md justify-center gap-8 font-mono font-normal phone:gap-4 bg-transparent">
-              <TabsTrigger
-                value="home"
-                className="relative text-fluid-xl font-rebondG text-muted-foreground data-[state=active]:text-foreground transition-colors duration-300 bg-transparent hover:text-foreground/80"
-                style={{ boxShadow: "none", outline: "none" }}
-              >
-                home
-              </TabsTrigger>
-              <TabsTrigger
-                value="blog"
-                className="relative text-fluid-xl font-rebondG text-muted-foreground data-[state=active]:text-foreground transition-colors duration-300 bg-transparent hover:text-foreground/80"
-                style={{ boxShadow: "none", outline: "none" }}
-              >
-                blog
-              </TabsTrigger>
-              <TabsTrigger
-                value="projects"
-                className="relative text-fluid-xl font-rebondG text-muted-foreground data-[state=active]:text-foreground transition-colors duration-300 bg-transparent hover:text-foreground/80"
-                style={{ boxShadow: "none", outline: "none" }}
-              >
-                projects
-              </TabsTrigger>
-            </TabsList>
-            {/* Animated underline indicator */}
-            <div
-              ref={indicatorRef}
-              className="absolute -bottom-1 h-px bg-foreground"
-              style={{ width: 0 }}
-            />
+          <div
+            ref={tabsRef}
+            className="sticky top-0 z-30 w-full py-8 phone:py-6 flex justify-center bg-background"
+          >
+            <div className="relative">
+              <TabsList className="flex w-full max-w-md justify-center gap-8 font-mono font-normal phone:gap-4 bg-transparent">
+                <TabsTrigger
+                  value="home"
+                  className="relative text-fluid-xl font-rebondG text-muted-foreground data-[state=active]:text-foreground transition-colors duration-300 bg-transparent hover:text-foreground/80"
+                  style={{ boxShadow: "none", outline: "none" }}
+                >
+                  home
+                </TabsTrigger>
+                <TabsTrigger
+                  value="blog"
+                  className="relative text-fluid-xl font-rebondG text-muted-foreground data-[state=active]:text-foreground transition-colors duration-300 bg-transparent hover:text-foreground/80"
+                  style={{ boxShadow: "none", outline: "none" }}
+                >
+                  blog
+                </TabsTrigger>
+                <TabsTrigger
+                  value="projects"
+                  className="relative text-fluid-xl font-rebondG text-muted-foreground data-[state=active]:text-foreground transition-colors duration-300 bg-transparent hover:text-foreground/80"
+                  style={{ boxShadow: "none", outline: "none" }}
+                >
+                  projects
+                </TabsTrigger>
+              </TabsList>
+              {/* Animated underline indicator */}
+              <div
+                ref={indicatorRef}
+                className="absolute -bottom-1 h-px bg-foreground"
+                style={{ width: 0 }}
+              />
+            </div>
           </div>
 
-          <div ref={contentRef} className="w-full">
+          <div ref={contentRef} className="w-full min-h-[calc(100vh-12rem)] mt-8">
             <TabsContent
               value="home"
               className="flex flex-col items-center mt-0"

@@ -1,5 +1,5 @@
 "use client";
-import { useRef, ReactNode, useEffect, useState } from "react";
+import { useRef, ReactNode } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -70,17 +70,10 @@ export function ScrollReveal({
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
-  const [hasAnimated, setHasAnimated] = useState(false);
 
   useGSAP(
     () => {
-      if (prefersReducedMotion || !ref.current || hasAnimated) {
-        // If reduced motion or already animated, ensure visible
-        if (ref.current) {
-          gsap.set(ref.current, { opacity: 1, y: 0, x: 0, scale: 1, filter: "none" });
-        }
-        return;
-      }
+      if (prefersReducedMotion || !ref.current) return;
 
       const animConfig = { ...animations[animation] };
 
@@ -90,57 +83,28 @@ export function ScrollReveal({
       if (animation === "fade-left") animConfig.from.x = -distance;
       if (animation === "fade-right") animConfig.from.x = distance;
 
-      // Check if element is already in viewport or trigger is "load"
-      const rect = ref.current.getBoundingClientRect();
-      const isInViewport = rect.top < window.innerHeight * 0.85;
-
-      if (trigger === "load" || isInViewport) {
-        // If already in viewport, animate immediately
-        gsap.fromTo(
-          ref.current,
-          animConfig.from,
-          {
-            ...animConfig.to,
-            duration,
-            delay,
-            ease: "power3.out",
-            onComplete: () => setHasAnimated(true),
-          }
-        );
-      } else {
-        // Set initial state and use ScrollTrigger
-        gsap.set(ref.current, animConfig.from);
-
-        gsap.to(ref.current, {
+      // Use GSAP's default behavior with ScrollTrigger
+      gsap.fromTo(
+        ref.current,
+        animConfig.from,
+        {
           ...animConfig.to,
           duration,
           delay,
           ease: "power3.out",
-          scrollTrigger: {
+          scrollTrigger: trigger === "scroll" ? {
             trigger: ref.current,
             start,
-            once: true, // Only trigger once
-          },
-          onComplete: () => setHasAnimated(true),
-        });
-      }
+            once: true,
+          } : undefined,
+        }
+      );
     },
-    { scope: ref, dependencies: [prefersReducedMotion, animation, distance, hasAnimated] }
+    { scope: ref }
   );
 
-  // Fallback: ensure content is visible after mount if animation didn't trigger
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (ref.current && !hasAnimated) {
-        gsap.set(ref.current, { opacity: 1, y: 0, x: 0, scale: 1, filter: "none" });
-      }
-    }, 2000); // Fallback after 2 seconds
-
-    return () => clearTimeout(timer);
-  }, [hasAnimated]);
-
   return (
-    <div ref={ref} className={className} style={{ opacity: prefersReducedMotion ? 1 : undefined }}>
+    <div ref={ref} className={className}>
       {children}
     </div>
   );
