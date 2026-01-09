@@ -5,9 +5,18 @@ import gsap from "gsap";
 import TechStackIcon from "./TechStackIcon";
 import { ScrollReveal } from "./animations/ScrollReveal";
 import { StaggeredList } from "./animations/StaggeredList";
-import { AnimatedText } from "./animations/AnimatedText";
+import { GridCard } from "./GridBackground";
+
+// Calculate years of experience from start date (Sep 2022)
+const calculateYearsExperience = (): number => {
+  const startDate = new Date(2022, 8, 1); // September 2022 (month is 0-indexed)
+  const now = new Date();
+  const diffYears = (now.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24 * 365.25);
+  return Math.floor(diffYears);
+};
 
 interface Project {
+  tier: string;
   title: string;
   subtitle: string;
   bullets: string[];
@@ -15,6 +24,7 @@ interface Project {
 }
 
 const research: Project = {
+  tier: "R1",
   title: "3D Point Cloud Diffusion Model",
   subtitle: "University of Manitoba",
   bullets: [
@@ -30,6 +40,7 @@ const research: Project = {
 
 const projects: Project[] = [
   {
+    tier: "01",
     title: "Image Classification Web App",
     subtitle: "Summer 2024",
     bullets: [
@@ -50,6 +61,7 @@ const projects: Project[] = [
     ],
   },
   {
+    tier: "02",
     title: "MicroGrad – Deep Learning Framework",
     subtitle: "Summer 2025",
     bullets: [
@@ -69,10 +81,10 @@ const projects: Project[] = [
 
 function ProjectCard({
   project,
-  index,
+  isResearch = false,
 }: {
   project: Project;
-  index: number;
+  isResearch?: boolean;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -112,83 +124,117 @@ function ProjectCard({
   );
 
   return (
-    <ScrollReveal animation="fade-up" delay={index * 0.1}>
-      <article
-        ref={cardRef}
-        className="group relative p-6 -mx-6 rounded-lg transition-colors duration-300 hover:bg-muted/50"
-      >
-        <div className="space-y-4">
+    <GridCard className="group" showCorners>
+      <article ref={cardRef} className="p-8">
+        <div className="space-y-6">
+          <p className="text-coral font-mono text-fluid-sm uppercase tracking-widest">
+            {isResearch ? "RESEARCH" : "PROJECT"} {project.tier}
+          </p>
           {/* Header */}
-          <div className="flex flex-wrap justify-between items-start gap-2">
-            <h3 className="text-fluid-xl font-rebondG font-semibold text-foreground">
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <h3 className="font-serif text-fluid-2xl font-semibold text-foreground">
               {project.title}
             </h3>
-            <span className="text-fluid-sm font-mono text-muted-foreground shrink-0">
+            <span className="font-mono text-fluid-xs uppercase tracking-widest text-muted-foreground border border-border px-3 py-1.5 bg-muted/30">
               {project.subtitle}
             </span>
           </div>
 
           {/* Bullets */}
-          <StaggeredList className="space-y-2" stagger={0.05} animation="fade-left">
+          <StaggeredList className="space-y-3" stagger={0.05} animation="fade-left">
             {project.bullets.map((bullet, i) => (
-              <li
-                key={i}
-                className="list-disc list-outside ml-5 text-fluid-base font-mono text-foreground/70"
-              >
-                {bullet}
-              </li>
+              <div key={i} className="flex items-start gap-3">
+                <span className="font-mono text-fluid-sm mt-1 text-coral shrink-0">→</span>
+                <p className="font-mono text-fluid-base text-foreground/80 leading-relaxed">
+                  {bullet}
+                </p>
+              </div>
             ))}
           </StaggeredList>
 
           {/* Tech Stack */}
-          <div className="flex flex-row flex-wrap pt-4 gap-6 phone:gap-5">
-            {project.techStack.map((tech, i) => (
-              <TechStackIcon
-                key={tech.alt}
-                src={tech.src}
-                alt={tech.alt}
-                index={i}
-                className="dark:invert w-7 h-7 phone:w-6 phone:h-6 transition-transform duration-200 hover:scale-110"
-              />
+          <div className="tech-stack-container">
+            {project.techStack.map((tech) => (
+              <div key={tech.alt} className="tech-stack-badge">
+                <TechStackIcon
+                  src={tech.src}
+                  alt={tech.alt}
+                  index={0}
+                  className="dark:invert w-5 h-5"
+                />
+                <span className="font-mono text-fluid-xs text-muted-foreground">
+                  {tech.alt}
+                </span>
+              </div>
             ))}
           </div>
         </div>
       </article>
-    </ScrollReveal>
+    </GridCard>
   );
 }
 
 export default function ProjectContent() {
   return (
-    <section className="w-full space-y-12">
+    <section className="w-full space-y-16">
       {/* Research Section */}
-      <div className="space-y-6">
+      <div className="space-y-8">
         <ScrollReveal animation="fade-up">
-          <h2 className="font-rebondG text-fluid-3xl tracking-heading text-foreground">
-            <AnimatedText as="span" animation="words" trigger="scroll">
-              Research
-            </AnimatedText>
-          </h2>
+          <div className="flex items-center gap-4">
+            <h2 className="text-coral font-serif text-fluid-4xl font-semibold tracking-tight">
+              Academic Research
+            </h2>
+            <div className="h-px flex-1 bg-border" />
+          </div>
         </ScrollReveal>
 
-        <ProjectCard project={research} index={0} />
+        <ScrollReveal animation="fade-up" delay={0.1}>
+          <ProjectCard project={research} isResearch />
+        </ScrollReveal>
       </div>
 
       {/* Projects Section */}
-      <div className="space-y-6">
+      <div className="space-y-8">
         <ScrollReveal animation="fade-up">
-          <h2 className="font-rebondG text-fluid-3xl tracking-heading text-foreground">
-            <AnimatedText as="span" animation="words" trigger="scroll">
-              Projects
-            </AnimatedText>
-          </h2>
+          <div className="flex items-center gap-4">
+            <h2 className="text-coral font-serif text-fluid-4xl font-semibold tracking-tight">
+              Featured Work
+            </h2>
+            <div className="h-px flex-1 bg-border" />
+          </div>
         </ScrollReveal>
 
-        <div className="space-y-8">
+        <div className="grid gap-8">
           {projects.map((project, index) => (
-            <ProjectCard key={project.title} project={project} index={index} />
+            <ScrollReveal key={project.title} animation="fade-up" delay={index * 0.1}>
+              <ProjectCard project={project} />
+            </ScrollReveal>
           ))}
         </div>
+      </div>
+
+      {/* Stats Section */}
+      <ScrollReveal animation="fade-up">
+        <div className="flex items-center gap-4 mb-2">
+          <h3 className="text-coral font-serif text-fluid-4xl font-semibold tracking-tight">
+            Metrics
+          </h3>
+          <div className="h-px flex-1 bg-border" />
+        </div>
+      </ScrollReveal>
+      
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+        {[          
+          { label: "TECHNOLOGIES", value: "15+" },
+          { label: "YEARS EXP", value: `${calculateYearsExperience()}+` },          
+        ].map((stat, index) => (
+          <ScrollReveal key={stat.label} animation="fade-up" delay={index * 0.05}>
+            <div className="metric-card text-center">
+              <span className="metric-value">{stat.value}</span>
+              <span className="metric-label block">{stat.label}</span>
+            </div>
+          </ScrollReveal>
+        ))}
       </div>
     </section>
   );

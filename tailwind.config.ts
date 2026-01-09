@@ -20,8 +20,11 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        hackNF: ['var(--font-hackNF)', 'sans-serif'],
-        rebondG: ['var(--font-Rebond)', 'sans-serif']
+        sans: ['var(--font-Rebond)', 'system-ui', 'sans-serif'],
+        hackNF: ['var(--font-hackNF)', 'monospace'],
+        rebondG: ['var(--font-Rebond)', 'sans-serif'],
+        serif: ['var(--font-serif)', 'Georgia', 'Times New Roman', 'serif'],
+        mono: ['var(--font-hackNF)', 'ui-monospace', 'monospace'],
       },
       fontSize: {
         'fluid-xs': 'var(--text-fluid-xs)',
@@ -33,6 +36,14 @@ const config: Config = {
         'fluid-3xl': 'var(--text-fluid-3xl)',
         'fluid-4xl': 'var(--text-fluid-4xl)',
         'fluid-5xl': 'var(--text-fluid-5xl)',
+        'fluid-6xl': 'var(--text-fluid-6xl)',
+        'fluid-7xl': 'var(--text-fluid-7xl)',
+      },
+      letterSpacing: {
+        'widest': '0.2em',
+        'wider': '0.1em',
+        'wide': '0.05em',
+        'document': '0.15em',
       },
       colors: {
         border: 'hsl(var(--border))',
@@ -67,6 +78,15 @@ const config: Config = {
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
+        },
+        // Atlas-style accent colors
+        cyan: {
+          DEFAULT: 'hsl(var(--accent-cyan))',
+          foreground: 'hsl(var(--accent-cyan-foreground))',
+        },
+        coral: {
+          DEFAULT: 'hsl(var(--accent-coral))',
+          foreground: 'hsl(var(--accent-coral-foreground))',
         },
       },
       borderRadius: {

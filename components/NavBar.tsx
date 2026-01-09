@@ -1,69 +1,74 @@
 "use client";
-import React, { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ThemeSwitcher } from "@/app/util/ThemeSwitcher";
-import { AnimatedText } from "./animations/AnimatedText";
-import { MagneticButton } from "./animations/MagneticButton";
+import React, { useState } from "react";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
-const NavBar = () => {
-  const headerRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
+const navLinks = [
+  { name: "HOME", href: "/" },
+  { name: "BLOG", href: "/?tab=blog" },
+  { name: "PROJECTS", href: "/?tab=projects" },
+  { name: "CONTACT", href: "#contact" },
+];
 
-  useGSAP(
-    () => {
-      if (!headerRef.current) return;
+interface NavBarProps {
+  className?: string;
+}
 
-      // Initial title animation
-      if (titleRef.current) {
-        gsap.from(titleRef.current, {
-          y: 30,
-          opacity: 0,
-          duration: 1,
-          delay: 0.2,
-          ease: "power3.out",
-        });
-      }
-    },
-    { scope: headerRef }
-  );
+const NavBar = ({ className }: NavBarProps) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header
-      ref={headerRef}
-      className={`relative z-40 flex flex-col items-center w-full transition-all duration-500 ease-out-expo pt-20 phone:pt-8 pb-4 bg-background`}
-    >
-      {/* Theme switcher with magnetic effect */}
-      <div className="absolute right-8 lg:right-20 top-1/2 -translate-y-1/2 phone:hidden z-10">
-        <MagneticButton as="div" strength={0.4} className="p-2">
-          <ThemeSwitcher />
-        </MagneticButton>
-      </div>
+    <header className={cn("w-full", className)}>
+      {/* Navigation bar */}
+      <div className="w-full bg-cyan px-4 py-4 lg:px-8">
+        <div className="w-full">
+          {/* Main nav row */}
+          <div className="flex items-center justify-between gap-4">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-2 shrink-0">
+              <div className="flex h-8 w-8 items-center justify-center border-2 border-foreground">
+                <span className="font-serif text-lg font-semibold">S</span>
+              </div>
+            </Link>
 
-      <div ref={titleRef} className="flex flex-col items-center">
-        <h1 className="font-rebondG tracking-display text-fluid-5xl">
-          <AnimatedText
-            as="span"
-            animation="words"
-            trigger="load"
-            delay={0}
-            stagger={0.05}
-          >
-            Saksham Bedi
-          </AnimatedText>
-        </h1>
+            {/* Desktop Navigation - Right Aligned */}
+            <nav className="hidden flex-1 items-center justify-end gap-8 lg:flex">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="group relative font-mono text-fluid-sm uppercase tracking-widest text-foreground transition-colors hover:text-foreground/70"
+                >
+                  {link.name}
+                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-foreground transition-all duration-300 group-hover:w-full" />
+                </Link>
+              ))}
+            </nav>
 
-        <div className="py-3 phone:py-0">
-          <h3 className="font-mono font-light text-muted-foreground text-fluid-xl phone:p-2">
-            <AnimatedText
-              as="span"
-              animation="fade"
-              trigger="load"
-              delay={0.4}
+            {/* Right: Mobile menu button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="font-mono text-fluid-sm uppercase tracking-widest lg:hidden"
             >
-              AI Software Engineer
-            </AnimatedText>
-          </h3>
+              MENU [{mobileMenuOpen ? "−" : "+"}]
+            </button>
+          </div>
+
+          {/* Mobile Navigation */}
+          {mobileMenuOpen && (
+            <nav className="flex flex-col gap-3 border-t border-foreground/20 pt-3 mt-3 lg:hidden">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="font-mono text-fluid-sm uppercase tracking-widest text-foreground"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </nav>
+          )}
         </div>
       </div>
     </header>

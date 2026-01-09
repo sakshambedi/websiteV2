@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Roboto } from 'next/font/google';
+import { Source_Serif_4 } from 'next/font/google';
 import "./globals.css";
 import React from "react";
 import { cn } from "@/lib/utils"
@@ -10,6 +10,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import localFont from 'next/font/local'
 import ClientCursor from '@/components/ClientCursor'
+import TopBanner from "@/components/TopBanner"
 
 const HackNF = localFont({
   src: [
@@ -22,7 +23,6 @@ const HackNF = localFont({
   variable: '--font-hackNF'
 })
 
-
 const RebondG = localFont({
   src: [
     {
@@ -34,10 +34,12 @@ const RebondG = localFont({
   variable: '--font-Rebond'
 })
 
-const roboto = Roboto({
+// Serif font for large headlines (Atlas-style)
+const sourceSerif = Source_Serif_4({
   subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-roboto'
+  weight: ['400', '600', '700'],
+  variable: '--font-serif',
+  display: 'swap',
 });
 
 
@@ -86,7 +88,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
       <body className={cn(
         "min-h-screen w-screen font-sans antialiased flex flex-row justify-center overflow-x-hidden bg-background text-foreground",
-        roboto.variable,
+        sourceSerif.variable,
         RebondG.variable,
         HackNF.variable
       )}>
@@ -99,7 +101,12 @@ export default function RootLayout({
           disableTransitionOnChange={false}
         >
           <GSAPProvider>
-            {children}
+            <div className="w-full lg:p-8 xl:p-12">
+              <div className="main-wrapper flex flex-col w-full max-w-screen-2xl mx-auto border-l border-r border-foreground lg:border-t lg:border-b shadow-sm lg:shadow-md">
+                <TopBanner />
+                {children}
+              </div>
+            </div>
             <ClientCursor />
           </GSAPProvider>
         </ThemeProvider>
