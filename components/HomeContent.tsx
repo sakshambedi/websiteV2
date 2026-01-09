@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Link from "next/link";
 import { ScrollReveal } from "./animations/ScrollReveal";
 import { StaggeredList } from "./animations/StaggeredList";
 import { GridCard } from "./GridBackground";
@@ -74,9 +75,9 @@ export default function HomeContent() {
               <a href="#contact" className="atlas-cta">
                 CONTACT ME
               </a>
-              <a href="/?tab=blog" className="atlas-btn-secondary">
+              <Link href="/?tab=blog" className="atlas-btn-secondary">
                 VIEW WORK
-              </a>
+              </Link>
             </div>
           </div>
         </ScrollReveal>
