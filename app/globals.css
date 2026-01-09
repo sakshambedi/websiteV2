@@ -4,33 +4,39 @@
 
 @layer base {
   :root {
-    /* Neutral Foundation - Minimalist & Elegant */
-    --background: 0 0% 99%;
-    --foreground: 0 0% 9%;
+    /* Atlas-style Cream Background */
+    --background: 40 30% 96%;
+    --foreground: 0 0% 8%;
 
     /* Sophisticated Grays */
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
-    --border: 0 0% 91%;
+    --muted: 40 15% 92%;
+    --muted-foreground: 0 0% 40%;
+    --border: 0 0% 85%;
     --input: 0 0% 91%;
 
     /* Accent - Warm Neutral */
-    --accent: 30 10% 96%;
-    --accent-foreground: 0 0% 9%;
+    --accent: 40 20% 94%;
+    --accent-foreground: 0 0% 8%;
+
+    /* Atlas Accent Colors */
+    --accent-cyan: 203 92% 79%;
+    --accent-cyan-foreground: 0 0% 8%;
+    --accent-coral: 10 85% 62%;
+    --accent-coral-foreground: 0 0% 100%;
 
     /* Primary - Deep charcoal */
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 99%;
+    --primary: 0 0% 8%;
+    --primary-foreground: 40 30% 96%;
 
     /* Secondary */
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 9%;
+    --secondary: 40 15% 92%;
+    --secondary-foreground: 0 0% 8%;
 
     /* Card & Popover */
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 9%;
+    --card: 40 30% 98%;
+    --card-foreground: 0 0% 8%;
+    --popover: 40 30% 98%;
+    --popover-foreground: 0 0% 8%;
 
     /* Semantic */
     --destructive: 0 84% 60%;
@@ -41,7 +47,7 @@
     /* Interactive */
     --ring: 0 0% 65%;
     --focus: 220 65% 54%;
-    --radius: 0.5rem;
+    --radius: 0rem;
 
     /* Fluid Typography Scale */
     --text-fluid-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
@@ -52,7 +58,9 @@
     --text-fluid-2xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
     --text-fluid-3xl: clamp(1.5rem, 1.25rem + 1.25vw, 1.875rem);
     --text-fluid-4xl: clamp(1.875rem, 1.5rem + 1.875vw, 2.25rem);
-    --text-fluid-5xl: clamp(2rem, 1.5rem + 2.5vw, 3rem);
+    --text-fluid-5xl: clamp(2.25rem, 1.75rem + 2.5vw, 3.5rem);
+    --text-fluid-6xl: clamp(2.75rem, 2rem + 3.75vw, 4.5rem);
+    --text-fluid-7xl: clamp(3.25rem, 2.5rem + 3.75vw, 5.5rem);
 
     /* Animation Tokens */
     --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
@@ -70,26 +78,32 @@
 
   .dark {
     --background: 0 0% 4%;
-    --foreground: 0 0% 95%;
+    --foreground: 40 20% 92%;
 
     --muted: 0 0% 10%;
     --muted-foreground: 0 0% 55%;
-    --border: 0 0% 15%;
+    --border: 0 0% 18%;
     --input: 0 0% 15%;
 
     --accent: 0 0% 12%;
-    --accent-foreground: 0 0% 95%;
+    --accent-foreground: 40 20% 92%;
 
-    --primary: 0 0% 95%;
+    /* Atlas Accent Colors - Dark Mode */
+    --accent-cyan: 203 80% 60%;
+    --accent-cyan-foreground: 40 20% 92%;
+    --accent-coral: 10 75% 50%;
+    --accent-coral-foreground: 0 0% 100%;
+
+    --primary: 40 20% 92%;
     --primary-foreground: 0 0% 4%;
 
     --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 95%;
+    --secondary-foreground: 40 20% 92%;
 
     --card: 0 0% 6%;
-    --card-foreground: 0 0% 95%;
+    --card-foreground: 40 20% 92%;
     --popover: 0 0% 6%;
-    --popover-foreground: 0 0% 95%;
+    --popover-foreground: 40 20% 92%;
 
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 95%;
@@ -101,11 +115,25 @@
     background-color: hsl(0 0% 95%);
     color: hsl(0 0% 9%);
   }
+
+  footer ::selection {
+    background-color: hsl(40 30% 96%);
+    color: hsl(0 0% 8%);
+  }
+
+  .dark footer ::selection {
+    background-color: hsl(40 30% 96%);
+    color: hsl(0 0% 8%);
+  }
 }
 
 @layer base {
   * {
     @apply border-border;
+  }
+
+  .main-wrapper {
+    @apply border-foreground !important;
   }
 
   html {
@@ -224,6 +252,159 @@
   .gradient-text {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-foreground to-muted-foreground;
   }
+
+  /* Atlas-style document label */
+  .document-label {
+    @apply uppercase text-fluid-xs font-mono text-muted-foreground;
+    letter-spacing: 0.15em;
+  }
+
+  /* Atlas-style tier label */
+  .tier-label {
+    @apply uppercase tracking-widest text-fluid-xs font-mono;
+    color: hsl(var(--accent-coral));
+  }
+
+  /* Atlas-style bordered container */
+  .atlas-border {
+    @apply border border-border;
+  }
+
+  /* Atlas-style CTA button with corner brackets */
+  .atlas-cta {
+    @apply relative inline-flex items-center justify-center px-8 py-4 uppercase tracking-widest text-fluid-sm font-mono transition-all duration-300;
+    background-color: hsl(var(--accent-coral));
+    color: hsl(var(--accent-coral-foreground));
+  }
+
+  .atlas-cta::before,
+  .atlas-cta::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-color: hsl(var(--foreground));
+    transition: all 0.3s ease;
+  }
+
+  .atlas-cta::before {
+    top: -4px;
+    left: -4px;
+    border-top: 2px solid;
+    border-left: 2px solid;
+  }
+
+  .atlas-cta::after {
+    bottom: -4px;
+    right: -4px;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+  }
+
+  .atlas-cta:hover {
+    background-color: hsl(var(--accent-coral) / 0.9);
+    transform: translateY(-2px);
+  }
+
+  .atlas-cta:hover::before,
+  .atlas-cta:hover::after {
+    border-color: hsl(var(--accent-coral));
+  }
+
+  /* Atlas-style secondary button */
+  .atlas-btn-secondary {
+    @apply relative inline-flex items-center justify-center px-8 py-4 uppercase tracking-widest text-fluid-sm font-mono transition-all duration-300;
+    background-color: hsl(var(--foreground));
+    color: hsl(var(--background));
+  }
+
+  .atlas-btn-secondary:hover {
+    background-color: hsl(var(--foreground) / 0.85);
+    transform: translateY(-2px);
+  }
+
+  /* Atlas-style metric display */
+  .metric-display {
+    @apply border border-border p-4 font-mono;
+  }
+
+  .metric-display .metric-label {
+    @apply uppercase tracking-widest text-fluid-xs text-muted-foreground;
+  }
+
+  .metric-display .metric-value {
+    @apply text-fluid-3xl font-serif;
+  }
+
+  /* Atlas-style metric card */
+  .metric-card {
+    @apply relative border border-border p-6 bg-background transition-all duration-300;
+  }
+
+  .metric-card:hover {
+    @apply border-foreground/30;
+  }
+
+  .metric-card .metric-value {
+    @apply font-serif text-fluid-4xl font-semibold text-foreground;
+  }
+
+  .metric-card .metric-label {
+    @apply uppercase tracking-widest text-fluid-xs font-mono text-muted-foreground mt-2;
+  }
+
+  /* Atlas-style project card */
+  .atlas-card {
+    @apply relative border border-border bg-background transition-all duration-300;
+  }
+
+  .atlas-card:hover {
+    @apply border-foreground/40;
+  }
+
+  /* Atlas-style tier badge - positioned outside the card border */
+  .tier-badge {
+    @apply absolute left-8 bg-background px-3 py-0.5;
+  }
+
+  .tier-badge span {
+    @apply uppercase tracking-widest text-fluid-xs font-mono;
+    color: hsl(var(--accent-coral));
+  }
+
+  /* Atlas-style info panel (like the system log) */
+  .info-panel {
+    @apply border border-border bg-background p-4;
+  }
+
+  .info-panel-header {
+    @apply uppercase tracking-widest text-fluid-xs font-mono text-muted-foreground border-b border-border pb-2 mb-3;
+  }
+
+  .info-panel-row {
+    @apply flex items-center gap-2 font-mono text-fluid-sm text-foreground/80 py-0.5;
+  }
+
+  .info-panel-row .status-indicator {
+    @apply w-1.5 h-1.5 rounded-full;
+  }
+
+  .info-panel-row .status-indicator.active {
+    background-color: hsl(var(--success));
+  }
+
+  /* Tech stack badge container */
+  .tech-stack-container {
+    @apply flex flex-wrap gap-3 pt-4 border-t border-border;
+  }
+
+  .tech-stack-badge {
+    @apply flex items-center gap-2 px-3 py-1.5 border border-border bg-muted/30 transition-all duration-200;
+  }
+
+  .tech-stack-badge:hover {
+    @apply border-foreground/30 bg-muted/50;
+  }
 }
 
 /* Keyframe animations */
@@ -310,4 +491,79 @@
   to {
     transform: scaleX(1);
   }
+}
+
+/* Neural Network Perceptron Animations */
+@keyframes pulseGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 2px currentColor);
+    opacity: 0.8;
+  }
+  50% {
+    filter: drop-shadow(0 0 8px currentColor);
+    opacity: 1;
+  }
+}
+
+@keyframes dashFlow {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -20;
+  }
+}
+
+@keyframes nodeActivate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInValue {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Neural network utility classes */
+.nn-connection-active {
+  animation: dashFlow 0.8s linear infinite;
+}
+
+.nn-node-pulse {
+  animation: pulseGlow 1.5s ease-in-out infinite;
+}
+
+.nn-node-activate {
+  animation: nodeActivate 0.4s ease-out;
+}
+
+.nn-value-update {
+  animation: fadeInValue 0.3s ease-out;
+}
+
+/* Perceptron panel styles */
+.nn-side-panel {
+  @apply bg-foreground flex items-center justify-center;
+  writing-mode: vertical-rl;
+}
+
+.nn-side-panel-left {
+  transform: rotate(180deg);
+}
+
+.nn-side-panel-text {
+  @apply font-mono text-[10px] tracking-[0.2em] text-background whitespace-nowrap;
 }

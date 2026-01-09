@@ -1,17 +1,13 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "@/components/NavBar";
 import BlogTable from "@/components/BlogTable";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import HomeContent from "@/components/HomeContent";
-import { ArrowUpRight } from "lucide-react";
 import ProjectContent from "@/components/ProjectContent";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
+import { ArrowUpRight } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { AllPostDataTableInterface } from "@/interface/PostData";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { MagneticButton } from "@/components/animations/MagneticButton";
-import { StaggeredList } from "@/components/animations/StaggeredList";
 
 const ALLOWED_TABS = ["home", "blog", "projects"] as const;
 const isAllowedTab = (
@@ -21,9 +17,9 @@ const isAllowedTab = (
   ALLOWED_TABS.includes(value as (typeof ALLOWED_TABS)[number]);
 
 const socialLinks = [
-  { name: "github", href: "https://github.com/sakshambedi" },
-  { name: "linkedin", href: "https://www.linkedin.com/in/sakshambedi/" },
-  { name: "hugging face", href: "https://huggingface.co/sakshambedi" },
+  { name: "GITHUB", href: "https://github.com/sakshambedi" },
+  { name: "LINKEDIN", href: "https://www.linkedin.com/in/sakshambedi/" },
+  { name: "HUGGING FACE", href: "https://huggingface.co/sakshambedi" },
 ];
 
 export default function HomeContainer({
@@ -36,9 +32,6 @@ export default function HomeContainer({
   const [activeTab, setActiveTab] = useState("home");
   const router = useRouter();
   const pathname = usePathname();
-  const tabsRef = useRef<HTMLDivElement>(null);
-  const indicatorRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isAllowedTab(tabParam)) {
@@ -47,42 +40,6 @@ export default function HomeContainer({
       setActiveTab("home");
     }
   }, [tabParam]);
-
-  // Animate tab indicator
-  useGSAP(
-    () => {
-      if (!tabsRef.current || !indicatorRef.current) return;
-
-      const activeTabEl = tabsRef.current.querySelector(
-        '[data-state="active"]'
-      ) as HTMLElement;
-      if (!activeTabEl) return;
-
-      gsap.to(indicatorRef.current, {
-        x: activeTabEl.offsetLeft,
-        width: activeTabEl.offsetWidth,
-        duration: 0.4,
-        ease: "power3.out",
-        overwrite: "auto",
-      });
-    },
-    { scope: tabsRef, dependencies: [activeTab] }
-  );
-
-  // Animate tab content on change - only opacity to avoid layout shifts
-  useGSAP(
-    () => {
-      if (!contentRef.current) return;
-
-      gsap.fromTo(
-        contentRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.3, ease: "power2.out", overwrite: "auto" }
-      );
-    },
-    { dependencies: [activeTab] }
-  );
-
 
   const handleTabChange = (value: string) => {
     if (!isAllowedTab(value)) return;
@@ -102,100 +59,97 @@ export default function HomeContainer({
   };
 
   return (
-    <main className="flex flex-col w-full min-h-screen bg-background">
+    <div className="flex flex-col w-full min-h-screen bg-background">
       <NavBar />
 
-      <section className="w-full max-w-5xl flex flex-col flex-grow items-center self-center mx-auto px-8 phone:px-4 pb-0">
-        <Tabs
-          value={activeTab}
-          defaultValue="home"
-          className="w-full flex flex-col items-center"
-          onValueChange={handleTabChange}
-        >
-          <div
-            ref={tabsRef}
-            className="sticky top-0 z-30 w-full py-8 phone:py-6 flex justify-center bg-background"
+      <main className="flex-1">
+        <div className="w-full px-4 lg:px-8 py-12">
+          <Tabs
+            value={activeTab}
+            defaultValue="home"
+            className="w-full flex flex-col"
+            onValueChange={handleTabChange}
           >
-            <div className="relative">
-              <TabsList className="flex w-full max-w-md justify-center gap-8 font-mono font-normal phone:gap-4 bg-transparent">
-                <TabsTrigger
-                  value="home"
-                  className="relative text-fluid-xl font-rebondG text-muted-foreground data-[state=active]:text-foreground transition-colors duration-300 bg-transparent hover:text-foreground/80"
-                  style={{ boxShadow: "none", outline: "none" }}
-                >
-                  home
-                </TabsTrigger>
-                <TabsTrigger
-                  value="blog"
-                  className="relative text-fluid-xl font-rebondG text-muted-foreground data-[state=active]:text-foreground transition-colors duration-300 bg-transparent hover:text-foreground/80"
-                  style={{ boxShadow: "none", outline: "none" }}
-                >
-                  blog
-                </TabsTrigger>
-                <TabsTrigger
-                  value="projects"
-                  className="relative text-fluid-xl font-rebondG text-muted-foreground data-[state=active]:text-foreground transition-colors duration-300 bg-transparent hover:text-foreground/80"
-                  style={{ boxShadow: "none", outline: "none" }}
-                >
-                  projects
-                </TabsTrigger>
-              </TabsList>
-              {/* Animated underline indicator */}
-              <div
-                ref={indicatorRef}
-                className="absolute -bottom-1 h-px bg-foreground"
-                style={{ width: 0 }}
-              />
+            {/* Tab Content - No Tab Navigation UI */}
+            <div className="w-full">
+              <TabsContent value="home" className="flex w-full flex-col mt-0">
+                <HomeContent />
+              </TabsContent>
+              <TabsContent value="blog" className="flex w-full flex-col mt-0">
+                <BlogTable allData={allData} />
+              </TabsContent>
+              <TabsContent value="projects" className="flex w-full flex-col mt-0">
+                <ProjectContent />
+              </TabsContent>
+            </div>
+          </Tabs>
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer id="contact" className="w-full bg-foreground text-background">
+        {/* Main Footer Content */}
+        <div className="px-4 lg:px-8 py-16">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
+            {/* Left: CTA */}
+            <div className="space-y-6">
+              <div className="flex items-center gap-2">
+                <div className="h-2 w-2 bg-coral" />
+                <span className="font-mono text-fluid-sm uppercase tracking-widest text-background/70">
+                  Get In Touch
+                </span>
+              </div>
+              <h2 className="font-serif text-fluid-4xl font-semibold italic">
+                Let&apos;s Connect
+              </h2>
+              <p className="max-w-md font-mono text-fluid-base text-background/70">
+                Interested in AI/ML projects, collaborations, or just want to chat about
+                technology? I&apos;d love to hear from you.
+              </p>
+              <a
+                href="mailto:hello@sakshambedi.com"
+                className="inline-flex items-center gap-2 border-2 border-background px-6 py-3 font-mono text-fluid-sm uppercase tracking-widest transition-colors hover:bg-background hover:text-foreground"
+              >
+                SEND EMAIL
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            </div>
+
+            {/* Right: Links */}
+            <div className="flex flex-col justify-between gap-8 lg:items-end">
+              <div className="space-y-4">
+                <span className="font-mono text-fluid-xs uppercase tracking-widest text-background/50">
+                  CONNECT
+                </span>
+                <nav className="flex flex-col gap-3">
+                  {socialLinks.map((link) => (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center gap-2 font-mono text-fluid-sm uppercase tracking-widest text-background transition-colors hover:text-background/70"
+                    >
+                      {link.name}
+                      <ArrowUpRight className="h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100" />
+                    </a>
+                  ))}
+                </nav>
+              </div>
             </div>
           </div>
+        </div>
 
-          <div ref={contentRef} className="w-full min-h-[calc(100vh-12rem)] mt-8">
-            <TabsContent
-              value="home"
-              className="flex flex-col items-center mt-0"
-            >
-              <HomeContent />
-            </TabsContent>
-            <TabsContent
-              value="blog"
-              className="flex w-full flex-col items-center mt-0"
-            >
-              <BlogTable allData={allData} />
-            </TabsContent>
-            <TabsContent
-              value="projects"
-              className="flex flex-col items-center mt-0"
-            >
-              <ProjectContent />
-            </TabsContent>
+        {/* Bottom Bar */}
+        <div className="border-t border-background/20">
+          <div className="px-4 lg:px-8 py-4">
+            <div className="flex flex-wrap items-center justify-between gap-4 font-mono text-fluid-xs uppercase tracking-widest text-background/50">
+              <span>DESIGNED AND BUILT WITH INTENTION — 2025</span>
+              <span>BUILT WITH ❤️ @ WINNIPEG, MB</span>
+            </div>
           </div>
-        </Tabs>
-
-        {/* Footer with magnetic social links */}
-        <footer className="mt-auto w-full py-12 phone:py-8">
-          <StaggeredList
-            className="flex flex-row justify-center gap-12 phone:flex-col phone:gap-4 phone:items-center"
-            stagger={0.1}
-          >
-            {socialLinks.map((link) => (
-              <MagneticButton
-                key={link.name}
-                as="a"
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group"
-                strength={0.3}
-              >
-                <span className="flex items-center gap-1.5 font-rebondG text-fluid-base font-light text-foreground">
-                  <span className="hover-underline">{link.name}</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 opacity-0 -translate-y-0.5 translate-x-0.5 transition-all duration-300 ease-out-expo group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0" />
-                </span>
-              </MagneticButton>
-            ))}
-          </StaggeredList>
-        </footer>
-      </section>
-    </main>
+        </div>
+      </footer>
+    </div>
   );
 }

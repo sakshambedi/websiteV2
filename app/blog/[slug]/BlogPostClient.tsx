@@ -39,7 +39,7 @@ export default function BlogPostClient() {
   return (
     <div
       ref={progressRef}
-      className={`fixed top-0 left-0 h-0.5 bg-foreground origin-left z-50 transition-opacity duration-300 ${
+      className={`fixed top-0 left-0 h-1 bg-coral origin-left z-50 transition-opacity duration-300 ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
       style={{ transform: "scaleX(0)", width: "100%" }}

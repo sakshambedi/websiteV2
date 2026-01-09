@@ -8,6 +8,7 @@ export function CursorFollower() {
   const cursorDotRef = useRef<HTMLDivElement>(null);
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isInFooter, setIsInFooter] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const rafIdRef = useRef<number | null>(null);
   const cursorPosRef = useRef({ x: 0, y: 0 });
@@ -28,8 +29,14 @@ export function CursorFollower() {
 
     const moveCursor = (e: MouseEvent) => {
       if (!isVisible) setIsVisible(true);
-      
+
       cursorPosRef.current = { x: e.clientX, y: e.clientY };
+
+      // Check if cursor is over footer
+      const elementAtCursor = document.elementFromPoint(e.clientX, e.clientY);
+      const footer = document.querySelector("footer");
+      const inFooter = footer && footer.contains(elementAtCursor);
+      setIsInFooter(inFooter || false);
 
       // Use RAF for smoother performance
       if (rafIdRef.current !== null) {
@@ -134,16 +141,20 @@ export function CursorFollower() {
           isVisible ? "opacity-100" : "opacity-0"
         } ${
           isHovering
-            ? "w-16 h-16 border-foreground/50 bg-foreground/10"
+            ? isInFooter
+              ? "w-16 h-16 border-background/50 bg-background/10"
+              : "w-16 h-16 border-foreground/50 bg-foreground/10"
+            : isInFooter
+            ? "w-8 h-8 border-background/30"
             : "w-8 h-8 border-foreground/30"
         }`}
         style={{ left: 0, top: 0 }}
       />
       <div
         ref={cursorDotRef}
-        className={`fixed pointer-events-none z-[9999] w-1.5 h-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-foreground transition-opacity duration-200 ${
-          isVisible ? "opacity-100" : "opacity-0"
-        }`}
+        className={`fixed pointer-events-none z-[9999] w-1.5 h-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full transition-opacity duration-200 ${
+          isInFooter ? "bg-background" : "bg-foreground"
+        } ${isVisible ? "opacity-100" : "opacity-0"}`}
         style={{ left: 0, top: 0 }}
       />
     </>
