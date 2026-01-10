@@ -3,6 +3,14 @@ import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
+// Detect Safari browser
+const isSafari = () => {
+  if (typeof window === "undefined") return false;
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  // Safari detection: contains Safari but not Chrome
+  return /safari/.test(userAgent) && !/chrome/.test(userAgent) && !/chromium/.test(userAgent);
+};
+
 export function CursorFollower() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const cursorDotRef = useRef<HTMLDivElement>(null);
@@ -15,11 +23,12 @@ export function CursorFollower() {
   const cursorPosRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    // Hide on touch devices
+    // Hide on touch devices, Safari, or when reduced motion is preferred
     if (
       typeof window === "undefined" ||
       "ontouchstart" in window ||
-      prefersReducedMotion
+      prefersReducedMotion ||
+      isSafari()
     ) {
       return;
     }
@@ -129,10 +138,10 @@ export function CursorFollower() {
     };
   }, [isVisible, prefersReducedMotion]);
 
-  // Don't render on touch devices or with reduced motion
+  // Don't render on touch devices, Safari, or with reduced motion
   if (
     typeof window !== "undefined" &&
-    ("ontouchstart" in window || prefersReducedMotion)
+    ("ontouchstart" in window || prefersReducedMotion || isSafari())
   ) {
     return null;
   }
