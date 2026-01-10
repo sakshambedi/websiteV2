@@ -138,6 +138,13 @@
 
   html {
     scroll-behavior: smooth;
+    color-scheme: light dark;
+  }
+
+  /* Smooth theme transitions */
+  html.theme-transitioning,
+  html.theme-transitioning * {
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s !important;
   }
 
   html,

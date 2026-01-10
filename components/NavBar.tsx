@@ -26,9 +26,7 @@ const NavBar = ({ className }: NavBarProps) => {
           <div className="flex items-center justify-between gap-4">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 shrink-0">
-              <div className="flex h-8 w-8 items-center justify-center border-2 border-foreground">
-                <span className="font-serif text-lg font-semibold">S</span>
-              </div>
+              <span className="font-serif text-2xl font-semibold">S</span>
             </Link>
 
             {/* Desktop Navigation - Right Aligned */}
