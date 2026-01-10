@@ -5,6 +5,10 @@ import { useEffect, useState } from "react";
 import React from "react";
 import { Moon, Sun } from "lucide-react";
 
+interface DocumentWithViewTransition extends Document {
+  startViewTransition: (callback: () => void) => void;
+}
+
 export function ThemeSwitcher() {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
@@ -39,7 +43,7 @@ export function ThemeSwitcher() {
 
     if (supportsViewTransitions && !prefersReducedMotion) {
       // Use View Transitions API for smooth cross-fade
-      (document as any).startViewTransition(() => {
+      (document as DocumentWithViewTransition).startViewTransition(() => {
         setTheme(isDark ? "light" : "dark");
       });
     } else {
