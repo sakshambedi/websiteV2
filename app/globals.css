@@ -147,6 +147,21 @@
     transition: background-color 0.3s, color 0.3s, border-color 0.3s !important;
   }
 
+  /* View Transitions API support - smooth cross-fade for theme switching */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 300ms;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); /* ease-out-expo */
+  }
+
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation: none !important;
+    }
+  }
+
   html,
   body {
     margin: 0;

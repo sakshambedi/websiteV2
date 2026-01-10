@@ -108,7 +108,7 @@ export default async function BlogPostPage({
           <div className="w-full max-w-5xl mx-auto px-8 phone:px-6 py-12 phone:py-8">
             {/* Back button */}
             <Link
-              href="/?tab=resources"
+              href="/?tab=blog"
               className="not-prose group inline-flex items-center gap-2 font-mono text-fluid-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors duration-200 mb-8 phone:mb-6 w-fit"
             >
               <ArrowLeft className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" />
@@ -166,7 +166,7 @@ export default async function BlogPostPage({
                 </div>
 
                 <Link
-                  href="/?tab=resources"
+                  href="/?tab=blog"
                   className="not-prose atlas-btn-secondary text-fluid-xs py-3 px-5"
                 >
                   VIEW ALL POSTS
@@ -175,7 +175,7 @@ export default async function BlogPostPage({
 
               {/* Bottom Document Info */}
               <div className="flex flex-wrap items-center justify-between gap-4 pt-8 border-t border-border font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                <span>BLOG : {slug.slice(0, 14).toUpperCase()}</span>
+                <span>BLOG : {slug.toUpperCase()}</span>
                 <span>SAKSHAM BEDI — WINNIPEG, MB</span>
               </div>
             </div>

@@ -137,20 +137,22 @@ export default function HomeContent() {
               delay={index * 0.1}
             >
               <GridCard className="group" showCorners>
-                <article className="relative p-8">
+                <article className="relative p-5 lg:p-8">
                   <div className="space-y-4 pt-2">
-                    <div>
-                      <h3 className="font-serif text-fluid-2xl font-semibold text-foreground">
-                        {job.title}
-                      </h3>
-                      <div className="mt-3 flex flex-wrap items-center gap-3 font-mono text-fluid-sm">
-                        <span className="text-foreground font-medium">{job.company}</span>
-                        <span className="text-muted-foreground">•</span>
-                        <span className="text-muted-foreground">{job.location}</span>
-                        <span className="ml-auto px-3 py-1 border border-border text-muted-foreground bg-muted/30">
-                          {job.period}
-                        </span>
+                    <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-2 lg:gap-4">
+                      <div>
+                        <h3 className="font-serif text-fluid-2xl font-semibold text-foreground">
+                          {job.title}
+                        </h3>
+                        <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-fluid-sm">
+                          <span className="text-foreground font-medium">{job.company}</span>
+                          <span className="hidden lg:inline text-muted-foreground">•</span>
+                          <span className="text-muted-foreground">{job.location}</span>
+                        </div>
                       </div>
+                      <span className="shrink-0 self-start px-3 py-1 border border-border text-muted-foreground bg-muted/30 font-mono text-fluid-sm">
+                        {job.period}
+                      </span>
                     </div>
 
                     <StaggeredList

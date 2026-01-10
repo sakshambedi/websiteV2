@@ -164,8 +164,8 @@ export default function HomeContainer({
         <div className="border-t border-background/20">
           <div className="px-4 lg:px-8 py-4">
             <div className="flex flex-wrap items-center justify-between gap-4 font-mono text-fluid-xs uppercase tracking-widest text-background/50">
-              <span>{winnipegTime}</span>
-              <span>BUILT WITH ❤️ @ WINNIPEG, MB</span>
+              <span>{winnipegTime} @ WINNIPEG, MB</span>
+              <span>BUILT WITH ❤️</span>
             </div>
           </div>
         </div>

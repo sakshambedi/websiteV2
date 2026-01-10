@@ -55,7 +55,7 @@ const TechStackIcon: React.FC<TechStackIconProps> = ({
   );
 
   return (
-    <div ref={iconRef} className="relative group/icon opacity-0">
+    <div ref={iconRef} className="opacity-0">
       <Image
         src={src}
         width={width}
@@ -64,10 +64,6 @@ const TechStackIcon: React.FC<TechStackIconProps> = ({
         className={className}
         priority={priority}
       />
-      <div className="absolute left-1/2 -translate-x-1/2 -top-9 px-2.5 py-1 rounded-sm bg-foreground text-background text-xs font-mono whitespace-nowrap opacity-0 scale-95 pointer-events-none transition-all duration-200 ease-out group-hover/icon:opacity-100 group-hover/icon:scale-100 z-10">
-        {alt}
-        <div className="absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 bg-foreground rotate-45" />
-      </div>
     </div>
   );
 };

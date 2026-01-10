@@ -28,13 +28,30 @@ export function ThemeSwitcher() {
   const isDark = theme === "dark";
 
   const handleThemeChange = () => {
-    const html = document.documentElement;
-    html.classList.add("theme-transitioning");
-    setTheme(isDark ? "light" : "dark");
+    // Check for View Transitions API support
+    const supportsViewTransitions =
+      typeof document !== "undefined" &&
+      "startViewTransition" in document;
 
-    setTimeout(() => {
-      html.classList.remove("theme-transitioning");
-    }, 300);
+    // Check reduced motion preference
+    const prefersReducedMotion =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (supportsViewTransitions && !prefersReducedMotion) {
+      // Use View Transitions API for smooth cross-fade
+      (document as any).startViewTransition(() => {
+        setTheme(isDark ? "light" : "dark");
+      });
+    } else {
+      // Fallback: existing CSS transition method
+      const html = document.documentElement;
+      html.classList.add("theme-transitioning");
+      setTheme(isDark ? "light" : "dark");
+
+      setTimeout(() => {
+        html.classList.remove("theme-transitioning");
+      }, 300);
+    }
   };
 
   return (
