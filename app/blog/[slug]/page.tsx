@@ -175,7 +175,7 @@ export default async function BlogPostPage({
 
               {/* Bottom Document Info */}
               <div className="flex flex-wrap items-center justify-between gap-4 pt-8 border-t border-border font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                <span>SPEC: 2025-SB / BLOG-{slug.slice(0, 8).toUpperCase()}</span>
+                <span>BLOG : {slug.slice(0, 14).toUpperCase()}</span>
                 <span>SAKSHAM BEDI — WINNIPEG, MB</span>
               </div>
             </div>

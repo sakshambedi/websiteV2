@@ -30,6 +30,7 @@ export default function HomeContainer({
   const searchParams = useSearchParams();
   const tabParam = searchParams.get("tab");
   const [activeTab, setActiveTab] = useState("home");
+  const [winnipegTime, setWinnipegTime] = useState("");
   const router = useRouter();
   const pathname = usePathname();
 
@@ -40,6 +41,25 @@ export default function HomeContainer({
       setActiveTab("home");
     }
   }, [tabParam]);
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const winnipegTimeString = now.toLocaleString("en-US", {
+        timeZone: "America/Winnipeg",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+      });
+      setWinnipegTime(winnipegTimeString);
+    };
+
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleTabChange = (value: string) => {
     if (!isAllowedTab(value)) return;
@@ -144,7 +164,7 @@ export default function HomeContainer({
         <div className="border-t border-background/20">
           <div className="px-4 lg:px-8 py-4">
             <div className="flex flex-wrap items-center justify-between gap-4 font-mono text-fluid-xs uppercase tracking-widest text-background/50">
-              <span>DESIGNED AND BUILT WITH INTENTION — 2025</span>
+              <span>{winnipegTime}</span>
               <span>BUILT WITH ❤️ @ WINNIPEG, MB</span>
             </div>
           </div>

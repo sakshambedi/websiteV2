@@ -129,7 +129,7 @@ export default async function Image() {
               textTransform: "uppercase",
             }}
           >
-            2025
+            2026
           </span>
         </div>
       </div>

@@ -72,11 +72,8 @@ export default function HomeContent() {
             </p>
 
             <div className="flex flex-wrap gap-4 pt-4">
-              <a href="#contact" className="atlas-cta">
+              <Link href="#contact" className="atlas-cta">
                 CONTACT ME
-              </a>
-              <Link href="/?tab=blog" className="atlas-btn-secondary">
-                VIEW WORK
               </Link>
             </div>
           </div>
