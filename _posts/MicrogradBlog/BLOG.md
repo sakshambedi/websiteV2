@@ -1,5 +1,5 @@
 ---
-title: "Micrograd: A Chronological Deep Dive into Design, Development, and Performance"
+title: "pygrad: A Chronological Deep Dive into Design, Development, and Performance"
 date: "2025-07-12"
 category: "ML"
 tags:
@@ -14,210 +14,190 @@ tags:
   ]
 ---
 
-## 0. First Steps: Python-only Buffer with array.array
+# Building pygrad: A Personal Journey into the Guts of Deep Learning
 
-**Commits:** very initial prototype
-Before diving into C++, the earliest versions of micrograd used Python's built-in `array.array` to store raw numeric data. In `grad/buffer.py`, a simple wrapper managed an `array.array`:
+_How I went from "let me understand how PyTorch works" to writing SIMD kernels at 2 AM_
 
-```python
-from array import array
+## The Beginning: May 2025
 
-class SimpleBuffer:
-    def __init__(self, data, dtype):
-        self._dtype = dtype
-        self._storage = array(dtype.typecode, data)
+It started, as many of my projects do, with a simple question: _"How does automatic differentiation actually work?"_
+
+I'd been using PyTorch for a while, calling `.backward()` like it was magic, trusting that gradients would flow through my neural networks. But I never really understood what was happening under the hood. So I did what any reasonable engineer would do - I decided to build my own tensor library from scratch.
+
+The first commit was titled `tinygrad start`. Looking back at that now, it makes me smile. I had no idea what I was getting myself into.
+
+## Phase 1: The Naive Python Days
+
+My initial approach was pure Python. I figured if I could just get the math right, everything else would follow. The early commits tell the story:
+
+```
+7ed2e00 Remove numpy underlying framework and implementing features form the core
+2f6f9a5 added bool dtype support for tensor and added tests for the tensors
+be5e4f5 using a more low level approach with support for some binary ops
 ```
 
-This approach delivered functional correctness and easy iterability but suffered from pure-Python overhead:
+I remember spending an entire weekend just getting tensor indexing to work correctly. Negative indices, multi-dimensional slicing, the edge cases kept multiplying. Every time I thought I was done, I'd discover another scenario where PyTorch handled something elegantly that my code butchered.
 
-- 1M-element addition timing: **~0.15 s**
-- Lacked SIMD/vectorization and memory alignment control
-- Python loop dispatch dominated runtime
+The first real "aha" moment came when I implemented strides. Before that, my tensors were just flat arrays with a shape tuple bolted on. Understanding that `view()` doesn't copy data - it just changes how you interpret the memory layout - that was when things started clicking.
 
-To overcome these limitations and unlock native performance, the project soon transitioned to a C++ backend via pybind11.
+```
+02998c7 implement pytorch like stride function function
+ba81289 added support for contigous buffers for cheap views
+b711ce0 added transpose feature
+```
 
-_Last updated: commit c94181c_
+I'll be honest: I got the stride calculation wrong three times before it worked. The commit message "fixed return statement issue in the stride function" doesn't capture the four hours of debugging that preceded it.
 
-This post walks through the complete development history of **micrograd**, tracing decisions, challenges, and benchmarks from the earliest SIMD buffer integration to the final performance-tuned kernels. Each section maps to key commits, illustrating how the code evolved and why.
+## Phase 2: The BufferPool Experiment
 
----
+Once basic operations worked, I hit my first performance wall. Creating new arrays for every operation was killing me. So I did what the PyTorch source code suggested: implement a memory pool.
 
-## 1. Laying the Foundation: SIMD Vector Buffer and CPU Kernel (commit 5f0585e)
+```
+09c743d Add thread-safe buffer pooling for memory reuse
+289e5dc Enhance BufferPool with dynamic memory management
+```
 
-**Date:** Early prototype stage
-**Commit:** `5f0585e - Add SIMD vector buffer and CPU kernel`
+I went way overboard. Power-of-2 size bucketing. Memory pressure detection. Automatic garbage collection. Configurable limits. I was so proud of this code.
 
-- Introduced `VecBuffer`, a templated C++ container supporting SIMD loads/stores.
-- Built the first `cpu_kernel.cpp`, exposing raw buffer operations via pybind11.
-- Motivation: achieve low-level control over memory alignment and vectorization.
-- Challenge: ensuring proper alignment on multiple platforms.
+It was also completely unnecessary for an educational project.
 
-**Outcome:** Successful proof-of-concept for C++-based tensor data storage.
+But here's the thing - building it taught me _why_ frameworks like PyTorch have memory allocators. When you're training a neural network and you're allocating and deallocating millions of tensors, every microsecond matters. I didn't need that level of optimization, but understanding why it exists changed how I think about systems programming.
 
----
+## Phase 3: The Autograd Revelation
 
-## 2. Modular SIMD Support and Build Refactor (commit 4ac4835)
+Getting the forward pass working was one thing. Implementing backward propagation was when this project went from "toy" to "actually understanding deep learning."
 
-**Date:** After initial prototype
-**Commit:** `4ac4835 - Refactor kernel and build system for modular SIMD support`
+```
+a9866f1 adding building blocks for computation graph
+6ddf999 Implement Neg operation and improve test coverage
+```
 
-- Refactored CMake and build system to allow optional SIMD backends.
-- Separated alignment utilities, so we could swap in AVX2, SSE, or scalar paths.
-- This modularity set the stage for future unrolling and optimization experiments.
+The computation graph concept is beautiful once you see it. Every operation creates a node. Each node knows its parents and the function that created it. When you call `backward()`, you're just traversing this graph in reverse, applying the chain rule at each step.
 
----
+I spent a lot of time staring at my whiteboard, drawing little boxes with arrows between them. For addition: if `L = a + b`, then `dL/da = 1` and `dL/db = 1`, so you just pass the gradient through unchanged. For multiplication: `L = a * b` means `dL/da = b` and `dL/db = a`. You need to save the inputs during the forward pass to use them in backward.
 
-## 3. Unifying DType Handling and Python Bindings (commit e58f67f & b2e2504)
+The `ctx.save_for_backward(a, b)` pattern that PyTorch uses suddenly made perfect sense.
 
-**Commits:**
+## Phase 4: The C++ Pivot
 
-- `e58f67f - Refactor Buffer and dtype usage for consistent argument order`
-- `b2e2504 - Remove pybind11 submodule and update Buffer and Tensor classes`
+And then came the moment that changed everything.
 
-- Streamlined `grad/dtype.py` to centralize all numeric types.
-- Updated `Buffer` constructor signatures for consistent dtype ordering.
-- Removed outdated pybind11 submodule in favor of a top-level `kernels/` CMake integration.
-- Cleaned Python API in `grad/buffer.py` and `grad/tensor.py` for ergonomic use.
+I profiled my code and discovered , to my suprise, that element-wise operations were slower. Python loops over large arrays just can't compete with compiled code. I had two choices: use NumPy as a backend (which felt like cheating) or write my own C++ kernels.
 
-**Takeaway:** Consistency in APIs prevents confusion when expanding operations.
+I chose violence.
 
----
+```
+f12b28b Replace Python buffer with pybind11 C++ eigen lib backend
+1aa73d5 Add C++ kernel library with pybind11 and test setup
+```
 
-## 4. Broadcasting & Binary Kernels (commit 6e7639d)
+Learning pybind11 was its own adventure. The template metaprogramming required to make Python and C++ play nice is... something. But once I got the bindings working, the speedup was immediate and dramatic.
 
-**Commit:** `6e7639d - Add broadcast binary kernel and tests`
+The `VecBuffer` class became the heart of the project - a type-erased container that could hold int8, float16, float32, or any other numeric type, while still exposing a consistent interface to Python.
 
-- Implemented generic binary kernel supporting element-wise operations with broadcasting.
-- Added comprehensive tests for shape mismatches and broadcasting semantics.
-- Wrote `operations.binary_op` to dispatch to the C++ kernel for `ADD`, `SUB`, `MUL`, `DIV`.
+## Phase 5: SIMD and the Performance Rabbit Hole
 
-**Benchmark baseline:** ~0.00925 s for adding two float32 buffers of 1M elements.
+Once I had C++ working, I couldn't stop optimizing.
 
----
+```
+5f0585e Add SIMD vector buffer and CPU kernel
+970d72d Optimize binary kernels with unrolled SIMD loop
+812cc29 Refactor SIMD kernels for IEEE 754 compliance and add tests
+```
 
-## 5. Ensuring Correct Casting & Half-Precision (commits 52175c3, faa0336)
+SIMD (Single Instruction, Multiple Data) lets you operate on multiple values simultaneously. Instead of adding two numbers, you add eight (or sixteen, depending on your CPU). The xsimd library made this almost pleasant—it abstracts over AVX2, NEON, and other instruction sets so your code stays portable.
 
-**Commits:**
+I learned hard lessons about memory alignment. SIMD instructions expect data at specific boundaries. Access misaligned memory and you either crash or suffer a massive performance penalty. The commit "Refactor SIMD kernels for IEEE 754 compliance" represents a particularly painful debugging session where I discovered that `-ffast-math` breaks floating-point edge cases in ways that make your tests pass but your math wrong.
 
-- `52175c3 - Add tests for VecBuffer cast method covering all type conversions`
-- `faa0336 - Fix half precision build and implement buffer add`
+Loop unrolling was another revelation:
 
-- Expanded `VecBuffer::cast<T>()` to support all integer and floating dtypes.
-- Enabled IEEE‐754 half-precision (`float16`) conversion through `half.hpp`.
-- Added unit tests for every `cast()` path ensuring no data corruption.
+```cpp
+// Instead of:
+for (int i = 0; i < n; i++) {
+    c[i] = a[i] + b[i];
+}
 
-**Challenge:** Maintaining precision guarantees across scalar and vectorized code.
+// You do:
+for (int i = 0; i < n; i += 4) {
+    c[i]   = a[i]   + b[i];
+    c[i+1] = a[i+1] + b[i+1];
+    c[i+2] = a[i+2] + b[i+2];
+    c[i+3] = a[i+3] + b[i+3];
+}
+```
 
----
+The CPU can execute these independent operations in parallel. Combined with SIMD, you're suddenly operating on 32 floats at once instead of 1. It's intoxicating when the benchmarks come back faster.
 
-## 6. SIMD Kernel Compliance and Test Consolidation (commits 812cc29 & b6fb698)
+## Phase 6: The Infrastructure Debt
 
-**Commits:**
+Somewhere around commit 50, I realized my project had become unmaintainable. The build system was a mess of shell scripts. Tests were scattered randomly. Half the code was Python, half was C++, and they were coupled in ways that made changes terrifying.
 
-- `812cc29 - Refactor SIMD kernels for IEEE 754 compliance and add tests`
-- `b6fb698 - Refactor and unify binary operation tests`
+```
+4618fc3 Add unified build scripts, docs, and Makefile for C++ kernel
+ff453bb Add Dockerfile and update README with build instructions
+4ac4835 Refactor kernel and build system for modular SIMD support
+```
 
-- Tweaked unaligned SIMD loops to handle tail elements safely.
-- Ensured rounding behavior matches NumPy/PyTorch for float32 and float64.
-- Unified all binary operation tests into `tests/ops_test.py` for maintainability.
+I spent two weeks just cleaning up. Adding proper CMake configuration. Writing a Makefile that actually made sense. Creating a Dockerfile so anyone could build the project without installing fifteen dependencies manually.
 
----
+It wasn't glamorous work, but it was necessary. And honestly? Deleting old code felt almost as good as writing new features.
 
-## 7. Unified Build Scripts & Documentation (commit 4618fc3)
+## The Current State: January 2026
 
-**Commit:** `4618fc3 - Add unified build scripts, docs, and Makefile for C++ kernel`
+Today, pygrad has:
 
-- Created a top‐level `Makefile` with targets: `setup-env`, `build`, `test`, `clean`.
-- Updated `README.md` to clarify build steps, prerequisites, and example usage.
-- Ensured reproducible build across Linux, macOS, and Windows (via CMake).
+- A proper tensor class with views, strides, and contiguity tracking
+- Support for 11 different data types (int8 through float64)
+- SIMD-optimized kernels for all binary operations
+- A working autograd system (forward pass complete, backward mostly there)
+- 500+ tests ensuring I don't break things
+- Build support for macOS, Linux, and Windows
 
----
+What it doesn't have:
 
-## 8. Alignment, Misalignment, and Edge-case Tests (commits 1f5f122, 1c438db, b8b70f9, 2dd9c7b)
+- Broadcasting (the bane of my existence - it's next on the list)
+- Matrix multiplication (requires different optimization strategies)
+- GPU support (CUDA is a whole other world)
+- Neural network layers
 
-**Key Commits:**
+## What I Actually Learned
 
-- `1f5f122 - Add integer variants and misalignment tests`
-- `1c438db - Add alignment utility tests`
-- `b8b70f9 - Add Buffer member tests and implement set_item`
-- `2dd9c7b - Consolidate buffer and alignment tests into test_cpu_kernel.cpp`
+Building pygrad taught me more about deep learning than any course or paper could have.
 
-- Verified buffer pointer alignment in unit tests for offsets [0..31].
-- Tested integer kernels (int8, uint16, int64, etc.) for correctness under misalignment.
-- Added `Buffer.get_item()` / `set_item()` bindings and their tests.
-- Consolidated low-level buffer tests for clarity.
+**Tensors are just views into memory.** Shape, stride, offset—these determine how you interpret raw bytes. Most "operations" don't copy data; they just change the interpretation.
 
----
+**Autograd is graph traversal with calculus.** The forward pass builds the graph. The backward pass walks it in reverse. The chain rule connects everything.
 
-## 9. High-level API Refinements (commits 731f175, d998e44, 763a60c)
+**Performance comes from understanding hardware.** Cache lines, memory alignment, SIMD registers, branch prediction—the CPU has opinions about how you should write code, and ignoring them is expensive.
 
-**Commits:**
+**Type systems matter.** The amount of code dedicated to handling dtype conversions, upcasting, and type-safe operations is massive. Getting this wrong causes subtle bugs that only appear with specific inputs.
 
-- `731f175 - Refactor binary ops to use generic kernel and update tests`
-- `d998e44 - Update README and add basic operations example script`
-- `763a60c - Add Buffer::_filled method for creating filled buffers`
+**Good infrastructure enables velocity.** The weeks I spent on build systems and testing paid off tenfold. Every refactor became safer. Every PR could be validated automatically.
 
-- Simplified `operations.binary_op` dispatch to a single generic kernel call.
-- Added user‐friendly Python example in `examples/basic_operations.py`.
-- Exposed `Tensor.full()`, `Tensor.ones()`, `Tensor.zeros()` via underlying `Buffer._filled`.
+## What's Next
 
----
+The roadmap is long. Broadcasting support is the immediate priority - it's embarrassing that you can't add a scalar to a tensor without jumping through hoops. After that, matrix multiplication, which requires entirely different optimization strategies (tiling, blocking, maybe calling into BLAS).
 
-## 10. New Operations: Power, Negation, and Expand (commits 75afcff, e517dca, 3bb7b82)
+Eventually, I want to train a simple neural network end-to-end on this framework. A two-layer MLP on MNIST. Nothing groundbreaking, but proof that all the pieces work together.
 
-**Commits:**
+And GPU support? Maybe someday. CUDA is a commitment, and Metal (for Apple Silicon) is a whole different API. But the architecture is ready for it—the `device` attribute exists for a reason.
 
-- `75afcff - Refactor: Consolidate power and negation tests into test_operations.cpp`
-- `e517dca - Implement power and negation ops, add tests, and fix dtype name`
-- `3bb7b82 - Refactor elementwise ops and add Tensor.expand method`
+## To Anyone Starting Something Similar
 
-- Added unary operations `neg()` and elementwise power `pow()`.
-- Plugged new ops into the autograd system with forward/backward implementations.
-- Introduced `Tensor.expand()` to support broadcasted views without data copy.
+If you're thinking about building your own tensor library, here's my advice:
 
-**Learning:** Handling autograd with shape-altering operations exposed subtle context-saving challenges.
+1. **Start with pure Python.** Get the semantics right before optimizing. You'll rewrite everything anyway.
 
----
+2. **Test against NumPy/PyTorch.** They're the ground truth. If your results differ, you're wrong.
 
-## 11. Performance Leap: Unrolled SIMD Kernel (commit 970d72d)
+3. **Read the source.** PyTorch and tinygrad are open source. When you're stuck, the answers are there.
 
-**Commit:** `970d72d - Optimize binary kernels with unrolled SIMD loop`
+4. **Embrace the rabbit holes.** You'll end up learning about CPU architecture, compiler optimizations, and numerical analysis. That's the point.
 
-- Consolidated aligned & unaligned loops into a single templated function.
-- Unrolled the core loop to process four elements per iteration, reducing branch overhead.
-- Realigned pointer arithmetic to maintain throughput on misaligned tails.
+5. **It will take longer than you think.** My "quick weekend project" turned into an 8-month journey with over 130 commits. And it's still not done.
 
-**Benchmark comparison:**
+But it's worth it. Every time I use PyTorch now, I understand what's happening beneath the surface. And that understanding? It's worth every frustrating debug session and late-night refactor.
 
-- Before: 0.00925 s per 1M-element addition
-- After: 0.00778 s per 1M-element addition
-  → **15% speedup**
+_pygrad is open source at [github.com/sakshambedi/pygrad](https://github.com/sakshambedi/pygrad). Contributions welcome - especially if you want to help me finally implement broadcasting._
 
-This dramatic boost affirmed the value of careful loop unrolling and inlining in performance-critical code.
-
----
-
-## 12. Final Cleanup & Documentation (commits c2234fd & c94181c)
-
-**Commits:**
-
-- `c2234fd - Update README to document power and negation operations`
-- `c94181c - Remove binary kernel benchmark and related files`
-
-- Updated project README with full API reference for new ops.
-- Removed legacy benchmark scripts now superseded by tighter integration tests.
-
----
-
-# Conclusion & Future Directions
-
-This chronological journey demonstrates the value of incremental improvements: building a robust C++ buffer, layering Python APIs, fortifying with tests, and finally squeezing out performance gains.
-
-Next on the roadmap:
-
-- Matrix multiplication kernels (BLAS/CUDA)
-- Advanced autograd optimizations and graph pruning
-- Neural network layers, activation functions, and optimizers
-- GPU acceleration and multi‐device support
-
-micrograd is now a solid foundation for experimenting with deep learning internals. May this detailed history inspire you to carve your own learning path; one commit at a time!
+Human written by Saksham Bedi and robotically fixed by Claude Code, January 2026
