@@ -194,7 +194,7 @@ If you're thinking about building your own tensor library, here's my advice:
 
 4. **Embrace the rabbit holes.** You'll end up learning about CPU architecture, compiler optimizations, and numerical analysis. That's the point.
 
-5. **It will take longer than you think.** My "quick weekend project" turned into an 8-month journey with over 130 commits. And it's still not done.
+5. **It will take longer than you think.** My "quick weekend project" turned into an 3-month journey with over 130 commits. And it's still not done.
 
 But it's worth it. Every time I use PyTorch now, I understand what's happening beneath the surface. And that understanding? It's worth every frustrating debug session and late-night refactor.
 
